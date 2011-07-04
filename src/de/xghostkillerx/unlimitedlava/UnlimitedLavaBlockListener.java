@@ -4,6 +4,12 @@ import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockListener;
 
+/**
+ * UnlimitedLava block listener
+ * @author xGhOsTkiLLeRx
+ */
+
+
 public class UnlimitedLavaBlockListener extends BlockListener
 {
   public static UnlimitedLava plugin;

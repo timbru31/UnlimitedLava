@@ -7,12 +7,18 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+/**
+ * UnlimitedLava for Bukkit
+ *
+ * @author xGhOsTkiLLeRx
+ */
+
 public class UnlimitedLava extends JavaPlugin
 {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 
-//Shutdown111
+//Shutdown
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
         log.info(pdfFile.getName()+" " +pdfFile.getVersion()+" has been disabled!");		
@@ -22,7 +28,7 @@ public class UnlimitedLava extends JavaPlugin
 		PluginDescriptionFile pdfFile = this.getDescription();
 		PluginManager pm = getServer().getPluginManager();
 		log.info(pdfFile.getName()+" " +pdfFile.getVersion()+" is enabled!");
-		pm.registerEvent(Event.Type.BLOCK_FROMTO,blockListener,Event.Priority.Low,this);
+		pm.registerEvent(Event.Type.BLOCK_FROMTO,blockListener,Event.Priority.Lowest,this);
 	}
 
 }
