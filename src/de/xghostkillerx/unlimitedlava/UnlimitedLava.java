@@ -28,7 +28,7 @@ public class UnlimitedLava extends JavaPlugin
 		PluginDescriptionFile pdfFile = this.getDescription();
 		PluginManager pm = getServer().getPluginManager();
 		log.info(pdfFile.getName()+" " +pdfFile.getVersion()+" is enabled!");
-		pm.registerEvent(Event.Type.BLOCK_FROMTO,blockListener,Event.Priority.Highest,this);
+		pm.registerEvent(Event.Type.BLOCK_FROMTO,blockListener,Event.Priority.Normal,this);
 	}
 
 }
