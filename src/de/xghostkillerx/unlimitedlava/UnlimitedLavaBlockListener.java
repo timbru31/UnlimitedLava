@@ -21,10 +21,6 @@ public class UnlimitedLavaBlockListener extends BlockListener
       {
         event.getToBlock().setTypeId(11);
       }
-      if (surounded2(event.getToBlock()))
-      {
-        event.getToBlock().setTypeId(11);
-      }
     }
   }
 
@@ -33,6 +29,7 @@ public class UnlimitedLavaBlockListener extends BlockListener
     if (block.getTypeId() != 10)
       return false;
     int n = 0;
+
     if (spawnable(block, 1, 0))
       n++;
     if (spawnable(block, -1, 0))
@@ -51,28 +48,9 @@ public class UnlimitedLavaBlockListener extends BlockListener
       n++;
     return n == 8;
   }
-  
-  private boolean surounded2(Block block)
-  {
-    if (block.getTypeId() != 10)
-      return false;
-    int m = 0;
-    if (spawnable2(block, -1, 0))
-      m++;
-    if (spawnable2(block, 0, 1))
-      m++;
-    if (spawnable2(block, -1, 1))
-      m++;
-    return m == 3;
-  }
 
   private boolean spawnable(Block block, int x, int z)
   {
     return ((block.getRelative(x, 0, z).getTypeId() == 10) || (block.getRelative(x, 0, z).getTypeId() == 11)) && (block.getRelative(x, 0, z).getData() == 0);
-  }
-  
-  private boolean spawnable2(Block block, int x, int z)
-  {
-    return ((block.getRelative(x-1, 0, z+1).getTypeId() == 10) || (block.getRelative(x, 0, z+1).getTypeId() == 11)) && (block.getRelative(x-1, 0, z).getData() == 0);
   }
 }
