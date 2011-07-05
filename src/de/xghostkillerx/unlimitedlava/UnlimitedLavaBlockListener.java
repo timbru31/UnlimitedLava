@@ -31,7 +31,7 @@ public class UnlimitedLavaBlockListener extends BlockListener
       		}
     	}
 	}
-}
+  }
 
   private boolean surounded(Block block)
   {
