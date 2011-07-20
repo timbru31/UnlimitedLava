@@ -5,9 +5,9 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockListener;
 
 /**
- * UnlimitedLava block listener
- * @author xGhOsTkiLLeRx
- */
+* UnlimitedLava block listener
+* @author xGhOsTkiLLeRx
+*/
 
 
 public class UnlimitedLavaBlockListener extends BlockListener
@@ -21,16 +21,16 @@ public class UnlimitedLavaBlockListener extends BlockListener
 
   public void onBlockFromTo(BlockFromToEvent event)
   {
-	if (!event.isCancelled())
-	{
+if (!event.isCancelled())
+{
     if (event.getBlock().getTypeId() == 11)
-    	{
+     {
       if (surounded(event.getToBlock()))
-      		{
+       {
         event.getToBlock().setTypeId(11);
-      		}
-    	}
-	}
+       }
+     }
+}
   }
 
   private boolean surounded(Block block)
