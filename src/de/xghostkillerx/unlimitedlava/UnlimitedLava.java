@@ -25,7 +25,7 @@ public class UnlimitedLava extends JavaPlugin {
     public static final Logger log = Logger.getLogger("Minecraft");
     private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 
-    /**
+    /*
      * Shutdown
      * 
      * Ende
