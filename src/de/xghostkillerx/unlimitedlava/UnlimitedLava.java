@@ -6,6 +6,7 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.config.Configuration;
 
 /**
  * UnlimitedLava for CraftBukkit
@@ -21,6 +22,10 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 
 public class UnlimitedLava extends JavaPlugin {
+	
+	public Configuration config;
+	public Boolean configBoolean;
+
 
     public static final Logger log = Logger.getLogger("Minecraft");
     private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
@@ -41,5 +46,11 @@ public class UnlimitedLava extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " is enabled!");
         pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
+        config = getConfiguration();
+        config.setHeader("# If you haven't understood the config (especially the point 'other'),", "# please refer to this topic: http://bit.ly/n1Wex2");
+        configBoolean = config.getBoolean("2x2", true);
+        configBoolean = config.getBoolean("3x3", true);
+        configBoolean = config.getBoolean("Other", false);
+        config.save();
     }
 }
