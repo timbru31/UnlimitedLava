@@ -5,6 +5,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockListener;
+import org.bukkit.util.config.Configuration;
+
 
 /**
  * UnlimitedLavaBlockListener
@@ -21,83 +23,96 @@ import org.bukkit.event.block.BlockListener;
 public class UnlimitedLavaBlockListener extends BlockListener {
 
 	public static UnlimitedLava plugin;
+	public Configuration config;
+	public Boolean configBoolean;
+
 
 	public UnlimitedLavaBlockListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
 
 	public void onBlockFromTo(BlockFromToEvent event) {
-		Block sourceBlock = event.getBlock();
-		Block targetBlock = event.getToBlock();
+		if 	(config.getBoolean("2x2", false)) {
+			event.setCancelled(true);
+		} else {
+			Block sourceBlock = event.getBlock();
+			Block targetBlock = event.getToBlock();
 
-		/*
-		 * Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
-		 * Check if we got a full block of lava
-		 * 
-		 * Verweis: http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
-		 * Check fuer den Lava Block (0x00)
-		 */
-		if (event.getBlock().getData() != 0x0) {
-			return;
-		}
-
-		if ((sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA)) {
 			/*
-			 * Check if we can use the surrounded check
+			 * Refer to
+			 * http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
+			 * Check if we got a full block of lava
 			 * 
-			 * Checke ob der Surround-Check machbar ist
+			 * Verweis:
+			 * http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
+			 * Check fuer den Lava Block (0x00)
 			 */
-			if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
+			if (event.getBlock().getData() != 0x0) {
+				return;
+			}
+
+			if ((sourceBlock.getType() == Material.LAVA || sourceBlock
+					.getType() == Material.STATIONARY_LAVA)) {
 				/*
-				 * Full block (0x0) and not falling (0x8)
+				 * Check if we can use the surrounded check
 				 * 
-				 * Voller Block und nicht nach unten fallend (0x8)
+				 * Checke ob der Surround-Check machbar ist
 				 */
-				if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
+				if (targetBlock.getType() == Material.LAVA
+						|| targetBlock.getType() == Material.STATIONARY_LAVA) {
+					/*
+					 * Full block (0x0) and not falling (0x8)
+					 * 
+					 * Voller Block und nicht nach unten fallend (0x8)
+					 */
+					if (targetBlock.getData() != 0x0
+							&& targetBlock.getData() != 0x8) {
+						/*
+						 * Spread if possible
+						 * 
+						 * Ausdehnung, wenn machbar
+						 */
+						if (checkSpreadValidity(targetBlock)) {
+							/*
+							 * Only full blocks
+							 * 
+							 * Nur volle Bloecke(0x0)
+							 */
+							event.getToBlock().setType(Material.LAVA);
+						}
+					}
+				}
+				/*
+				 * If the block flows into air, check if the air can get a full
+				 * lava block
+				 * 
+				 * Wenn der Block in Luft fliess, pruefe ob die Luft zu einem
+				 * vollen Lava Block werden kann
+				 */
+				else if (targetBlock.getType() == Material.AIR) {
 					/*
 					 * Spread if possible
 					 * 
-					 * Ausdehnung, wenn machbar
+					 * Dehne aus, wenn machbar
 					 */
-					if (checkSpreadValidity(targetBlock)) {
+					if (checkSpreadValidity(event.getToBlock())) {
 						/*
-						 * Only full blocks
+						 * Yay, we got a full lava block!
 						 * 
-						 * Nur volle Bloecke(0x0)
+						 * Ja, wir haben einen Lava Block (0x0)
 						 */
 						event.getToBlock().setType(Material.LAVA);
+						event.getToBlock().setData((byte) 0x0);
 					}
-				}
-			}
-			/*
-			 * If the block flows into air, check if the air can get a full lava
-			 * block
-			 * 
-			 * Wenn der Block in Luft fliess, pruefe ob die Luft zu einem vollen
-			 * Lava Block werden kann
-			 */
-			else if (targetBlock.getType() == Material.AIR) {
-				/*
-				 * Spread if possible
-				 * 
-				 * Dehne aus, wenn machbar
-				 */
-				if (checkSpreadValidity(event.getToBlock())) {
-					/*
-					 * Yay, we got a full lava block!
-					 * 
-					 * Ja, wir haben einen Lava Block (0x0)
-					 */
-					event.getToBlock().setType(Material.LAVA);
-					event.getToBlock().setData((byte) 0x0);
 				}
 			}
 		}
 	}
 
-
 private boolean checkSpreadValidity(Block block) {
 int n = 0;
+
+	
 /*
 * defines the number of valid "source" lava flows surrounding this
 * block Sets the value of valid lava flows, sorrounding this block
