@@ -17,24 +17,19 @@ import org.bukkit.util.config.Configuration;
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
  * 
- * All the comments will be first in English and second in German!
- * (Because I am German, but I want that you understand my source, too!)
  */
 
 public class UnlimitedLava extends JavaPlugin {
 	
 	public Configuration config;
-	public Boolean configBoolean;
-
+    public Boolean three;
+    public Boolean two;
+    public Boolean other;
 
     public static final Logger log = Logger.getLogger("Minecraft");
     private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 
-    /*
-     * Shutdown
-     * 
-     * Ende
-     */
+    // Shutdown
     public void onDisable() {
         PluginDescriptionFile pdfFile = this.getDescription();
         log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " has been disabled!");
@@ -42,15 +37,20 @@ public class UnlimitedLava extends JavaPlugin {
 
     // Start
     public void onEnable() {
-        PluginDescriptionFile pdfFile = this.getDescription();
+    	//Events
         PluginManager pm = getServer().getPluginManager();
-        log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " is enabled!");
         pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
+        
+        // Config
         config = getConfiguration();
         config.setHeader("# If you haven't understood the config (especially the point 'other'),", "# please refer to this topic: http://bit.ly/n1Wex2");
-        configBoolean = config.getBoolean("2x2", true);
-        configBoolean = config.getBoolean("3x3", true);
-        configBoolean = config.getBoolean("Other", false);
+        three = config.getBoolean("three", true);
+        two = config.getBoolean("two", true);
+        other = config.getBoolean("other", false);
         config.save();
+        
+        // Message
+        PluginDescriptionFile pdfFile = this.getDescription();
+        log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " is enabled!");
     }
 }
