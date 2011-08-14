@@ -1,11 +1,11 @@
 package de.xghostkillerx.unlimitedlava;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockListener;
-
 
 /**
  * UnlimitedLavaBlockListener
@@ -25,6 +25,8 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 	}
 	
 	public void onBlockFromTo(BlockFromToEvent event) {
+		Player player = event.getPlayer();
+		if (player.hasPermission("unlimitedlava.use")) {
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
 		/*
@@ -126,6 +128,10 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 			}
 		}
 	}
+		else {
+			player.sendMessage("pwnded");
+		}
+}
 
 private boolean checkSpreadValidityTwo(Block block) {
 int n = 0;
