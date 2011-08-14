@@ -1,6 +1,49 @@
 name: UnlimitedLava
 main: de.xghostkillerx.unlimitedlava.UnlimitedLava
-version: 1.1
+version: test - reloaded!
 author: xGhOsTkiLLeRx
 description: Ability to enjoy unlimited lava sources
 website: http://bit.ly/n1Wex2
+commands:
+  unlimitedlava:
+    description: Handles all the UnlimitedLava commands
+    permission: unlimitedlava.*
+    usage: /unlimitedlava help - to see a list of available commands
+permissions:
+  unlimitedlava.*:
+    description: Gives access to all UnlimitedLava commands
+    children:
+      unlimitedlava.reload: true
+      unlimitedlava enable.*: true
+      unlimitedlava.disable.*: true
+      unlimitedlava.help: true
+  unlimitedlava.help:
+    description: Allows you to see the help
+    default: op
+  unlimitedlava.reload:
+    description: Allows you to reload the config
+    default: op
+  unlimitedlava.enable.all:
+    description: Allows you to enable all sources
+    default: op
+  unlimitedlava.enable.three:
+    description: Allows you to enable the 3x3 source
+    default: op
+  unlimitedlava.enable.two:
+    description: Allows you to enable the 2x2 source
+    default: op
+  unlimitedlava.enable.other:
+    description: Allows you to enable other sources
+    default: op
+  unlimitedlava.disable.all:
+    description: Allows you to disable all sources
+    default: op
+  unlimitedlava.disable.three:
+    description: Allows you to disable the 3x3 source
+    default: op
+  unlimitedlava.disable.two:
+    description: Allows you to disable the 2x2 source
+    default: op
+  unlimitedlava.disable.other:
+    description: Allows you to disable other sources
+    default: op
