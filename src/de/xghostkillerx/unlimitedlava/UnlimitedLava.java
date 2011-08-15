@@ -29,20 +29,21 @@ public class UnlimitedLava extends JavaPlugin {
     public Boolean two;
     public Boolean other;
     public static final Logger log = Logger.getLogger("Minecraft");
-    private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
+	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
+			this);
 	
 
     // Shutdown
-    public void onDisable() {
-        PluginDescriptionFile pdfFile = this.getDescription();
-        log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " has been disabled!");
-    }
+	public void onDisable() {
+		PluginDescriptionFile pdfFile = this.getDescription();
+		log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " has been disabled!");
+	}
 
-    // Start
-    public void onEnable() {
-    	// Events
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
+	// Start
+	public void onEnable() {
+		// Events
+		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
         
         // Config
         config = getConfiguration();

@@ -1,7 +1,6 @@
 package de.xghostkillerx.unlimitedlava;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -20,19 +19,17 @@ import org.bukkit.event.block.BlockListener;
 public class UnlimitedLavaBlockListener extends BlockListener {
 
 	public static UnlimitedLava plugin;
+	
 	public UnlimitedLavaBlockListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
-	
+
 	public void onBlockFromTo(BlockFromToEvent event) {
-		Player player = event.getPlayer();
-		if (player.hasPermission("unlimitedlava.use")) {
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
 		/*
 		 * Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
 		 * Check if we got a full block of lava
-		 * 
 		 */
 		if (plugin.two == true) {
 			if (event.getBlock().getData() != 0x0) {
@@ -43,7 +40,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 				if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
 					// Full block (0x0) and not falling (0x8)
 					if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-						//Spread if possible
+						// Spread if possible
 						if (checkSpreadValidityTwo(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
@@ -51,9 +48,8 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					}
 				}
 				/*
-				 * If the block flows into air, check if the air can get a full lava
-				 * block
-				 * 
+				 * If the block flows into air, check if the air can get a full
+				 * lava block
 				 */
 				else if (targetBlock.getType() == Material.AIR) {
 					// Spread if possible
@@ -74,7 +70,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 				if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
 					// Full block (0x0) and not falling (0x8)
 					if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-						//Spread if possible
+						// Spread if possible
 						if (checkSpreadValidityThree(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
@@ -82,9 +78,8 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					}
 				}
 				/*
-				 * If the block flows into air, check if the air can get a full lava
-				 * block
-				 * 
+				 * If the block flows into air, check if the air can get a full
+				 * lava block
 				 */
 				else if (targetBlock.getType() == Material.AIR) {
 					// Spread if possible
@@ -105,7 +100,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 				if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
 					// Full block (0x0) and not falling (0x8)
 					if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-						//Spread if possible
+						// Spread if possible
 						if (checkSpreadValidityOther(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
@@ -113,9 +108,8 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					}
 				}
 				/*
-				 * If the block flows into air, check if the air can get a full lava
-				 * block
-				 * 
+				 * If the block flows into air, check if the air can get a full
+				 * lava block
 				 */
 				else if (targetBlock.getType() == Material.AIR) {
 					// Spread if possible
@@ -128,13 +122,10 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 			}
 		}
 	}
-		else {
-			player.sendMessage("pwnded");
-		}
-}
 
-private boolean checkSpreadValidityTwo(Block block) {
-int n = 0;
+
+	private boolean checkSpreadValidityTwo(Block block) {
+		int n = 0;
 		/*
 		 * For the 2x2 source!
 		 * 
@@ -183,8 +174,8 @@ int n = 0;
 		}
 	}
 
-private boolean checkSpreadValidityThree(Block block) {
-int n = 0;
+	private boolean checkSpreadValidityThree(Block block) {
+		int n = 0;
 		/*
 		 * For the 3x3 source!
 		 * 
@@ -215,8 +206,8 @@ int n = 0;
 		}
 	}
 
-private boolean checkSpreadValidityOther(Block block) {
-int n = 0;
+	private boolean checkSpreadValidityOther(Block block) {
+		int n = 0;
 		/*
 		 * For Other sources!
 		 * 
