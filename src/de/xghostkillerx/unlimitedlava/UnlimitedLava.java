@@ -33,7 +33,6 @@ public class UnlimitedLava extends JavaPlugin {
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
 			this);
 	
-
     // Shutdown
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
