@@ -217,7 +217,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 			return false;
 		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR)
 			return false;		
-		// If more than 4 flow exists, yay, it's okay!
+		// If more than 8 flow exists, yay, it's okay!
 	    
 		if (n >= 8) {
 			return true;
