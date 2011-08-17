@@ -1,6 +1,6 @@
 name: UnlimitedLava
 main: de.xghostkillerx.unlimitedlava.UnlimitedLava
-version: pre 1.2
+version: pre 1.3
 author: xGhOsTkiLLeRx
 description: Ability to enjoy unlimited lava sources
 website: http://bit.ly/n1Wex2
@@ -35,6 +35,9 @@ permissions:
   unlimitedlava.enable.other:
     description: Allows you to enable other sources
     default: op
+  unlimitedlava.enable.permissions:
+    description: Allows you to enable permissions
+    default: op
   unlimitedlava.disable.all:
     description: Allows you to disable all sources
     default: op
@@ -46,4 +49,7 @@ permissions:
     default: op
   unlimitedlava.disable.other:
     description: Allows you to disable other sources
+    default: op
+  unlimitedlava.disable.permissions:
+    description: Allows you to disable permissions
     default: op
