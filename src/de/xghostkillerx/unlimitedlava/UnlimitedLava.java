@@ -56,14 +56,11 @@ public class UnlimitedLava extends JavaPlugin {
     }
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		String[] subargs = new String[args.length - 1];
-		for (int x = 1; x < args.length; x++)
-			subargs[x - 1] = args[x];
 		if (cmd.getName().equalsIgnoreCase("unlimitedlava")) {
 			if (args.length > 0 && args[0].equals("reload")) {
 				if (permissions == true) {
 					if (sender.hasPermission("unlimitedlava.reload")) {
-						UnlimitedLavaReload(sender, subargs);
+						UnlimitedLavaReload(sender, args);
 						return true;
 					}
 					else {
@@ -72,14 +69,14 @@ public class UnlimitedLava extends JavaPlugin {
 					}
 				}
 				if (permissions == false) {
-					UnlimitedLavaReload(sender, subargs);
+					UnlimitedLavaReload(sender, args);
 					return true;
 				}
 			}
 			if (args.length > 0 && args[0].equals("help")) {
 				if (permissions == true) {
 					if (sender.hasPermission("unlimitedlava.help")) {
-						UnlimitedLavaHelp(sender, subargs);
+						UnlimitedLavaHelp(sender, args);
 						return true;
 					}
 					else {
@@ -88,7 +85,7 @@ public class UnlimitedLava extends JavaPlugin {
 					}
 				}
 				if (permissions == false) {
-					UnlimitedLavaHelp(sender, subargs);
+					UnlimitedLavaHelp(sender, args);
 					return true;
 				}
 			}
@@ -96,7 +93,7 @@ public class UnlimitedLava extends JavaPlugin {
 				if (args.length > 1 && args[1].equals("all")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.all")) {
-							UnlimitedLavaEnableAll(sender, subargs);
+							UnlimitedLavaEnableAll(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -104,14 +101,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaEnableAll(sender, subargs);
+						UnlimitedLavaEnableAll(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("three")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.three")) {
-							UnlimitedLavaEnableThree(sender, subargs);
+							UnlimitedLavaEnableThree(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -119,14 +116,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaEnableThree(sender, subargs);
+						UnlimitedLavaEnableThree(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("two")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.two")) {
-							UnlimitedLavaEnableTwo(sender, subargs);
+							UnlimitedLavaEnableTwo(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -134,14 +131,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaEnableTwo(sender, subargs);
+						UnlimitedLavaEnableTwo(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("other")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.other")) {
-							UnlimitedLavaEnableOther(sender, subargs);
+							UnlimitedLavaEnableOther(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -149,14 +146,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaEnableOther(sender, subargs);
+						UnlimitedLavaEnableOther(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("permissions")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.permissions")) {
-							UnlimitedLavaEnablePermissions(sender, subargs);
+							UnlimitedLavaEnablePermissions(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -164,7 +161,7 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaEnablePermissions(sender, subargs);
+						UnlimitedLavaEnablePermissions(sender, args);
 						return true;
 					}
 				}
@@ -173,7 +170,7 @@ public class UnlimitedLava extends JavaPlugin {
 				if (args.length > 1 && args[1].equals("all")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.all")) {
-							UnlimitedLavaDisableAll(sender, subargs);
+							UnlimitedLavaDisableAll(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -181,14 +178,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaDisableAll(sender, subargs);
+						UnlimitedLavaDisableAll(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("three")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.three")) {
-							UnlimitedLavaDisableThree(sender, subargs);
+							UnlimitedLavaDisableThree(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -196,14 +193,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaDisableThree(sender, subargs);
+						UnlimitedLavaDisableThree(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("two")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.two")) {
-							UnlimitedLavaDisableTwo(sender, subargs);
+							UnlimitedLavaDisableTwo(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -211,14 +208,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaDisableTwo(sender, subargs);
+						UnlimitedLavaDisableTwo(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("other")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.other")) {
-							UnlimitedLavaDisableOther(sender, subargs);
+							UnlimitedLavaDisableOther(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -226,14 +223,14 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaDisableOther(sender, subargs);
+						UnlimitedLavaDisableOther(sender, args);
 						return true;
 					}
 				}
 				if (args.length > 1 && args[1].equals("permissions")) {
 					if (permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.permissions")) {
-							UnlimitedLavaDisablePermissions(sender, subargs);
+							UnlimitedLavaDisablePermissions(sender, args);
 							return true;
 						} else {
 							sender.sendMessage("§4You don't have the permission to do this!");
@@ -241,7 +238,7 @@ public class UnlimitedLava extends JavaPlugin {
 						}
 					}
 					if (permissions == false) {
-						UnlimitedLavaDisablePermissions(sender, subargs);
+						UnlimitedLavaDisablePermissions(sender, args);
 						return true;
 					}
 				}

@@ -195,11 +195,31 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
 			n++;
 		}
+		if (block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) {
+			n++;
+		}
+		if (block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) {
+			n++;
+		}
+		if (block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) {
+			n++;
+		}
+		if (block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
+			n++;
+		}
+		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA)
+			return false;
+		if (block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA)
+			return false;
+		if (block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA)
+			return false;	
+		if (block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.STATIONARY_LAVA)
+			return false;
 		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR)
 			return false;		
 		// If more than 4 flow exists, yay, it's okay!
 	    
-		if (n >= 4) {
+		if (n >= 8) {
 			return true;
 		} else {
 			return false;
