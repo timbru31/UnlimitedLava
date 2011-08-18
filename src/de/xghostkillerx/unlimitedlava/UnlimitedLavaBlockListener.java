@@ -130,7 +130,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 		 * For the 2x2 source!
 		 * 
 		 * Defines the number of valid "source" lava flows surrounding this
-		 * block Sets the value of valid lava flows, sorrounding this block If a
+		 * block Sets the value of valid lava flows, surrounding this block If a
 		 * valid flow of lava exists, add to the count
 		 */
 	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.NORTH_WEST).getData() == 0x0))) {
@@ -180,7 +180,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 		 * For the 3x3 source!
 		 * 
 		 * Defines the number of valid "source" lava flows surrounding this
-		 * block Sets the value of valid lava flows, sorrounding this block If a
+		 * block Sets the value of valid lava flows, surrounding this block If a
 		 * valid flow of lava exists, add to the count
 		 */
 		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
@@ -229,10 +229,10 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 	private boolean checkSpreadValidityOther(Block block) {
 		int n = 0;
 		/*
-		 * For Other sources!
+		 * For other sources!
 		 * 
 		 * Defines the number of valid "source" lava flows surrounding this
-		 * block Sets the value of valid lava flows, sorrounding this block If a
+		 * block Sets the value of valid lava flows, surrounding this block If a
 		 * valid flow of lava exists, add to the count
 		 */
 		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
