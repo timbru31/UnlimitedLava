@@ -2,14 +2,13 @@ package de.xghostkillerx.unlimitedlava;
 
 import java.util.logging.Logger;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.Command;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.config.Configuration;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-
 
 /**
  * UnlimitedLava for CraftBukkit
@@ -32,7 +31,7 @@ public class UnlimitedLava extends JavaPlugin {
     public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
 			this);
-	
+
     // Shutdown
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -55,198 +54,6 @@ public class UnlimitedLava extends JavaPlugin {
         log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " is enabled!");
     }
 
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (cmd.getName().equalsIgnoreCase("unlimitedlava")) {
-			if (args.length > 0 && args[0].equals("reload")) {
-				if (permissions == true) {
-					if (sender.hasPermission("unlimitedlava.reload")) {
-						UnlimitedLavaReload(sender, args);
-						return true;
-					}
-					else {
-						sender.sendMessage("§4You don't have the permission to do this!");
-						return true;
-					}
-				}
-				if (permissions == false) {
-					UnlimitedLavaReload(sender, args);
-					return true;
-				}
-			}
-			if (args.length > 0 && args[0].equals("help")) {
-				if (permissions == true) {
-					if (sender.hasPermission("unlimitedlava.help")) {
-						UnlimitedLavaHelp(sender, args);
-						return true;
-					}
-					else {
-	                    sender.sendMessage("§4You don't have the permission to do this!");
-	                    return true;
-					}
-				}
-				if (permissions == false) {
-					UnlimitedLavaHelp(sender, args);
-					return true;
-				}
-			}
-			if (args.length > 0 && args[0].equals("enable")) {
-				if (args.length > 1 && args[1].equals("all")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.enable.all")) {
-							UnlimitedLavaEnableAll(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaEnableAll(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("three")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.enable.three")) {
-							UnlimitedLavaEnableThree(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaEnableThree(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("two")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.enable.two")) {
-							UnlimitedLavaEnableTwo(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaEnableTwo(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("other")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.enable.other")) {
-							UnlimitedLavaEnableOther(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaEnableOther(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("permissions")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.enable.permissions")) {
-							UnlimitedLavaEnablePermissions(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaEnablePermissions(sender, args);
-						return true;
-					}
-				}
-			}
-			if (args.length > 0 && args[0].equals("disable")) {
-				if (args.length > 1 && args[1].equals("all")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.disable.all")) {
-							UnlimitedLavaDisableAll(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaDisableAll(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("three")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.disable.three")) {
-							UnlimitedLavaDisableThree(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaDisableThree(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("two")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.disable.two")) {
-							UnlimitedLavaDisableTwo(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaDisableTwo(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("other")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.disable.other")) {
-							UnlimitedLavaDisableOther(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaDisableOther(sender, args);
-						return true;
-					}
-				}
-				if (args.length > 1 && args[1].equals("permissions")) {
-					if (permissions == true) {
-						if (sender.hasPermission("unlimitedlava.disable.permissions")) {
-							UnlimitedLavaDisablePermissions(sender, args);
-							return true;
-						} else {
-							sender.sendMessage("§4You don't have the permission to do this!");
-							return true;
-						}
-					}
-					if (permissions == false) {
-						UnlimitedLavaDisablePermissions(sender, args);
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
 	// Reload the config file, via command /unlimitedlava reload and at the start!
     public void reloadConfig() {
     	config.load();
@@ -257,103 +64,9 @@ public class UnlimitedLava extends JavaPlugin {
         permissions = config.getBoolean("permissions", true);
         config.save();
     }
-    // Reload the config with /unlimitedlava reload
-    private boolean UnlimitedLavaReload(CommandSender sender, String[] args) {
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava config reloaded!");
-		return true;
-    }
-    // See the help with /unlimitedlava help
-    private boolean UnlimitedLavaHelp(CommandSender sender, String[] args) {
-		sender.sendMessage("To see the help type §4/unlimitedlava help");
-		sender.sendMessage("To reload the config use §4/unlimitedlava reload");
-		sender.sendMessage("To enable a source or permissions use §4/unlimitedlava enable §e<value>");
-		sender.sendMessage("To disable a source or permissions use §4/unlimitedlava disable §e<value>");
-		sender.sendMessage("§eValues §fcan be: all, three, two, other or permissions");
-		return true;
-	}
-    // Enable all sources with /unlimitedlava enable all
-    private boolean UnlimitedLavaEnableAll(CommandSender sender, String[] args) {
-		config.setProperty("three", true);
-		config.setProperty("two", true);
-		config.setProperty("other", true);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§cAll §2UnlimitedLava sources §2enabled!");
-		return true;
-    }
-    // Enable 3x3 with /unlimitedlava enable three
-    private boolean UnlimitedLavaEnableThree(CommandSender sender, String[] args) {
-		config.setProperty("three", true);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava source §cthree (3x3) §2enabled!");
-		return true;
-    }
-    // Enable 2x2 with /unlimitedlava enable two
-    private boolean UnlimitedLavaEnableTwo(CommandSender sender, String[] args) {
-		config.setProperty("two", true);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava source §ctwo (2x2) §2enabled!");
-		return true;
-    }
-    // Enable other sources with /unlimitedlava enable other
-    private boolean UnlimitedLavaEnableOther(CommandSender sender, String[] args) {
-		config.setProperty("other", true);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava source §cother §2enabled!");
-		return true;
-    }
-    // Disable all sources with /unlimitedlava disable all
-    private boolean UnlimitedLavaDisableAll(CommandSender sender, String[] args) {
-		config.setProperty("three", false);
-		config.setProperty("two", false);
-		config.setProperty("other", false);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§cAll §2UnlimitedLava sources §2disabled!");
-		return true;
-    }
-    // Disable 3x3 source with /unlimitedlava disable three
-    private boolean UnlimitedLavaDisableThree(CommandSender sender, String[] args) {
-		config.setProperty("three", false);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava source §cthree (3x3) §2disabled!");
-		return true;
-    }
-    // Disable 2x2 source with /unlimitedlava disable two
-    private boolean UnlimitedLavaDisableTwo(CommandSender sender, String[] args) {
-		config.setProperty("two", false);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava source §ctwo (2x2) §2disabled!");
-		return true;
-    }
-    // Disable other sources with /unlimitedlava disable other
-    private boolean UnlimitedLavaDisableOther(CommandSender sender, String[] args) {
-		config.setProperty("other", false);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava source §cother §2disabled!");
-		return true;
-    }
-    // Enable permissions with /unlimitedlava enable permissions
-    private boolean UnlimitedLavaEnablePermissions(CommandSender sender, String[] args) {
-		config.setProperty("permissions", true);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava §cpermissions §2enabled! Only OPs or players with the permission can use the /unlimitedlava commands!");
-		return true;
-    }
-    // Disable permissions with /unlimitedlava disable permissions
-    private boolean UnlimitedLavaDisablePermissions(CommandSender sender, String[] args) {
-		config.setProperty("permissions", false);
-		config.save();
-		reloadConfig();
-		sender.sendMessage("§2UnlimitedLava §cpermissions §2disabled! All players can use the /unlimitedlava commands!");
-		return true;
-    }
+    
+    public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+    	UnlimitedLavaCommands cmd = new UnlimitedLavaCommands(this);
+    	return cmd.UnlimitedLavaCommand(sender, command, commandLabel, args);
+    	}
 }
