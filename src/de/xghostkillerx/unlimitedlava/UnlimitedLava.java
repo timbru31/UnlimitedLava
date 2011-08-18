@@ -11,7 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.config.Configuration;
 
 /**
- * UnlimitedLava for CraftBukkit
+ * UnlimitedLava for CraftBukkit/Bukkit
+ * Handles some general stuff!
  * 
  * Refer to:
  * http://forums.bukkit.org/threads/19441/

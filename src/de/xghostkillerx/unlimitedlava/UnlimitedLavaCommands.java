@@ -7,6 +7,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 
 /**
  * UnlimitedLavaCommands
+ * Handles all commands!
  * 
  * Refer to: http://forums.bukkit.org/threads/19441/
  * 

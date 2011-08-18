@@ -8,6 +8,7 @@ import org.bukkit.event.block.BlockListener;
 
 /**
  * UnlimitedLavaBlockListener
+ * Handles the infinite sources!
  * 
  * Refer to: http://forums.bukkit.org/threads/19441/
  * 
