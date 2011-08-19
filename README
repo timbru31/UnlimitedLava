@@ -12,6 +12,7 @@ Standard config:
 two: true
 other: false
 three: true
+big: false
 permissions: true
 
 Sources:
@@ -58,55 +59,81 @@ or
   L
 L X
 
+Big:
+
+You can get infinite lava from pools bigger than 3x3 (4x4, 5x5, ect.) from any block inside!
+Border blocks won't work
 
 Commands (if no permissions system is detected, only OPs are able to use the commands!)
 Only bukkit's permissions system is supported! If a command is typed wrong, 
 it will return, that you should type /unlimitedlava help for more information!
 
 /unlimitedlava reload
+/ulava reload
 Node: unlimitedlava.reload
 Description: Reloads the config
 
 /unlimitedlava help
+/ulava help
 Node: unlimitedlava.help
 Description: Displays the help
 
 /unlimitedlava enable all
+/ulava enable all
 Node: unlimitedlava.enable.all
 Description: Enables all sources
 
 /unlimitedlava enable three
+/ulava enable three
 Node: unlimitedlava.enable.three
 Description: Enables the 3x3 source
 
 /unlimitedlava enable two
+/ulava enable two
 Node: unlimitedlava.enable.two
 Description: Enables the 2x2 source
 
 /unlimitedlava enable other
+/ulava enable other
 Node: unlimitedlava.enable.other
 Description: Enables the other source
 
+/unlimitedlava enable big
+/ulava enable big
+Node: unlimitedlava.enable.big
+Description: Enables the big sources
+
 /unlimitedlava enable permissions
+/ulava enable permissions
 Node: unlimitedlava.enable.permissions
 Description: Enables the permissions! (Only OPs or player with the permission can use a specific command)
 
 /unlimitedlava disable all
+/ulava disable all
 Node: unlimitedlava.disable.all
 Description: Disables all sources
 
 /unlimitedlava disable three
+/ulava disable three
 Node: unlimitedlava.disable.three
 Description: Disables the 3x3 source
 
 /unlimitedlava disable two 
+/ulava disable two
 Node: unlimitedlava.disable.two
 Description: Disables the 2x2 source
 
-/unlimitedlava disable other 
+/unlimitedlava disable other
+/ulava disable other
 Node: unlimitedlava.disable.other
 Description: Disables the other source
 
+/unlimitedlava disable big
+/ulava disable big
+Node: unlimitedlava.disable.big
+Description: Disables the big sources
+
 /unlimitedlava disable permissions
+/ulava disable permissions
 Node: unlimitedlava.disable.permissions
 Description: Disables the permissions! ALL players can use the commands!

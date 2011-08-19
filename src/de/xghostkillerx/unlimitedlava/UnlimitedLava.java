@@ -28,6 +28,7 @@ public class UnlimitedLava extends JavaPlugin {
     public Boolean three;
     public Boolean two;
     public Boolean other;
+    public Boolean big;
     public Boolean permissions;
     public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
@@ -62,6 +63,7 @@ public class UnlimitedLava extends JavaPlugin {
         three = config.getBoolean("three", true);
         two = config.getBoolean("two", true);
         other = config.getBoolean("other", false);
+        big = config.getBoolean("big", false);
         permissions = config.getBoolean("permissions", true);
         config.save();
     }

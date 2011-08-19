@@ -22,7 +22,7 @@ public class UnlimitedLavaCommands {
 	plugin = instance;
 	}
 public boolean UnlimitedLavaCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-	if (command.getName().equalsIgnoreCase("unlimitedlava")) {
+	if ((command.getName().equalsIgnoreCase("unlimitedlava")) || (command.getName().equalsIgnoreCase("ulava"))) {
 		if (args.length > 0 && args[0].equals("reload")) {
 			if (plugin.permissions == true) {
 				if (sender.hasPermission("unlimitedlava.reload")) {
@@ -116,6 +116,21 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 					return true;
 				}
 			}
+			if (args.length > 1 && args[1].equals("big")) {
+				if (plugin.permissions == true) {
+					if (sender.hasPermission("unlimitedlava.enable.big")) {
+						UnlimitedLavaEnableBig(sender, args);
+						return true;
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "You don't have the permission to do this!");
+						return true;
+					}
+				}
+				if (plugin.permissions == false) {
+					UnlimitedLavaEnableBig(sender, args);
+					return true;
+				}
+			}
 			if (args.length > 1 && args[1].equals("permissions")) {
 				if (plugin.permissions == true) {
 					if (sender.hasPermission("unlimitedlava.enable.permissions")) {
@@ -193,6 +208,21 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 					return true;
 				}
 			}
+			if (args.length > 1 && args[1].equals("big")) {
+				if (plugin.permissions == true) {
+					if (sender.hasPermission("unlimitedlava.disable.big")) {
+						UnlimitedLavaDisableBig(sender, args);
+						return true;
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "You don't have the permission to do this!");
+						return true;
+					}
+				}
+				if (plugin.permissions == false) {
+					UnlimitedLavaDisableBig(sender, args);
+					return true;
+				}
+			}
 			if (args.length > 1 && args[1].equals("permissions")) {
 				if (plugin.permissions == true) {
 					if (sender.hasPermission("unlimitedlava.disable.permissions")) {
@@ -214,35 +244,38 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 	return false;
 }
 
-	// Reload the config with /unlimitedlava reload
+	// Reload the config with /unlimitedlava reload or /ulava help
 	private boolean UnlimitedLavaReload(CommandSender sender, String[] args) {
 		PluginDescriptionFile pdfFile = plugin.getDescription();
 		plugin.reloadConfig();
 		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava version " + ChatColor.DARK_RED + pdfFile.getVersion() + ChatColor.DARK_GREEN + " reloaded!");
 		return true;
 	}
-	// See the help with /unlimitedlava help
+	// See the help with /unlimitedlava help or /ulava help
 	private boolean UnlimitedLavaHelp(CommandSender sender, String[] args) {
 		PluginDescriptionFile pdfFile = plugin.getDescription();
 		sender.sendMessage(ChatColor.DARK_GREEN	+ "Welcome to the UnlimitedLava version " + ChatColor.DARK_RED + pdfFile.getVersion() + ChatColor.DARK_GREEN + " help!");
-		sender.sendMessage("To see the help type " + ChatColor.DARK_RED	+ "/unlimitedlava help");
-		sender.sendMessage("To reload the config use " + ChatColor.DARK_RED	+ "/unlimitedlava reload");
+		sender.sendMessage("To see the help type " + ChatColor.DARK_RED	+ "/unlimitedlava help " + ChatColor.WHITE + "or " + ChatColor.DARK_RED	+ "/ulava help" );
+		sender.sendMessage("To reload use " + ChatColor.DARK_RED	+ "/unlimitedlava reload " + ChatColor.WHITE + "or " + ChatColor.DARK_RED + "/ulava reload" );
 		sender.sendMessage("To enable something use " + ChatColor.DARK_RED + "/unlimitedlava enable " + ChatColor.YELLOW + "<value>");
+		sender.sendMessage("or " + ChatColor.DARK_RED + "/ulava enable " + ChatColor.YELLOW + "<value>" );
 		sender.sendMessage("To disable something use " + ChatColor.DARK_RED	+ "/unlimitedlava disable " + ChatColor.YELLOW + "<value>");
-		sender.sendMessage(ChatColor.YELLOW + "Values " + ChatColor.WHITE + "can be: all, three, two, other or permissions");
+		sender.sendMessage("or " + ChatColor.DARK_RED + "/ulava disable " + ChatColor.YELLOW + "<value>");
+		sender.sendMessage(ChatColor.YELLOW + "Values " + ChatColor.WHITE + "can be: all, three, two, other, big or permissions");
 		return true;
 	}
-	// Enable all sources with /unlimitedlava enable all
+	// Enable all sources with /unlimitedlava enable all or /ulava enable all
 	private boolean UnlimitedLavaEnableAll(CommandSender sender, String[] args) {
 		plugin.config.setProperty("three", true);
 		plugin.config.setProperty("two", true);
 		plugin.config.setProperty("other", true);
+		plugin.config.setProperty("big", true);
 		plugin.config.save();
 		plugin.reloadConfig();
 		sender.sendMessage(ChatColor.DARK_RED + "All " + ChatColor.DARK_GREEN + "UnlimitedLava sources enabled!");
 		return true;
 	}
-	// Enable 3x3 with /unlimitedlava enable three
+	// Enable 3x3 with /unlimitedlava enable three or /ulava enable three
 	private boolean UnlimitedLavaEnableThree(CommandSender sender, String[] args) {
 		plugin.config.setProperty("three", true);
 		plugin.config.save();
@@ -250,7 +283,7 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "three (3x3) " + ChatColor.DARK_GREEN + "enabled!");
 		return true;
 	}
-	// Enable 2x2 with /unlimitedlava enable two
+	// Enable 2x2 with /unlimitedlava enable two or /ulava enable two
 	private boolean UnlimitedLavaEnableTwo(CommandSender sender, String[] args) {
 		plugin.config.setProperty("two", true);
 		plugin.config.save();
@@ -258,7 +291,7 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "two (2x2) " + ChatColor.DARK_GREEN + "enabled!");
 		return true;
 	}
-	// Enable other sources with /unlimitedlava enable other
+	// Enable other sources with /unlimitedlava enable other or /ulava enable other
 	private boolean UnlimitedLavaEnableOther(CommandSender sender, String[] args) {
 		plugin.config.setProperty("other", true);
 		plugin.config.save();
@@ -266,41 +299,15 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "other " + ChatColor.DARK_GREEN + "enabled!");
 		return true;
 	}
-	// Disable all sources with /unlimitedlava disable all
-	private boolean UnlimitedLavaDisableAll(CommandSender sender, String[] args) {
-		plugin.config.setProperty("three", false);
-		plugin.config.setProperty("two", false);
-		plugin.config.setProperty("other", false);
+	// Enable big sources with /unlimitedlava enable big or /ulava enable big
+	private boolean UnlimitedLavaEnableBig(CommandSender sender, String[] args) {
+		plugin.config.setProperty("big", true);
 		plugin.config.save();
 		plugin.reloadConfig();
-		sender.sendMessage(ChatColor.DARK_RED + "All " + ChatColor.DARK_GREEN + "UnlimitedLava sources disabled!");
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "big " + ChatColor.DARK_GREEN + "enabled!");
 		return true;
 	}
-	// Disable 3x3 source with /unlimitedlava disable three
-	private boolean UnlimitedLavaDisableThree(CommandSender sender,	String[] args) {
-		plugin.config.setProperty("three", false);
-		plugin.config.save();
-		plugin.reloadConfig();
-		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "three (3x3) " + ChatColor.DARK_GREEN + "disabled!");
-		return true;
-	}
-	// Disable 2x2 source with /unlimitedlava disable two
-	private boolean UnlimitedLavaDisableTwo(CommandSender sender, String[] args) {
-		plugin.config.setProperty("two", false);
-		plugin.config.save();
-		plugin.reloadConfig();
-		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "two (2x2) " + ChatColor.DARK_GREEN + "disabled!");
-		return true;
-	}
-	// Disable other sources with /unlimitedlava disable other
-	private boolean UnlimitedLavaDisableOther(CommandSender sender,	String[] args) {
-		plugin.config.setProperty("other", false);
-		plugin.config.save();
-		plugin.reloadConfig();
-		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "other " + ChatColor.DARK_GREEN + "disabled!");
-		return true;
-	}
-	// Enable permissions with /unlimitedlava enable permissions
+	// Enable permissions with /unlimitedlava enable permissions or /ulava enable permissions
 	private boolean UnlimitedLavaEnablePermissions(CommandSender sender, String[] args) {
 		plugin.config.setProperty("permissions", true);
 		plugin.config.save();
@@ -308,7 +315,50 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava " + ChatColor.DARK_RED	+ "permissions " + ChatColor.DARK_GREEN	+ "enabled! Only OPs or players with the permission can use the /unlimitedlava commands!");
 		return true;
 	}
-	// Disable permissions with /unlimitedlava disable permissions
+	// Disable all sources with /unlimitedlava disable all or /ulava disable all
+	private boolean UnlimitedLavaDisableAll(CommandSender sender, String[] args) {
+		plugin.config.setProperty("three", false);
+		plugin.config.setProperty("two", false);
+		plugin.config.setProperty("other", false);
+		plugin.config.setProperty("big", false);
+		plugin.config.save();
+		plugin.reloadConfig();
+		sender.sendMessage(ChatColor.DARK_RED + "All " + ChatColor.DARK_GREEN + "UnlimitedLava sources disabled!");
+		return true;
+	}
+	// Disable 3x3 source with /unlimitedlava disable three or /ulava disable two
+	private boolean UnlimitedLavaDisableThree(CommandSender sender,	String[] args) {
+		plugin.config.setProperty("three", false);
+		plugin.config.save();
+		plugin.reloadConfig();
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "three (3x3) " + ChatColor.DARK_GREEN + "disabled!");
+		return true;
+	}
+	// Disable 2x2 source with /unlimitedlava disable two or /ulava disable two
+	private boolean UnlimitedLavaDisableTwo(CommandSender sender, String[] args) {
+		plugin.config.setProperty("two", false);
+		plugin.config.save();
+		plugin.reloadConfig();
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "two (2x2) " + ChatColor.DARK_GREEN + "disabled!");
+		return true;
+	}
+	// Disable other sources with /unlimitedlava disable other or /ulava disable other
+	private boolean UnlimitedLavaDisableOther(CommandSender sender,	String[] args) {
+		plugin.config.setProperty("other", false);
+		plugin.config.save();
+		plugin.reloadConfig();
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "other " + ChatColor.DARK_GREEN + "disabled!");
+		return true;
+	}
+	// Disable big sources with /unlimitedlava disable big or /ulava disable big
+	private boolean UnlimitedLavaDisableBig(CommandSender sender,	String[] args) {
+		plugin.config.setProperty("big", false);
+		plugin.config.save();
+		plugin.reloadConfig();
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava source " + ChatColor.DARK_RED + "big " + ChatColor.DARK_GREEN + "disabled!");
+		return true;
+	}
+	// Disable permissions with /unlimitedlava disable permissions or /ulava disable permissions
 	private boolean UnlimitedLavaDisablePermissions(CommandSender sender, String[] args) {
 		plugin.config.setProperty("permissions", false);
 		plugin.config.save();

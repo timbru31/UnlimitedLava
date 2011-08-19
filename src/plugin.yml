@@ -1,6 +1,6 @@
 name: UnlimitedLava
 main: de.xghostkillerx.unlimitedlava.UnlimitedLava
-version: pre 1.2 v3
+version: pre 1.2 v4
 author: xGhOsTkiLLeRx
 description: Ability to enjoy unlimited lava sources
 website: http://bit.ly/n1Wex2
@@ -8,7 +8,8 @@ commands:
   unlimitedlava:
     description: Handles all the UnlimitedLava commands
     permission: unlimitedlava.*
-    usage: /unlimitedlava help - to see a list of available commands
+    usage: /unlimitedlava help or /ulava help - to see a list of available commands
+    aliases: [ulava]
 permissions:
   unlimitedlava.*:
     description: Gives access to all UnlimitedLava commands
@@ -35,6 +36,9 @@ permissions:
   unlimitedlava.enable.other:
     description: Allows you to enable other sources
     default: op
+  unlimitedlava.enable.big:
+    description: Allows you to enable big sources
+    default: op
   unlimitedlava.enable.permissions:
     description: Allows you to enable permissions
     default: op
@@ -49,6 +53,9 @@ permissions:
     default: op
   unlimitedlava.disable.other:
     description: Allows you to disable other sources
+    default: op
+  unlimitedlava.disable.big:
+    description: Allows you to disable big sources
     default: op
   unlimitedlava.disable.permissions:
     description: Allows you to disable permissions
