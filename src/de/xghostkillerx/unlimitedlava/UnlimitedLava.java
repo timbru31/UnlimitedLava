@@ -68,7 +68,8 @@ public class UnlimitedLava extends JavaPlugin {
 		permissions = config.getBoolean("permissions", true);
 		config.save();
 	}
-
+	
+	//Refer to UnlimitedLavaCommands
 	public boolean onCommand(CommandSender sender, Command command,
 			String commandLabel, String[] args) {
 		UnlimitedLavaCommands cmd = new UnlimitedLavaCommands(this);
