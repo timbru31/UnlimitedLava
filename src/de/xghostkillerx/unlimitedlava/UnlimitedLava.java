@@ -15,10 +15,11 @@ import org.bukkit.util.config.Configuration;
  * Handles some general stuff!
  * 
  * Refer to:
- * http://forums.bukkit.org/threads/19441/
+ * http://bit.ly/n1Wex2
  *
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
+ * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * 
  */
 

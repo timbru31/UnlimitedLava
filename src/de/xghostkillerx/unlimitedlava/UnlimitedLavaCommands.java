@@ -9,10 +9,12 @@ import org.bukkit.plugin.PluginDescriptionFile;
  * UnlimitedLavaCommands
  * Handles all commands!
  * 
- * Refer to: http://forums.bukkit.org/threads/19441/
- * 
+ * Refer to:
+ * http://bit.ly/n1Wex2
+ *
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
+ * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * 
  */
 
@@ -255,10 +257,10 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 	private boolean UnlimitedLavaHelp(CommandSender sender, String[] args) {
 		PluginDescriptionFile pdfFile = plugin.getDescription();
 		sender.sendMessage(ChatColor.DARK_GREEN	+ "Welcome to the UnlimitedLava version " + ChatColor.DARK_RED + pdfFile.getVersion() + ChatColor.DARK_GREEN + " help!");
-		sender.sendMessage("To see the help type " + ChatColor.DARK_RED	+ "/unlimitedlava help " + ChatColor.WHITE + "or " + ChatColor.DARK_RED	+ "/ulava help" );
-		sender.sendMessage("To reload use " + ChatColor.DARK_RED	+ "/unlimitedlava reload " + ChatColor.WHITE + "or " + ChatColor.DARK_RED + "/ulava reload" );
+		sender.sendMessage("To see the help type " + ChatColor.DARK_RED	+ "/unlimitedlava help " + ChatColor.WHITE + "or " + ChatColor.DARK_RED	+ "/ulava help");
+		sender.sendMessage("To reload use " + ChatColor.DARK_RED + "/unlimitedlava reload " + ChatColor.WHITE + "or " + ChatColor.DARK_RED + "/ulava reload");
 		sender.sendMessage("To enable something use " + ChatColor.DARK_RED + "/unlimitedlava enable " + ChatColor.YELLOW + "<value>");
-		sender.sendMessage("or " + ChatColor.DARK_RED + "/ulava enable " + ChatColor.YELLOW + "<value>" );
+		sender.sendMessage("or " + ChatColor.DARK_RED + "/ulava enable " + ChatColor.YELLOW + "<value>");
 		sender.sendMessage("To disable something use " + ChatColor.DARK_RED	+ "/unlimitedlava disable " + ChatColor.YELLOW + "<value>");
 		sender.sendMessage("or " + ChatColor.DARK_RED + "/ulava disable " + ChatColor.YELLOW + "<value>");
 		sender.sendMessage(ChatColor.YELLOW + "Values " + ChatColor.WHITE + "can be: all, three, two, other, big or permissions");
@@ -351,7 +353,7 @@ public boolean UnlimitedLavaCommand(CommandSender sender, Command command, Strin
 		return true;
 	}
 	// Disable big sources with /unlimitedlava disable big or /ulava disable big
-	private boolean UnlimitedLavaDisableBig(CommandSender sender,	String[] args) {
+	private boolean UnlimitedLavaDisableBig(CommandSender sender, String[] args) {
 		plugin.config.setProperty("big", false);
 		plugin.config.save();
 		plugin.reloadConfig();
