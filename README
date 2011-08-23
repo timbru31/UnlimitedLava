@@ -66,7 +66,7 @@ Border blocks won't work!
 
 Commands (if no permissions system is detected, only OPs are able to use the commands!)
 Only bukkit's permissions system is supported! If a command is typed wrong, 
-it will return, that you should type /unlimitedlava help for more information!
+it will return, that you should type /unlimitedlava help or /ulava help for more information!
 
 /unlimitedlava reload
 /ulava reload
