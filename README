@@ -3,12 +3,13 @@ Hi,
 this is the README of UnlimitedLava
 Thanks to loganwm for helping me :)!
 Thanks for using!
-For support visit: http://bit.ly/n1Wex2
+For support visit the old forum thread: http://bit.ly/n1Wex2
+or the new dev.bukkit.org page: http://bit.ly/pCj7v3
 
 Standard config:
 
 # If you haven't understood the config (especially the point 'other' and 'big'),
-# please refer to this topic: http://bit.ly/n1Wex2
+# please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3
 two: true
 other: false
 three: true

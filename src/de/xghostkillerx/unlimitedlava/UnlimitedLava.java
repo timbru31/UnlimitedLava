@@ -14,8 +14,10 @@ import org.bukkit.util.config.Configuration;
  * UnlimitedLava for CraftBukkit/Bukkit
  * Handles some general stuff!
  * 
- * Refer to:
+ * Refer to the forum thread:
  * http://bit.ly/n1Wex2
+ * Refer to the dev.bukkit.org page:
+ * http://bit.ly/pCj7v3
  *
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
@@ -34,6 +36,8 @@ public class UnlimitedLava extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
 			this);
+	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(
+			this);
 
 	// Shutdown
 	public void onDisable() {
@@ -46,6 +50,7 @@ public class UnlimitedLava extends JavaPlugin {
 		// Events
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
+		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
 
 		// Config
 		config = getConfiguration();
@@ -60,7 +65,7 @@ public class UnlimitedLava extends JavaPlugin {
 	// Reload the config file, via command /unlimitedlava reload or /ulava reload and at the start!
 	public void reloadConfig() {
 		config.load();
-		config.setHeader("# If you haven't understood the config (especially the point 'other' and 'big'),", "# please refer to this topic: http://bit.ly/n1Wex2");
+		config.setHeader("# If you haven't understood the config (especially the point 'other' and 'big'),", "# please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
 		three = config.getBoolean("three", true);
 		two = config.getBoolean("two", true);
 		other = config.getBoolean("other", false);

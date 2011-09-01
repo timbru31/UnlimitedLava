@@ -9,8 +9,10 @@ import org.bukkit.plugin.PluginDescriptionFile;
  * UnlimitedLavaCommands
  * Handles all commands!
  * 
- * Refer to:
+ * Refer to the forum thread:
  * http://bit.ly/n1Wex2
+ * Refer to the dev.bukkit.org page:
+ * http://bit.ly/pCj7v3
  *
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
