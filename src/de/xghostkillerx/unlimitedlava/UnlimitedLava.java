@@ -33,6 +33,7 @@ public class UnlimitedLava extends JavaPlugin {
 	public Boolean other;
 	public Boolean big;
 	public Boolean permissions;
+	public Boolean messages;
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
 			this);
@@ -65,12 +66,13 @@ public class UnlimitedLava extends JavaPlugin {
 	// Reload the config file, via command /unlimitedlava reload or /ulava reload and at the start!
 	public void reloadConfig() {
 		config.load();
-		config.setHeader("# If you haven't understood the config (especially the point 'other' and 'big'),", "# please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
+		config.setHeader("# If you haven't understood the config (especially the point 'other' and 'big'),", "# please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3", "# If you set messages to true, a message will be displayed, if a player without the", "# permission tries to use a unlimited block");
 		three = config.getBoolean("three", true);
 		two = config.getBoolean("two", true);
 		other = config.getBoolean("other", false);
 		big = config.getBoolean("big", false);
 		permissions = config.getBoolean("permissions", true);
+		messages = config.getBoolean("messages", true);
 		config.save();
 	}
 	

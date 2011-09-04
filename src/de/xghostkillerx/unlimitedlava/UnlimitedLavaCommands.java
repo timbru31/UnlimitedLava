@@ -27,16 +27,16 @@ public class UnlimitedLavaCommands {
 	plugin = instance;
 	}
 	
-	//Commands... First check if config value permissions is true
+	// Commands... First check if config value permissions is true
 	public boolean UnlimitedLavaCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		if ((command.getName().equalsIgnoreCase("unlimitedlava")) || (command.getName().equalsIgnoreCase("ulava"))) {
+			//reload
 			if (args.length > 0 && args[0].equals("reload")) {
 				if (plugin.permissions == true) {
 					if (sender.hasPermission("unlimitedlava.reload")) {
 						UnlimitedLavaReload(sender, args);
 						return true;
-					}
-					else {
+					} else {
 						sender.sendMessage(ChatColor.DARK_RED + "You don't have the permission to do this!");
 						return true;
 					}
@@ -46,15 +46,15 @@ public class UnlimitedLavaCommands {
 					return true;
 				}
 			}
+			// help
 			if (args.length > 0 && args[0].equals("help")) {
 				if (plugin.permissions == true) {
 					if (sender.hasPermission("unlimitedlava.help")) {
 						UnlimitedLavaHelp(sender, args);
 						return true;
-					}
-					else {
-	                    sender.sendMessage(ChatColor.DARK_RED + "You don't have the permission to do this!");
-	                    return true;
+					} else {
+						sender.sendMessage(ChatColor.DARK_RED + "You don't have the permission to do this!");
+						return true;
 					}
 				}
 				if (plugin.permissions == false) {
@@ -62,7 +62,9 @@ public class UnlimitedLavaCommands {
 					return true;
 				}
 			}
+			// enable
 			if (args.length > 0 && args[0].equals("enable")) {
+				// enable all
 				if (args.length > 1 && args[1].equals("all")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.all")) {
@@ -78,6 +80,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// enable three
 				if (args.length > 1 && args[1].equals("three")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.three")) {
@@ -93,6 +96,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// enable two
 				if (args.length > 1 && args[1].equals("two")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.two")) {
@@ -108,6 +112,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// enable other
 				if (args.length > 1 && args[1].equals("other")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.other")) {
@@ -123,6 +128,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// enable big
 				if (args.length > 1 && args[1].equals("big")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.big")) {
@@ -138,6 +144,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// enable permissions
 				if (args.length > 1 && args[1].equals("permissions")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.enable.permissions")) {
@@ -153,8 +160,26 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// enable messages
+				if (args.length > 1 && args[1].equals("messages")) {
+					if (plugin.permissions == true) {
+						if (sender.hasPermission("unlimitedlava.enable.messages")) {
+							UnlimitedLavaEnableMessages(sender, args);
+							return true;
+						} else {
+							sender.sendMessage(ChatColor.DARK_RED + "You don't have the permission to do this!");
+							return true;
+						}
+					}
+					if (plugin.permissions == false) {
+						UnlimitedLavaEnableMessages(sender, args);
+						return true;
+					}
+				}
 			}
+			// disable
 			if (args.length > 0 && args[0].equals("disable")) {
+				// disable all
 				if (args.length > 1 && args[1].equals("all")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.all")) {
@@ -170,6 +195,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// disable three
 				if (args.length > 1 && args[1].equals("three")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.three")) {
@@ -185,6 +211,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// disable two
 				if (args.length > 1 && args[1].equals("two")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.two")) {
@@ -200,6 +227,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// disable other
 				if (args.length > 1 && args[1].equals("other")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.other")) {
@@ -215,6 +243,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// disable big
 				if (args.length > 1 && args[1].equals("big")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.big")) {
@@ -230,6 +259,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
+				// disable permissions
 				if (args.length > 1 && args[1].equals("permissions")) {
 					if (plugin.permissions == true) {
 						if (sender.hasPermission("unlimitedlava.disable.permissions")) {
@@ -242,6 +272,22 @@ public class UnlimitedLavaCommands {
 					}
 					if (plugin.permissions == false) {
 						UnlimitedLavaDisablePermissions(sender, args);
+						return true;
+					}
+				}
+				// disable messages
+				if (args.length > 1 && args[1].equals("messages")) {
+					if (plugin.permissions == true) {
+						if (sender.hasPermission("unlimitedlava.disable.messages")) {
+							UnlimitedLavaDisableMessages(sender, args);
+							return true;
+						} else {
+							sender.sendMessage(ChatColor.DARK_RED + "You don't have the permission to do this!");
+							return true;
+						}
+					}
+					if (plugin.permissions == false) {
+						UnlimitedLavaDisableMessages(sender, args);
 						return true;
 					}
 				}
@@ -268,7 +314,7 @@ public class UnlimitedLavaCommands {
 		sender.sendMessage("or " + ChatColor.DARK_RED + "/ulava enable " + ChatColor.YELLOW + "<value>");
 		sender.sendMessage("To disable something use " + ChatColor.DARK_RED	+ "/unlimitedlava disable " + ChatColor.YELLOW + "<value>");
 		sender.sendMessage("or " + ChatColor.DARK_RED + "/ulava disable " + ChatColor.YELLOW + "<value>");
-		sender.sendMessage(ChatColor.YELLOW + "Values " + ChatColor.WHITE + "can be: all, three, two, other, big or permissions");
+		sender.sendMessage(ChatColor.YELLOW + "Values " + ChatColor.WHITE + "can be: all, three, two, other, big, permissions, messages");
 		return true;
 	}
 	// Enable all sources with /unlimitedlava enable all or /ulava enable all
@@ -319,7 +365,15 @@ public class UnlimitedLavaCommands {
 		plugin.config.setProperty("permissions", true);
 		plugin.config.save();
 		plugin.reloadConfig();
-		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava " + ChatColor.DARK_RED	+ "permissions " + ChatColor.DARK_GREEN	+ "enabled! Only OPs or players with the permission can use the /unlimitedlava commands!");
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava " + ChatColor.DARK_RED	+ "permissions " + ChatColor.DARK_GREEN	+ "enabled! Only OPs or players with the permission can use UnlimitedLava!");
+		return true;
+	}
+	// Enable messages with /unlimitedlava enable messages or /ulava enable messages
+	private boolean UnlimitedLavaEnableMessages(CommandSender sender, String[] args) {
+		plugin.config.setProperty("messages", true);
+		plugin.config.save();
+		plugin.reloadConfig();
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava " + ChatColor.DARK_RED + "messages " + ChatColor.DARK_GREEN + "enabled!");
 		return true;
 	}
 	// Disable all sources with /unlimitedlava disable all or /ulava disable all
@@ -370,7 +424,15 @@ public class UnlimitedLavaCommands {
 		plugin.config.setProperty("permissions", false);
 		plugin.config.save();
 		plugin.reloadConfig();
-		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava " + ChatColor.DARK_RED + "permissions " + ChatColor.DARK_GREEN	+ "disabled! All players can use the /unlimitedlava commands!");
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava " + ChatColor.DARK_RED + "permissions " + ChatColor.DARK_GREEN	+ "disabled! All players can use UnlimitedLava!");
+		return true;
+	}
+	// Disable messages with /unlimitedlava disable messages or /ulava disable messages
+	private boolean UnlimitedLavaDisableMessages(CommandSender sender, String[] args) {
+		plugin.config.setProperty("messages", false);
+		plugin.config.save();
+		plugin.reloadConfig();
+		sender.sendMessage(ChatColor.DARK_GREEN + "UnlimitedLava " + ChatColor.DARK_RED + "messages " + ChatColor.DARK_GREEN	+ "disabled!");
 		return true;
 	}
 }

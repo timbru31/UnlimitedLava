@@ -36,76 +36,37 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 		 * Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
 		 * Check if we got a full block of lava
 		 */
-		if (plugin.two == true) {
-			if (event.getBlock().getData() != 0x0) {
-				return;
-			}
-			if ((sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA)) {
-				// Check if we can use the surrounded check
-				if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
-					// Full block (0x0) and not falling (0x8)
-					if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-						// Spread if possible
+		if (event.getBlock().getData() != 0x0) {
+			return;
+		}
+		if ((sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA)) {
+			// Check if we can use the surrounded check
+			if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
+				// Full block (0x0) and not falling (0x8)
+				if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
+					// Spread if possible for TWO
+					if (plugin.two == true) {
 						if (checkSpreadValidityTwo(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
-				}
-				/*
-				 * If the block flows into air, check if the air can get a full
-				 * lava block
-				 */
-				else if (targetBlock.getType() == Material.AIR) {
-					// Spread if possible
-					if (checkSpreadValidityTwo(event.getToBlock())) {
-						// Yay, we got a full lava block!
-						event.getToBlock().setType(Material.LAVA);
-						event.getToBlock().setData((byte) 0x0);
-					}
-				}
-			}
-		}
-		if (plugin.three == true) {
-			if (event.getBlock().getData() != 0x0) {
-				return;
-			}
-			if ((sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA)) {
-				// Check if we can use the surrounded check
-				if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
-					// Full block (0x0) and not falling (0x8)
-					if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-						// Spread if possible
+					// Spread if possible for THREE
+					if (plugin.three == true) {
 						if (checkSpreadValidityThree(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
-				}
-				/*
-				 * If the block flows into air, check if the air can get a full
-				 * lava block
-				 */
-				else if (targetBlock.getType() == Material.AIR) {
-					// Spread if possible
-					if (checkSpreadValidityThree(event.getToBlock())) {
-						// Yay, we got a full lava block!
-						event.getToBlock().setType(Material.LAVA);
-						event.getToBlock().setData((byte) 0x0);
+					// Spread if possible for OTHER
+					if (plugin.other == true) {
+						if (checkSpreadValidityOther(targetBlock)) {
+							// Only full blocks
+							event.getToBlock().setType(Material.LAVA);
+						}
 					}
-				}
-			}
-		}
-		if (plugin.big == true) {
-			if (event.getBlock().getData() != 0x0) {
-				return;
-			}
-			if ((sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA)) {
-				// Check if we can use the surrounded check
-				if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
-					// Full block (0x0) and not falling (0x8)
-					if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-						// Spread if possible
+					// Spread if possible for BIG
+					if (plugin.big == true) {
 						if (checkSpreadValidityBig(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
@@ -117,41 +78,37 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 				 * lava block
 				 */
 				else if (targetBlock.getType() == Material.AIR) {
-					// Spread if possible
-					if (checkSpreadValidityBig(event.getToBlock())) {
-						// Yay, we got a full lava block!
-						event.getToBlock().setType(Material.LAVA);
-						event.getToBlock().setData((byte) 0x0);
-					}
-				}
-			}
-		}
-		if (plugin.other == true) {
-			if (event.getBlock().getData() != 0x0) {
-				return;
-			}
-			if ((sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA)) {
-				// Check if we can use the surrounded check
-				if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
-					// Full block (0x0) and not falling (0x8)
-					if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-						// Spread if possible
-						if (checkSpreadValidityOther(targetBlock)) {
-							// Only full blocks
+					if (plugin.two == true) {
+						// Spread if possible for TWO
+						if (checkSpreadValidityTwo(event.getToBlock())) {
+							// Yay, we got a full lava block!
 							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setData((byte) 0x0);
 						}
 					}
-				}
-				/*
-				 * If the block flows into air, check if the air can get a full
-				 * lava block
-				 */
-				else if (targetBlock.getType() == Material.AIR) {
-					// Spread if possible
-					if (checkSpreadValidityOther(event.getToBlock())) {
-						// Yay, we got a full lava block!
-						event.getToBlock().setType(Material.LAVA);
-						event.getToBlock().setData((byte) 0x0);
+					if (plugin.three == true) {
+						// Spread if possible for THREE
+						if (checkSpreadValidityThree(event.getToBlock())) {
+							// Yay, we got a full lava block!
+							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setData((byte) 0x0);
+						}
+					}
+					if (plugin.other == true) {
+						// Spread if possible for OTHER
+						if (checkSpreadValidityOther(event.getToBlock())) {
+							// Yay, we got a full lava block!
+							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setData((byte) 0x0);
+						}
+					}
+					if (plugin.big == true) {
+						// Spread if possible for BIG
+						if (checkSpreadValidityBig(event.getToBlock())) {
+							// Yay, we got a full lava block!
+							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setData((byte) 0x0);
+						}
 					}
 				}
 			}
@@ -305,7 +262,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
 			n++;
 		}
-		// If more than 8 flow exists, yay, it's okay!
+		// If more than 9 flow exists, yay, it's okay!
 	    
 		if (n >= 9) {
 			return true;

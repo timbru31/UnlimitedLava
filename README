@@ -9,12 +9,15 @@ or the new dev.bukkit.org page: http://bit.ly/pCj7v3
 Standard config:
 
 # If you haven't understood the config (especially the point 'other' and 'big'),
-# please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3
+# please refer to this topic: [URL]http://bit.ly/n1Wex2[/URL] or [URL]http://bit.ly/pCj7v3[/URL]
+# If you set messages to true, a message will be displayed, if a player without the
+# permission tries to use a unlimited block
 two: true
 other: false
 three: true
 big: false
 permissions: true
+messages: true
 
 Sources:
 L are still lava blocks, X is the unlimited lava block!
@@ -65,9 +68,12 @@ Big:
 You can get infinite lava from pools bigger than 3x3 (4x4, 5x5, etc.) from any block inside!
 Border blocks won't work!
 
-Commands (if no permissions system is detected, only OPs are able to use the commands!)
+Commands & Permissions (if no permissions system is detected, only OPs are able to use the commands!)
 Only bukkit's permissions system is supported! If a command is typed wrong, 
 it will return, that you should type /unlimitedlava help or /ulava help for more information!
+
+Node: unlimitedlava.use
+Description: Ability to use the unlimited blocks
 
 /unlimitedlava reload
 /ulava reload
@@ -109,6 +115,11 @@ Description: Enables the big sources
 Node: unlimitedlava.enable.permissions
 Description: Enables the permissions! (Only OPs or player with the permission can use a specific command)
 
+/unlimitedlava enable messages
+/ulava enable messages
+Node: unlimitedlava.enable.messages
+Description: Enables the messages!
+
 /unlimitedlava disable all
 /ulava disable all
 Node: unlimitedlava.disable.all
@@ -138,3 +149,8 @@ Description: Disables the big sources
 /ulava disable permissions
 Node: unlimitedlava.disable.permissions
 Description: Disables the permissions! ALL players can use the commands!
+
+/unlimitedlava disable messages
+/ulava disable messages
+Node: unlimitedlava.disable.messages
+Description: Disables the messages!
