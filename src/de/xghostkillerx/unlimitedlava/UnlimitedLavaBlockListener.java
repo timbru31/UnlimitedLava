@@ -2,7 +2,6 @@ package de.xghostkillerx.unlimitedlava;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockListener;
 
@@ -36,38 +35,38 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 		 * Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
 		 * Check if we got a full block of lava
 		 */
-		if (event.getBlock().getData() != 0x0) {
+		if (sourceBlock.getData() != 0x0) {
 			return;
 		}
-		if ((sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA)) {
+		if (sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA) {
 			// Check if we can use the surrounded check
 			if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
 				// Full block (0x0) and not falling (0x8)
 				if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
 					// Spread if possible for TWO
 					if (plugin.two == true) {
-						if (checkSpreadValidityTwo(targetBlock)) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityTwo(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
 					// Spread if possible for THREE
 					if (plugin.three == true) {
-						if (checkSpreadValidityThree(targetBlock)) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityThree(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
 					// Spread if possible for OTHER
 					if (plugin.other == true) {
-						if (checkSpreadValidityOther(targetBlock)) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityOther(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
 					// Spread if possible for BIG
 					if (plugin.big == true) {
-						if (checkSpreadValidityBig(targetBlock)) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityBig(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
@@ -80,7 +79,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 				else if (targetBlock.getType() == Material.AIR) {
 					if (plugin.two == true) {
 						// Spread if possible for TWO
-						if (checkSpreadValidityTwo(event.getToBlock())) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityTwo(event.getToBlock())) {
 							// Yay, we got a full lava block!
 							event.getToBlock().setType(Material.LAVA);
 							event.getToBlock().setData((byte) 0x0);
@@ -88,7 +87,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					}
 					if (plugin.three == true) {
 						// Spread if possible for THREE
-						if (checkSpreadValidityThree(event.getToBlock())) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityThree(event.getToBlock())) {
 							// Yay, we got a full lava block!
 							event.getToBlock().setType(Material.LAVA);
 							event.getToBlock().setData((byte) 0x0);
@@ -96,7 +95,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					}
 					if (plugin.other == true) {
 						// Spread if possible for OTHER
-						if (checkSpreadValidityOther(event.getToBlock())) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityOther(event.getToBlock())) {
 							// Yay, we got a full lava block!
 							event.getToBlock().setType(Material.LAVA);
 							event.getToBlock().setData((byte) 0x0);
@@ -104,7 +103,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					}
 					if (plugin.big == true) {
 						// Spread if possible for BIG
-						if (checkSpreadValidityBig(event.getToBlock())) {
+						if (UnlimitedLavaSpreadCheck.checkSpreadValidityBig(event.getToBlock())) {
 							// Yay, we got a full lava block!
 							event.getToBlock().setType(Material.LAVA);
 							event.getToBlock().setData((byte) 0x0);
@@ -112,204 +111,6 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					}
 				}
 			}
-		}
-	}
-
-	private boolean checkSpreadValidityTwo(Block block) {
-		int n = 0;
-		/*
-		 * For the 2x2 source!
-		 * 
-		 * Defines the number of valid "source" lava flows surrounding this
-		 * block Sets the value of valid lava flows, surrounding this block If a
-		 * valid flow of lava exists, add to the count
-		 */
-	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.NORTH_WEST).getData() == 0x0))) {
-	    	n++;
-		}
-	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.SOUTH_WEST).getData() == 0x0))) {
-	    	n++;
-	    }
-	    if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.SOUTH_EAST).getData() == 0x0))) {
-	    	n++;
-	    }
-	    if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.NORTH_EAST).getData() == 0x0))) {
-	    	n++;
-	    }
-		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR)
-			return false;
-	    if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0)))
-	    	return false;
-	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.SOUTH).getData() == 0x0)))
-	    	return false;
-	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0)))
-	    	return false;
-	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) && ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0)))
-	    	return false;
-	    if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.SOUTH).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0)))
-	    	return false;
-		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA)
-			return false;
-		if (block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA)
-			return false;
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA)
-			return false;	
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.STATIONARY_LAVA)
-			return false;
-	   	// If more than 1 flow exists, yay, it's okay!
-	    
-		if (n >= 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean checkSpreadValidityThree(Block block) {
-		int n = 0;
-		/*
-		 * For the 3x3 source!
-		 * 
-		 * Defines the number of valid "source" lava flows surrounding this
-		 * block Sets the value of valid lava flows, surrounding this block If a
-		 * valid flow of lava exists, add to the count
-		 */
-		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
-			n++;
-			}
-		if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA)
-			return false;
-		if (block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA)
-			return false;
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA)
-			return false;	
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.STATIONARY_LAVA)
-			return false;
-		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR)
-			return false;		
-		// If more than 8 flow exists, yay, it's okay!
-	    
-		if (n >= 8) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	private boolean checkSpreadValidityBig(Block block) {
-		int n = 0;
-		/*
-		 * For the big source!
-		 * 
-		 * Defines the number of valid "source" lava flows surrounding this
-		 * block Sets the value of valid lava flows, surrounding this block If a
-		 * valid flow of lava exists, add to the count
-		 */
-		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
-			n++;
-			}
-		if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		// If more than 9 flow exists, yay, it's okay!
-	    
-		if (n >= 9) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean checkSpreadValidityOther(Block block) {
-		int n = 0;
-		/*
-		 * For other sources!
-		 * 
-		 * Defines the number of valid "source" lava flows surrounding this
-		 * block Sets the value of valid lava flows, surrounding this block If a
-		 * valid flow of lava exists, add to the count
-		 */
-		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR)
-			return false;
-	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.NORTH_WEST).getData() == 0x0)))
-	    	return false;
-	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.SOUTH_WEST).getData() == 0x0)))
-	    	return false;
-	    if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.SOUTH_EAST).getData() == 0x0)))
-	    	return false;
-	    if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.NORTH_EAST).getData() == 0x0)))
-	    	return false;
-		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.EAST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0)))
-			return false;
-		// If more than 2 flow exists, yay, it's okay!
-	    
-		if (n >= 2) {
-			return true;
-		} else {
-			return false;
 		}
 	}
 }

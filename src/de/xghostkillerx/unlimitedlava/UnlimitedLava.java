@@ -34,6 +34,7 @@ public class UnlimitedLava extends JavaPlugin {
 	public Boolean big;
 	public Boolean permissions;
 	public Boolean messages;
+	public Boolean fall;
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
 			this);
@@ -71,14 +72,14 @@ public class UnlimitedLava extends JavaPlugin {
 		two = config.getBoolean("two", true);
 		other = config.getBoolean("other", false);
 		big = config.getBoolean("big", false);
+		fall = config.getBoolean("fall", true);
 		permissions = config.getBoolean("permissions", true);
 		messages = config.getBoolean("messages", true);
 		config.save();
 	}
 	
 	//Refer to UnlimitedLavaCommands
-	public boolean onCommand(CommandSender sender, Command command,
-			String commandLabel, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		UnlimitedLavaCommands cmd = new UnlimitedLavaCommands(this);
 		return cmd.UnlimitedLavaCommand(sender, command, commandLabel, args);
 	}
