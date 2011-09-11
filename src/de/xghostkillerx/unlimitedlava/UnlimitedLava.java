@@ -2,6 +2,7 @@ package de.xghostkillerx.unlimitedlava;
 
 import java.util.logging.Logger;
 
+import org.blockface.bukkitstats.CallHome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.event.Event;
@@ -62,6 +63,9 @@ public class UnlimitedLava extends JavaPlugin {
 		// Message
 		PluginDescriptionFile pdfFile = this.getDescription();
 		log.info(pdfFile.getName() + " " + pdfFile.getVersion()	+ " is enabled!");
+		
+		// Stats
+		CallHome.load(this);
 	}
 
 	// Reload the config file, via command /unlimitedlava reload or /ulava reload and at the start!

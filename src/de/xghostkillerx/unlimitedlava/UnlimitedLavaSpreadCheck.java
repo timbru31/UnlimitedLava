@@ -4,6 +4,21 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
+/**
+ * UnlimitedLavaSpreadCheck
+ * Handles the infinite sources spread checks for the Block- and PlayerListener
+ * 
+ * Refer to the forum thread:
+ * http://bit.ly/n1Wex2
+ * Refer to the dev.bukkit.org page:
+ * http://bit.ly/pCj7v3
+ *
+ * @author xGhOsTkiLLeRx
+ * @thanks to loganwm for the help!!
+ * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
+ * 
+ */
+
 public class UnlimitedLavaSpreadCheck {
 
 	UnlimitedLava plugin;
@@ -20,6 +35,7 @@ public class UnlimitedLavaSpreadCheck {
 		 * Defines the number of valid "source" lava flows surrounding this
 		 * block Sets the value of valid lava flows, surrounding this block If a
 		 * valid flow of lava exists, add to the count
+		 * 
 		 */
 	    if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.WEST).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) && ((block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) && (block.getRelative(BlockFace.NORTH_WEST).getData() == 0x0))) {
 	    	n++;
@@ -70,6 +86,7 @@ public class UnlimitedLavaSpreadCheck {
 		 * Defines the number of valid "source" lava flows surrounding this
 		 * block Sets the value of valid lava flows, surrounding this block If a
 		 * valid flow of lava exists, add to the count
+		 * 
 		 */
 		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
 			n++;
@@ -122,6 +139,7 @@ public class UnlimitedLavaSpreadCheck {
 		 * Defines the number of valid "source" lava flows surrounding this
 		 * block Sets the value of valid lava flows, surrounding this block If a
 		 * valid flow of lava exists, add to the count
+		 * 
 		 */
 		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
 			n++;
@@ -179,6 +197,7 @@ public class UnlimitedLavaSpreadCheck {
 		 * Defines the number of valid "source" lava flows surrounding this
 		 * block Sets the value of valid lava flows, surrounding this block If a
 		 * valid flow of lava exists, add to the count
+		 * 
 		 */
 		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
 			n++;
