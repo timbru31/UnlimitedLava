@@ -6,6 +6,8 @@ Thanks for using!
 For support visit the old forum thread: http://bit.ly/n1Wex2
 or the new dev.bukkit.org page: http://bit.ly/pCj7v3
 
+This plugin sends usage statistics! If you wish to disable the usage stats, look at /plugins/stats/config.yml!
+
 Standard config:
 
 # If you haven't understood the config (especially the point 'other' and 'big'),

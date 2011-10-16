@@ -25,6 +25,7 @@
 
 package org.blockface.bukkitstats;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.config.Configuration;
 
@@ -38,6 +39,7 @@ import java.net.URLConnection;
 @
  */
 
+@SuppressWarnings("deprecation")
 public class CallHome{
 
     private static Configuration cfg=null;
@@ -47,7 +49,7 @@ public class CallHome{
             if(!verifyConfig()) return;
         }
         if(cfg.getBoolean("opt-out",false)) return;
-        plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin,new CallTask(plugin,cfg.getBoolean("list-server",true)),0L,20L*60L*10);
+        plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin,new CallTask(plugin,cfg.getBoolean("list-server",true)),0L,20L*60L*60);
         System.out.println(plugin.getDescription().getName() + " is keeping usage stats an. To opt-out for whatever bizarre reason, check plugins/stats.");
 
     }
@@ -94,20 +96,22 @@ class CallTask implements Runnable {
     }
 
     private String postUrl() throws Exception {
-        String url = String.format("http://usage.blockface.org/update.php?name=%s&build=%s&plugin=%s&port=%s&public=%s",
+        String url = String.format("http://usage.blockface.org/update.php?name=%s&build=%s&plugin=%s&port=%s&public=%s&bukkit=%s",
                 plugin.getServer().getName(),
                 plugin.getDescription().getVersion(),
                 plugin.getDescription().getName(),
                 plugin.getServer().getPort(),
-                pub);
+                pub,
+                Bukkit.getVersion());
         URL oracle = new URL(url);
         URLConnection yc = oracle.openConnection();
         BufferedReader in = new BufferedReader(
                                 new InputStreamReader(
                                 yc.getInputStream()));
         String inputLine;
+        String result = "";
         while ((inputLine = in.readLine()) != null)
-            inputLine += "";
-        return inputLine;
+            result += inputLine;
+        return result;
     }
 }

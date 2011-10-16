@@ -23,7 +23,6 @@ import org.bukkit.event.block.BlockListener;
 public class UnlimitedLavaBlockListener extends BlockListener {
 
 	public static UnlimitedLava plugin;
-	
 	public UnlimitedLavaBlockListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
@@ -44,28 +43,28 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 				// Full block (0x0) and not falling (0x8)
 				if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
 					// Spread if possible for TWO
-					if (plugin.two == true) {
+					if (plugin.config.getBoolean("sources.two", true)) {
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityTwo(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
 					// Spread if possible for THREE
-					if (plugin.three == true) {
+					if (plugin.config.getBoolean("sources.three", true)) {
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityThree(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
 					// Spread if possible for OTHER
-					if (plugin.other == true) {
+					if (plugin.config.getBoolean("sources.other", true)) {
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityOther(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
 						}
 					}
 					// Spread if possible for BIG
-					if (plugin.big == true) {
+					if (plugin.config.getBoolean("sources.big", true)) {
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityBig(targetBlock)) {
 							// Only full blocks
 							event.getToBlock().setType(Material.LAVA);
@@ -77,7 +76,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 				 * lava block
 				 */
 				else if (targetBlock.getType() == Material.AIR) {
-					if (plugin.two == true) {
+					if (plugin.config.getBoolean("sources.two", true)) {
 						// Spread if possible for TWO
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityTwo(event.getToBlock())) {
 							// Yay, we got a full lava block!
@@ -85,7 +84,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 							event.getToBlock().setData((byte) 0x0);
 						}
 					}
-					if (plugin.three == true) {
+					if (plugin.config.getBoolean("sources.three", true)) {
 						// Spread if possible for THREE
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityThree(event.getToBlock())) {
 							// Yay, we got a full lava block!
@@ -93,7 +92,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 							event.getToBlock().setData((byte) 0x0);
 						}
 					}
-					if (plugin.other == true) {
+					if (plugin.config.getBoolean("sources.other", true)) {
 						// Spread if possible for OTHER
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityOther(event.getToBlock())) {
 							// Yay, we got a full lava block!
@@ -101,7 +100,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 							event.getToBlock().setData((byte) 0x0);
 						}
 					}
-					if (plugin.big == true) {
+					if (plugin.config.getBoolean("sources.big", true)) {
 						// Spread if possible for BIG
 						if (UnlimitedLavaSpreadCheck.checkSpreadValidityBig(event.getToBlock())) {
 							// Yay, we got a full lava block!

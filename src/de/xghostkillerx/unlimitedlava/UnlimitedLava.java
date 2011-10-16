@@ -9,7 +9,7 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.config.Configuration;
+import org.bukkit.configuration.file.*;
 
 /**
  * UnlimitedLava for CraftBukkit/Bukkit
@@ -27,25 +27,16 @@ import org.bukkit.util.config.Configuration;
  */
 
 public class UnlimitedLava extends JavaPlugin {
-
-	public Configuration config;
-	public Boolean three;
-	public Boolean two;
-	public Boolean other;
-	public Boolean big;
-	public Boolean permissions;
-	public Boolean messages;
-	public Boolean fall;
+	
+	public FileConfiguration config;
 	public static final Logger log = Logger.getLogger("Minecraft");
-	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(
-			this);
-	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(
-			this);
+	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
+	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
 
 	// Shutdown
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();
-		log.info(pdfFile.getName() + " " + pdfFile.getVersion() + " has been disabled!");
+		log.info(pdfFile.getName() + " " + pdfFile.getVersion()	+ " has been disabled!");
 	}
 
 	// Start
@@ -56,9 +47,10 @@ public class UnlimitedLava extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
 
 		// Config
-		config = getConfiguration();
+		config = this.getConfig();
+		config.options().copyDefaults(true);
 		reloadConfig();
-		config.save();
+		saveConfig();
 
 		// Message
 		PluginDescriptionFile pdfFile = this.getDescription();
@@ -70,16 +62,15 @@ public class UnlimitedLava extends JavaPlugin {
 
 	// Reload the config file, via command /unlimitedlava reload or /ulava reload and at the start!
 	public void reloadConfig() {
-		config.load();
-		config.setHeader("# If you haven't understood the config (especially the point 'other' and 'big'),", "# please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3", "# If you set messages to true, a message will be displayed, if a player without the", "# permission tries to use a unlimited block");
-		three = config.getBoolean("three", true);
-		two = config.getBoolean("two", true);
-		other = config.getBoolean("other", false);
-		big = config.getBoolean("big", false);
-		fall = config.getBoolean("fall", true);
-		permissions = config.getBoolean("permissions", true);
-		messages = config.getBoolean("messages", true);
-		config.save();
+		config.options().header("For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
+		config.addDefault("sources.three", true);
+		config.addDefault("sources.two", true);
+		config.addDefault("sources.other", false);
+		config.addDefault("sources.big", false);
+		config.addDefault("sources.fall", true);
+		config.addDefault("configuration.permissions", true);
+		config.addDefault("configuration.messages", true);
+		saveConfig();
 	}
 	
 	//Refer to UnlimitedLavaCommands
