@@ -28,10 +28,10 @@ import org.bukkit.configuration.file.*;
 
 public class UnlimitedLava extends JavaPlugin {
 	
-	public FileConfiguration config;
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
+	FileConfiguration config;
 
 	// Shutdown
 	public void onDisable() {
@@ -43,13 +43,14 @@ public class UnlimitedLava extends JavaPlugin {
 	public void onEnable() {
 		// Events
 		PluginManager pm = getServer().getPluginManager();
+		pm.registerEvent(Event.Type.BLOCK_SPREAD, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
 
 		// Config
 		config = this.getConfig();
 		config.options().copyDefaults(true);
-		reloadConfig();
+		loadConfig();
 		saveConfig();
 
 		// Message
@@ -61,7 +62,7 @@ public class UnlimitedLava extends JavaPlugin {
 	}
 
 	// Reload the config file, via command /unlimitedlava reload or /ulava reload and at the start!
-	public void reloadConfig() {
+	public void loadConfig() {
 		config.options().header("For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
 		config.addDefault("sources.three", true);
 		config.addDefault("sources.two", true);

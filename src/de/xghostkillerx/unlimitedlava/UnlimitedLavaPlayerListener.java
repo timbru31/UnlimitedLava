@@ -42,7 +42,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 			// If the player hasn't got the permissions, cancel the event and give a empty bucket!
 			if (!player.hasPermission("unlimitedlava.use")) {
 				if (plugin.config.getBoolean("sources.two", true)) {
-					if (UnlimitedLavaSpreadCheck.checkSpreadValidityTwo(clicked)) {
+					if (UnlimitedLavaCheck.checkSpreadValidityTwo(clicked)) {
 						if (plugin.config.getBoolean("configuration.messages", true)) {
 							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
 						}
@@ -54,7 +54,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 					}
 				}
 				if (plugin.config.getBoolean("sources.three", true)) {
-					if (UnlimitedLavaSpreadCheck.checkSpreadValidityThree(clicked)) {
+					if (UnlimitedLavaCheck.checkSpreadValidityThree(clicked)) {
 						if (plugin.config.getBoolean("configuration.messages", true)) {
 							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
 						}
@@ -65,7 +65,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 					}
 				}
 				if (plugin.config.getBoolean("sources.other", true)) {
-					if (UnlimitedLavaSpreadCheck.checkSpreadValidityOther(clicked)) {
+					if (UnlimitedLavaCheck.checkSpreadValidityOther(clicked)) {
 						if (plugin.config.getBoolean("configuration.messages", true)) {
 							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
 						}
@@ -76,7 +76,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 					}
 				}
 				if (plugin.config.getBoolean("sources.big", true)) {
-					if (UnlimitedLavaSpreadCheck.checkSpreadValidityBig(clicked)) {
+					if (UnlimitedLavaCheck.checkSpreadValidityBig(clicked)) {
 						if (plugin.config.getBoolean("configuration.messages", true)) {
 							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
 						}
