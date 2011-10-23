@@ -50,7 +50,6 @@ public class UnlimitedLava extends JavaPlugin {
 		config = this.getConfig();
 		config.options().copyDefaults(true);
 		loadConfig();
-		saveConfig();
 
 		// Message
 		PluginDescriptionFile pdfFile = this.getDescription();

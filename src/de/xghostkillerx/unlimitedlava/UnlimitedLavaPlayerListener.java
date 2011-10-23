@@ -33,35 +33,35 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 		Block clicked = event.getBlockClicked();
 		Player player = event.getPlayer();
 		// Only if lava is clicked ;)
-		if (plugin.config.getBoolean("configuration.permissions", true)) {
+		if (plugin.config.getBoolean("configuration.permissions") == true) {
 			if (event.getBlockClicked().getTypeId() == 9) {
 				return;
 			}
 			// If the player hasn't got the permissions, cancel the event and give a empty bucket!
 			if (!player.hasPermission("unlimitedlava.use")) {
 				// 2x2 source
-				if (plugin.config.getBoolean("sources.two", true)) {
+				if (plugin.config.getBoolean("sources.two") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityTwo(clicked)) {
 						giveBucketBack(player, event);
 						message(player);
 					}
 				}
 				// 3x3 source
-				if (plugin.config.getBoolean("sources.three", true)) {
+				if (plugin.config.getBoolean("sources.three") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityThree(clicked)) {
 						giveBucketBack(player, event);
 						message(player);
 					}
 				}
 				// Other source
-				if (plugin.config.getBoolean("sources.other", true)) {
+				if (plugin.config.getBoolean("sources.other") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityOther(clicked)) {
 						giveBucketBack(player, event);
 						message(player);
 					}
 				}
 				// Big source
-				if (plugin.config.getBoolean("sources.big", true)) {
+				if (plugin.config.getBoolean("sources.big") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityBig(clicked)) {
 						giveBucketBack(player, event);
 						message(player);
@@ -80,7 +80,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 	}
 	
 	public void message(Player player) {
-		if (plugin.config.getBoolean("configuration.messages", true)) {
+		if (plugin.config.getBoolean("configuration.messages") == true) {
 			player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
 		}
 	}

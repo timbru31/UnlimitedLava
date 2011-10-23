@@ -32,7 +32,7 @@ public class UnlimitedLavaCommands {
 		if ((command.getName().equalsIgnoreCase("unlimitedlava")) ||(command.getName().equalsIgnoreCase("unlimitedlaba")) || (command.getName().equalsIgnoreCase("ulava"))) {
 			//reload
 			if (args.length > 0 && args[0].equals("reload")) {
-				if (plugin.config.getBoolean("configuration.permissions", true)) {
+				if (plugin.config.getBoolean("configuration.permissions") == true) {
 					if (sender.hasPermission("unlimitedlava.reload")) {
 						UnlimitedLavaReload(sender, args);
 						return true;
@@ -41,14 +41,14 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
-				if (plugin.config.getBoolean("configuration.permissions", false)) {
+				if (plugin.config.getBoolean("configuration.permissions") == false) {
 					UnlimitedLavaReload(sender, args);
 					return true;
 				}
 			}
 			// help
 			if (args.length > 0 && args[0].equals("help")) {
-				if (plugin.config.getBoolean("configuration.permissions", true)) {
+				if (plugin.config.getBoolean("configuration.permissions") == true) {
 					if (sender.hasPermission("unlimitedlava.help")) {
 						UnlimitedLavaHelp(sender, args);
 						return true;
@@ -57,7 +57,7 @@ public class UnlimitedLavaCommands {
 						return true;
 					}
 				}
-				if (plugin.config.getBoolean("configuration.permissions", false)) {
+				if (plugin.config.getBoolean("configuration.permissions") == false) {
 					UnlimitedLavaHelp(sender, args);
 					return true;
 				}
@@ -66,7 +66,7 @@ public class UnlimitedLavaCommands {
 			if (args.length > 0 && args[0].equals("enable")) {
 				// enable all
 				if (args.length > 1 && args[1].equals("all")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.all")) {
 							UnlimitedLavaEnableAll(sender, args);
 							return true;
@@ -75,14 +75,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaEnableAll(sender, args);
 						return true;
 					}
 				}
 				// enable three
 				if (args.length > 1 && args[1].equals("three")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.three")) {
 							UnlimitedLavaEnableThree(sender, args);
 							return true;
@@ -91,14 +91,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaEnableThree(sender, args);
 						return true;
 					}
 				}
 				// enable two
 				if (args.length > 1 && args[1].equals("two")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.two")) {
 							UnlimitedLavaEnableTwo(sender, args);
 							return true;
@@ -107,14 +107,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaEnableTwo(sender, args);
 						return true;
 					}
 				}
 				// enable other
 				if (args.length > 1 && args[1].equals("other")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.other")) {
 							UnlimitedLavaEnableOther(sender, args);
 							return true;
@@ -123,14 +123,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaEnableOther(sender, args);
 						return true;
 					}
 				}
 				// enable big
 				if (args.length > 1 && args[1].equals("big")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.big")) {
 							UnlimitedLavaEnableBig(sender, args);
 							return true;
@@ -139,14 +139,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaEnableBig(sender, args);
 						return true;
 					}
 				}
 				// enable permissions
 				if (args.length > 1 && args[1].equals("permissions")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.permissions")) {
 							UnlimitedLavaEnablePermissions(sender, args);
 							return true;
@@ -155,14 +155,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaEnablePermissions(sender, args);
 						return true;
 					}
 				}
 				// enable messages
 				if (args.length > 1 && args[1].equals("messages")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.messages")) {
 							UnlimitedLavaEnableMessages(sender, args);
 							return true;
@@ -171,7 +171,7 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaEnableMessages(sender, args);
 						return true;
 					}
@@ -181,7 +181,7 @@ public class UnlimitedLavaCommands {
 			if (args.length > 0 && args[0].equals("disable")) {
 				// disable all
 				if (args.length > 1 && args[1].equals("all")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.all")) {
 							UnlimitedLavaDisableAll(sender, args);
 							return true;
@@ -190,14 +190,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaDisableAll(sender, args);
 						return true;
 					}
 				}
 				// disable three
 				if (args.length > 1 && args[1].equals("three")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.three")) {
 							UnlimitedLavaDisableThree(sender, args);
 							return true;
@@ -206,14 +206,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaDisableThree(sender, args);
 						return true;
 					}
 				}
 				// disable two
 				if (args.length > 1 && args[1].equals("two")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.two")) {
 							UnlimitedLavaDisableTwo(sender, args);
 							return true;
@@ -222,14 +222,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaDisableTwo(sender, args);
 						return true;
 					}
 				}
 				// disable other
 				if (args.length > 1 && args[1].equals("other")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.other")) {
 							UnlimitedLavaDisableOther(sender, args);
 							return true;
@@ -238,14 +238,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaDisableOther(sender, args);
 						return true;
 					}
 				}
 				// disable big
 				if (args.length > 1 && args[1].equals("big")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.big")) {
 							UnlimitedLavaDisableBig(sender, args);
 							return true;
@@ -254,14 +254,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaDisableBig(sender, args);
 						return true;
 					}
 				}
 				// disable permissions
 				if (args.length > 1 && args[1].equals("permissions")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.permissions")) {
 							UnlimitedLavaDisablePermissions(sender, args);
 							return true;
@@ -270,14 +270,14 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaDisablePermissions(sender, args);
 						return true;
 					}
 				}
 				// disable messages
 				if (args.length > 1 && args[1].equals("messages")) {
-					if (plugin.config.getBoolean("configuration.permissions", true)) {
+					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.messages")) {
 							UnlimitedLavaDisableMessages(sender, args);
 							return true;
@@ -286,14 +286,13 @@ public class UnlimitedLavaCommands {
 							return true;
 						}
 					}
-					if (plugin.config.getBoolean("configuration.permissions", false)) {
+					if (plugin.config.getBoolean("configuration.permissions") == false) {
 						UnlimitedLavaDisableMessages(sender, args);
 						return true;
 					}
 				}
 			}
 		}
-		
 		return false;
 	}
 
