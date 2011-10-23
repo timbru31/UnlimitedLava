@@ -1,7 +1,6 @@
 package de.xghostkillerx.unlimitedlava;
 
 import java.util.logging.Logger;
-
 import org.blockface.bukkitstats.CallHome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.Command;

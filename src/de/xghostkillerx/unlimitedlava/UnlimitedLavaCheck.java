@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 
-
 /**
  * UnlimitedLavaSpreadCheck
  * Handles the infinite sources spread checks for the Block- and PlayerListener
@@ -23,7 +22,6 @@ import org.bukkit.block.BlockFace;
 public class UnlimitedLavaCheck {
 
 	 static UnlimitedLava plugin;
-
 	 public UnlimitedLavaCheck(UnlimitedLava instance) {
 		 plugin = instance;
 	 }

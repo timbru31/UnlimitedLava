@@ -31,7 +31,6 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 	public void onBlockSpread(BlockSpreadEvent event) {
 		plugin.getServer().broadcastMessage("STAGE 1");
 		Block sourceBlock = event.getBlock();
-
 		if (sourceBlock.getData() != 0x0) {
 			return;
 		}

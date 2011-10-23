@@ -25,12 +25,10 @@ import org.bukkit.inventory.ItemStack;
 public class UnlimitedLavaPlayerListener extends PlayerListener {
 
 	public static UnlimitedLava plugin;
-
 	public UnlimitedLavaPlayerListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
 
-	@SuppressWarnings("deprecation")
 	public void onPlayerBucketFill(PlayerBucketFillEvent event) {
 		Block clicked = event.getBlockClicked();
 		Player player = event.getPlayer();
@@ -41,52 +39,49 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 			}
 			// If the player hasn't got the permissions, cancel the event and give a empty bucket!
 			if (!player.hasPermission("unlimitedlava.use")) {
+				// 2x2 source
 				if (plugin.config.getBoolean("sources.two", true)) {
 					if (UnlimitedLavaCheck.checkSpreadValidityTwo(clicked)) {
-						if (plugin.config.getBoolean("configuration.messages", true)) {
-							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
-						}
-						event.setCancelled(true);
-						ItemStack bucket = new ItemStack(325, 1);
-						player.setItemInHand(bucket);
-						player.updateInventory();
-
+						giveBucketBack(player, event);
+						message(player);
 					}
 				}
+				// 3x3 source
 				if (plugin.config.getBoolean("sources.three", true)) {
 					if (UnlimitedLavaCheck.checkSpreadValidityThree(clicked)) {
-						if (plugin.config.getBoolean("configuration.messages", true)) {
-							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
-						}
-						event.setCancelled(true);
-						ItemStack bucket = new ItemStack(325, 1);
-						player.setItemInHand(bucket);
-						player.updateInventory();
+						giveBucketBack(player, event);
+						message(player);
 					}
 				}
+				// Other source
 				if (plugin.config.getBoolean("sources.other", true)) {
 					if (UnlimitedLavaCheck.checkSpreadValidityOther(clicked)) {
-						if (plugin.config.getBoolean("configuration.messages", true)) {
-							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
-						}
-						event.setCancelled(true);
-						ItemStack bucket = new ItemStack(325, 1);
-						player.setItemInHand(bucket);
-						player.updateInventory();
+						giveBucketBack(player, event);
+						message(player);
 					}
 				}
+				// Big source
 				if (plugin.config.getBoolean("sources.big", true)) {
 					if (UnlimitedLavaCheck.checkSpreadValidityBig(clicked)) {
-						if (plugin.config.getBoolean("configuration.messages", true)) {
-							player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
-						}
-						event.setCancelled(true);
-						ItemStack bucket = new ItemStack(325, 1);
-						player.setItemInHand(bucket);
-						player.updateInventory();
+						giveBucketBack(player, event);
+						message(player);
 					}
 				}
 			}
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void giveBucketBack(Player player, PlayerBucketFillEvent event) {
+		event.setCancelled(true);
+		ItemStack bucket = new ItemStack(325, 1);
+		player.setItemInHand(bucket);
+		player.updateInventory();
+	}
+	
+	public void message(Player player) {
+		if (plugin.config.getBoolean("configuration.messages", true)) {
+			player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
 		}
 	}
 }
