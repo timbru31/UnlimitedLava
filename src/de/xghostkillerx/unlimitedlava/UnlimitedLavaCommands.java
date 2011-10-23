@@ -297,7 +297,7 @@ public class UnlimitedLavaCommands {
 		return false;
 	}
 
-	// Reload the config with /unlimitedlava reload or /ulava help
+	// Reload the config with /unlimitedlava reload or /ulava reload
 	private boolean UnlimitedLavaReload(CommandSender sender, String[] args) {
 		PluginDescriptionFile pdfFile = plugin.getDescription();
 		plugin.reloadConfig();

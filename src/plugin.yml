@@ -12,7 +12,7 @@ commands:
     aliases: [ulava]
 permissions:
   unlimitedlava.*:
-    description: Gives access to all UnlimitedLava commands
+    description: Gives access to all UnlimitedLava permissions
     children:
       unlimitedlava.reload: true
       unlimitedlava.enable.*: true
