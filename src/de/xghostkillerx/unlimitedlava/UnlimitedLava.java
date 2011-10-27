@@ -70,7 +70,7 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("sources.two", true);
 		config.addDefault("sources.other", false);
 		config.addDefault("sources.big", false);
-		config.addDefault("sources.fall", true);
+		//config.addDefault("sources.fall", true);
 		config.options().copyDefaults(true);
 		saveConfig();
 	}

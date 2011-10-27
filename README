@@ -11,16 +11,15 @@ This plugin is released under the Creative Commons Attribution-NonCommercial-Sha
 
 Standard config:
 
-# If you haven't understood the config (especially the point 'other' and 'big'),
-# please refer to this topic: http://bit.ly/n1Wex2 or ttp://bit.ly/pCj7v3
-# If you set messages to true, a message will be displayed, if a player without the
-# permission tries to use a unlimited block
-two: true
-other: false
-three: true
-big: false
-permissions: true
-messages: true
+# For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3
+configuration:
+  permissions: true
+  messages: true
+sources:
+  three: true
+  two: true
+  other: false
+  big: false
 
 Sources:
 L are still lava blocks, X is the unlimited lava block!
