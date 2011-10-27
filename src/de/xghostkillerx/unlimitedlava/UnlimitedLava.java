@@ -1,5 +1,6 @@
 package de.xghostkillerx.unlimitedlava;
 
+import java.io.File;
 import java.util.logging.Logger;
 import org.blockface.bukkitstats.CallHome;
 import org.bukkit.command.CommandSender;
@@ -30,7 +31,8 @@ public class UnlimitedLava extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
-	FileConfiguration config;
+	public FileConfiguration config;
+	public File configFile;
 
 	// Shutdown
 	public void onDisable() {
@@ -47,8 +49,8 @@ public class UnlimitedLava extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
 
 		// Config
+		configFile = new File(getDataFolder(), "config.yml");
 		config = this.getConfig();
-		config.options().copyDefaults(true);
 		loadConfig();
 
 		// Message
@@ -62,14 +64,25 @@ public class UnlimitedLava extends JavaPlugin {
 	// Reload the config file, via command /unlimitedlava reload or /ulava reload and at the start!
 	public void loadConfig() {
 		config.options().header("For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
+		config.addDefault("configuration.permissions", true);
+		config.addDefault("configuration.messages", true);
 		config.addDefault("sources.three", true);
 		config.addDefault("sources.two", true);
 		config.addDefault("sources.other", false);
 		config.addDefault("sources.big", false);
 		config.addDefault("sources.fall", true);
-		config.addDefault("configuration.permissions", true);
-		config.addDefault("configuration.messages", true);
+		config.options().copyDefaults(true);
 		saveConfig();
+	}
+	
+	// Reloads the config via command /unlimitedlava reload or /ulava reload
+	public void loadConfigAgain() {
+		try {
+			config.load(configFile);
+			saveConfig();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//Refer to UnlimitedLavaCommands

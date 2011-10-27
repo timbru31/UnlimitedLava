@@ -37,7 +37,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 			if (event.getBlockClicked().getTypeId() == 9) {
 				return;
 			}
-			// If the player hasn't got the permissions, cancel the event and give a empty bucket!
+			// If the player hasn't got the permissions, cancel the event and give an empty bucket back!
 			if (!player.hasPermission("unlimitedlava.use")) {
 				// 2x2 source
 				if (plugin.config.getBoolean("sources.two") == true) {
@@ -71,6 +71,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 		}
 	}
 	
+	// Gives a bucket back
 	@SuppressWarnings("deprecation")
 	public void giveBucketBack(Player player, PlayerBucketFillEvent event) {
 		event.setCancelled(true);
@@ -79,6 +80,7 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 		player.updateInventory();
 	}
 	
+	// Sends a message to the player
 	public void message(Player player) {
 		if (plugin.config.getBoolean("configuration.messages") == true) {
 			player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");

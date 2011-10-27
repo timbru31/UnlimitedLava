@@ -28,6 +28,7 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 		plugin = instance;
 	}
 	
+	// Fall
 	public void onBlockSpread(BlockSpreadEvent event) {
 		plugin.getServer().broadcastMessage("STAGE 1");
 		Block sourceBlock = event.getBlock();
@@ -44,6 +45,8 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 			}
 		}
 	}
+	
+	// Unlimited sources
 	public void onBlockFromTo(BlockFromToEvent event) {
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
