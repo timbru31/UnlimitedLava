@@ -2,7 +2,6 @@ package de.xghostkillerx.unlimitedlava;
 
 import java.io.File;
 import java.util.logging.Logger;
-import org.blockface.bukkitstats.CallHome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.event.Event;
@@ -10,6 +9,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.configuration.file.*;
+import org.blockface.stats.*;
 
 /**
  * UnlimitedLava for CraftBukkit/Bukkit
