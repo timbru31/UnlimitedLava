@@ -1,6 +1,6 @@
 package de.xghostkillerx.unlimitedlava;
 
-import java.io.File;
+import java.io.*;
 import java.util.logging.Logger;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.Command;
@@ -44,12 +44,15 @@ public class UnlimitedLava extends JavaPlugin {
 	public void onEnable() {
 		// Events
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.BLOCK_SPREAD, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
 
 		// Config
 		configFile = new File(getDataFolder(), "config.yml");
+		if(!configFile.exists()){
+	        configFile.getParentFile().mkdirs();
+	        copy(getResource("config.yml"), configFile);
+	    }
 		config = this.getConfig();
 		loadConfig();
 
@@ -70,7 +73,6 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("sources.two", true);
 		config.addDefault("sources.other", false);
 		config.addDefault("sources.big", false);
-		//config.addDefault("sources.fall", true);
 		config.options().copyDefaults(true);
 		saveConfig();
 	}
@@ -80,6 +82,22 @@ public class UnlimitedLava extends JavaPlugin {
 		try {
 			config.load(configFile);
 			saveConfig();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// If no config is found, copy the default one!
+	private void copy(InputStream in, File file) {
+		try {
+			OutputStream out = new FileOutputStream(file);
+			byte[] buf = new byte[1024];
+			int len;
+			while((len=in.read(buf))>0){
+				out.write(buf,0,len);
+			}
+			out.close();
+			in.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

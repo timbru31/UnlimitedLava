@@ -1,0 +1,9 @@
+# For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3
+configuration:
+  permissions: true
+  messages: true
+sources:
+  three: true
+  two: true
+  other: false
+  big: false

@@ -4,7 +4,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockListener;
-import org.bukkit.event.block.BlockSpreadEvent;
 
 /**
  * UnlimitedLavaBlockListener
@@ -26,24 +25,6 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 	public static UnlimitedLava plugin;
 	public UnlimitedLavaBlockListener(UnlimitedLava instance) {
 		plugin = instance;
-	}
-	
-	// Fall
-	public void onBlockSpread(BlockSpreadEvent event) {
-		plugin.getServer().broadcastMessage("STAGE 1");
-		Block sourceBlock = event.getBlock();
-		if (sourceBlock.getData() != 0x0) {
-			return;
-		}
-		if (sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA) {
-			if (plugin.config.getBoolean("sources.fall") == true) {
-				plugin.getServer().broadcastMessage("STAGE 2");
-				if (UnlimitedLavaCheck.checkSpreadValidityLavaFall(sourceBlock)) {
-					event.getBlock().setType(Material.STONE);
-					plugin.getServer().broadcastMessage("STAGE 3");
-				}
-			}
-		}
 	}
 	
 	// Unlimited sources
