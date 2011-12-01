@@ -230,4 +230,31 @@ public class UnlimitedLavaCheck {
 			 return false;
 		 }
 	 }
+	 
+	 static boolean checkSpreadValidityLavaFall(Block block) {
+		 plugin.getServer().broadcastMessage("CHECK 1");
+		 int n = 0;
+		 /*
+		  *bal
+		  *
+		  */
+		 if ((block.getRelative(BlockFace.UP).getType() == Material.LAVA || block.getRelative(BlockFace.UP).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.UP).getData() == 0x0) {
+			 n++;
+		 }
+		 if (block.getRelative(BlockFace.WEST).getType() == Material.LAVA)
+			 return false;
+		 if (block.getRelative(BlockFace.NORTH).getType() == Material.LAVA)
+			 return false;
+		 if (block.getRelative(BlockFace.EAST).getType() == Material.LAVA)
+			 return false;
+		 if (block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA)
+			 return false;
+		 // I
+
+		 if (n >= 1) {
+			 return true;
+		 } else {
+			 return false;
+		 }
+		 }
  }

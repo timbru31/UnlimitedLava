@@ -1,8 +1,12 @@
 package de.xghostkillerx.unlimitedlava;
 
 import org.bukkit.Material;
+import org.bukkit.Server;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.event.block.BlockFromToEvent;
+import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.block.BlockListener;
 
 /**
@@ -26,6 +30,42 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 	public UnlimitedLavaBlockListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
+	
+//	
+//	public void onBlockSpread(BlockSpreadEvent event) {
+//		Block sourceBlock = event.getBlock();
+//		BlockState newBlock = event.getNewState();
+//		if (newBlock.getType() == Material.LAVA) {
+//			plugin.getServer().broadcastMessage("Stage 1!");
+//			if (sourceBlock.getRelative(BlockFace.DOWN).getType() == Material.AIR) {
+//				plugin.getServer().broadcastMessage("Stage 2!");
+//				if (newBlock.getType() == Material.LAVA) {
+//					plugin.getServer().broadcastMessage("Stage 3!");
+//					newBlock.setType(Material.CACTUS);
+//					plugin.getServer().broadcastMessage("Set!");
+//				}
+//			}
+//		}
+//	}
+	
+	// Fall
+	public void onBlockSpread(BlockSpreadEvent event) {
+		plugin.getServer().broadcastMessage("STAGE 1");
+		Block sourceBlock = event.getBlock();
+		if (sourceBlock.getData() != 0x0) {
+			return;
+		}
+		if (sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA) {
+			if (plugin.config.getBoolean("fall.lava") == true) {
+				plugin.getServer().broadcastMessage("STAGE 2");
+				if (UnlimitedLavaCheck.checkSpreadValidityLavaFall(sourceBlock)) {
+					event.getBlock().setType(Material.STONE);
+					plugin.getServer().broadcastMessage("STAGE 3");
+				}
+			}
+		}
+	}
+	
 	
 	// Unlimited sources
 	public void onBlockFromTo(BlockFromToEvent event) {

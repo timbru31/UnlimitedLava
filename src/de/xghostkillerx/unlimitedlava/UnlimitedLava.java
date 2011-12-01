@@ -46,6 +46,7 @@ public class UnlimitedLava extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
+		pm.registerEvent(Event.Type.BLOCK_SPREAD, blockListener, Event.Priority.Normal, this);
 
 		// Config
 		configFile = new File(getDataFolder(), "config.yml");
@@ -73,6 +74,7 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("sources.two", true);
 		config.addDefault("sources.other", false);
 		config.addDefault("sources.big", false);
+		config.addDefault("fall.lava", true);
 		config.options().copyDefaults(true);
 		saveConfig();
 	}
