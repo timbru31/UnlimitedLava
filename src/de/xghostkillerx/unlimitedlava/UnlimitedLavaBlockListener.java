@@ -1,10 +1,7 @@
 package de.xghostkillerx.unlimitedlava;
 
 import org.bukkit.Material;
-import org.bukkit.Server;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.block.BlockListener;

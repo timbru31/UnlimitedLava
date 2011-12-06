@@ -27,7 +27,6 @@ import com.randomappdev.pluginstats.Ping;
  */
 
 public class UnlimitedLava extends JavaPlugin {
-	
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);

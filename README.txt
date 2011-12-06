@@ -1,6 +1,4 @@
-Hi,
-
-this is the README of UnlimitedLava
+This is the README of UnlimitedLava
 Thanks to loganwm for helping me :)!
 Thanks for using!
 For support visit the old forum thread: http://bit.ly/n1Wex2
