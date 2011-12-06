@@ -65,7 +65,7 @@ public class UnlimitedLava extends JavaPlugin {
 		Ping.init(this);
 	}
 
-	// Reload the config file, via command /unlimitedlava reload or /ulava reload and at the start!
+	// Reloads the config file, via command /unlimitedlava reload or /ulava reload and at the start!
 	public void loadConfig() {
 		config.options().header("For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
 		config.addDefault("configuration.permissions", true);

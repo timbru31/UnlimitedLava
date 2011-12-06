@@ -29,9 +29,9 @@ public class UnlimitedLavaCommands {
 	
 	// Commands... First check if config value permissions is true
 	public boolean UnlimitedLavaCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-		if ((command.getName().equalsIgnoreCase("unlimitedlava")) ||(command.getName().equalsIgnoreCase("unlimitedlaba")) || (command.getName().equalsIgnoreCase("ulava"))) {
+		if ((command.getName().equalsIgnoreCase("unlimitedlava")) || (command.getName().equalsIgnoreCase("unlimitedlaba")) || (command.getName().equalsIgnoreCase("ulaba")) || (command.getName().equalsIgnoreCase("ulava"))) {
 			//reload
-			if (args.length > 0 && args[0].equals("reload")) {
+			if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 				if (plugin.config.getBoolean("configuration.permissions") == true) {
 					if (sender.hasPermission("unlimitedlava.reload")) {
 						UnlimitedLavaReload(sender, args);
@@ -47,7 +47,7 @@ public class UnlimitedLavaCommands {
 				}
 			}
 			// help
-			if (args.length > 0 && args[0].equals("help")) {
+			if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
 				if (plugin.config.getBoolean("configuration.permissions") == true) {
 					if (sender.hasPermission("unlimitedlava.help")) {
 						UnlimitedLavaHelp(sender, args);
@@ -63,9 +63,9 @@ public class UnlimitedLavaCommands {
 				}
 			}
 			// enable
-			if (args.length > 0 && args[0].equals("enable")) {
+			if (args.length > 0 && args[0].equalsIgnoreCase("enable")) {
 				// enable all
-				if (args.length > 1 && args[1].equals("all")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.all")) {
 							UnlimitedLavaEnableAll(sender, args);
@@ -81,7 +81,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// enable three
-				if (args.length > 1 && args[1].equals("three")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("three")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.three")) {
 							UnlimitedLavaEnableThree(sender, args);
@@ -97,7 +97,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// enable two
-				if (args.length > 1 && args[1].equals("two")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("two")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.two")) {
 							UnlimitedLavaEnableTwo(sender, args);
@@ -113,7 +113,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// enable other
-				if (args.length > 1 && args[1].equals("other")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("other")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.other")) {
 							UnlimitedLavaEnableOther(sender, args);
@@ -129,7 +129,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// enable big
-				if (args.length > 1 && args[1].equals("big")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("big")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.big")) {
 							UnlimitedLavaEnableBig(sender, args);
@@ -145,7 +145,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// enable permissions
-				if (args.length > 1 && args[1].equals("permissions")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.permissions")) {
 							UnlimitedLavaEnablePermissions(sender, args);
@@ -161,7 +161,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// enable messages
-				if (args.length > 1 && args[1].equals("messages")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.enable.messages")) {
 							UnlimitedLavaEnableMessages(sender, args);
@@ -178,9 +178,9 @@ public class UnlimitedLavaCommands {
 				}
 			}
 			// disable
-			if (args.length > 0 && args[0].equals("disable")) {
+			if (args.length > 0 && args[0].equalsIgnoreCase("disable")) {
 				// disable all
-				if (args.length > 1 && args[1].equals("all")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.all")) {
 							UnlimitedLavaDisableAll(sender, args);
@@ -196,7 +196,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// disable three
-				if (args.length > 1 && args[1].equals("three")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("three")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.three")) {
 							UnlimitedLavaDisableThree(sender, args);
@@ -212,7 +212,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// disable two
-				if (args.length > 1 && args[1].equals("two")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("two")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.two")) {
 							UnlimitedLavaDisableTwo(sender, args);
@@ -228,7 +228,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// disable other
-				if (args.length > 1 && args[1].equals("other")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("other")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.other")) {
 							UnlimitedLavaDisableOther(sender, args);
@@ -244,7 +244,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// disable big
-				if (args.length > 1 && args[1].equals("big")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("big")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.big")) {
 							UnlimitedLavaDisableBig(sender, args);
@@ -260,7 +260,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// disable permissions
-				if (args.length > 1 && args[1].equals("permissions")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.permissions")) {
 							UnlimitedLavaDisablePermissions(sender, args);
@@ -276,7 +276,7 @@ public class UnlimitedLavaCommands {
 					}
 				}
 				// disable messages
-				if (args.length > 1 && args[1].equals("messages")) {
+				if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
 					if (plugin.config.getBoolean("configuration.permissions") == true) {
 						if (sender.hasPermission("unlimitedlava.disable.messages")) {
 							UnlimitedLavaDisableMessages(sender, args);
@@ -296,7 +296,7 @@ public class UnlimitedLavaCommands {
 		return false;
 	}
 
-	// Reload the config with /unlimitedlava reload or /ulava reload
+	// Reloads the config with /unlimitedlava reload or /ulava reload
 	private boolean UnlimitedLavaReload(CommandSender sender, String[] args) {
 		PluginDescriptionFile pdfFile = plugin.getDescription();
 		plugin.loadConfigAgain();
@@ -318,7 +318,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Enable all sources with /unlimitedlava enable all or /ulava enable all
+	// Enables all sources with /unlimitedlava enable all or /ulava enable all
 	private boolean UnlimitedLavaEnableAll(CommandSender sender, String[] args) {
 		plugin.config.set("sources.three", true);
 		plugin.config.set("sources.two", true);
@@ -329,7 +329,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Enable 3x3 with /unlimitedlava enable three or /ulava enable three
+	// Enables 3x3 with /unlimitedlava enable three or /ulava enable three
 	private boolean UnlimitedLavaEnableThree(CommandSender sender, String[] args) {
 		plugin.config.set("sources.three", true);
 		plugin.saveConfig();
@@ -337,7 +337,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Enable 2x2 with /unlimitedlava enable two or /ulava enable two
+	// Enables 2x2 with /unlimitedlava enable two or /ulava enable two
 	private boolean UnlimitedLavaEnableTwo(CommandSender sender, String[] args) {
 		plugin.config.set("sources.two", true);
 		plugin.saveConfig();
@@ -345,7 +345,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Enable other sources with /unlimitedlava enable other or /ulava enable other
+	// Enables other sources with /unlimitedlava enable other or /ulava enable other
 	private boolean UnlimitedLavaEnableOther(CommandSender sender, String[] args) {
 		plugin.config.set("sources.other", true);
 		plugin.saveConfig();
@@ -353,7 +353,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Enable big sources with /unlimitedlava enable big or /ulava enable big
+	// Enables big sources with /unlimitedlava enable big or /ulava enable big
 	private boolean UnlimitedLavaEnableBig(CommandSender sender, String[] args) {
 		plugin.config.set("sources.big", true);
 		plugin.saveConfig();
@@ -361,7 +361,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Enable permissions with /unlimitedlava enable permissions or /ulava enable permissions
+	// Enables permissions with /unlimitedlava enable permissions or /ulava enable permissions
 	private boolean UnlimitedLavaEnablePermissions(CommandSender sender, String[] args) {
 		plugin.config.set("configuration.permissions", true);
 		plugin.saveConfig();
@@ -370,7 +370,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Enable messages with /unlimitedlava enable messages or /ulava enable messages
+	// Enables messages with /unlimitedlava enable messages or /ulava enable messages
 	private boolean UnlimitedLavaEnableMessages(CommandSender sender, String[] args) {
 		plugin.config.set("configuration.messages", true);
 		plugin.saveConfig();
@@ -378,7 +378,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Disable all sources with /unlimitedlava disable all or /ulava disable all
+	// Disables all sources with /unlimitedlava disable all or /ulava disable all
 	private boolean UnlimitedLavaDisableAll(CommandSender sender, String[] args) {
 		plugin.config.set("sources.three", false);
 		plugin.config.set("sources.two", false);
@@ -389,7 +389,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Disable 3x3 source with /unlimitedlava disable three or /ulava disable two
+	// Disables 3x3 source with /unlimitedlava disable three or /ulava disable two
 	private boolean UnlimitedLavaDisableThree(CommandSender sender,	String[] args) {
 		plugin.config.set("sources.three", false);
 		plugin.saveConfig();
@@ -397,7 +397,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Disable 2x2 source with /unlimitedlava disable two or /ulava disable two
+	// Disables 2x2 source with /unlimitedlava disable two or /ulava disable two
 	private boolean UnlimitedLavaDisableTwo(CommandSender sender, String[] args) {
 		plugin.config.set("sources.two", false);
 		plugin.saveConfig();
@@ -405,7 +405,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Disable other sources with /unlimitedlava disable other or /ulava disable other
+	// Disables other sources with /unlimitedlava disable other or /ulava disable other
 	private boolean UnlimitedLavaDisableOther(CommandSender sender,	String[] args) {
 		plugin.config.set("sources.other", false);
 		plugin.saveConfig();
@@ -413,7 +413,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Disable big sources with /unlimitedlava disable big or /ulava disable big
+	// Disables big sources with /unlimitedlava disable big or /ulava disable big
 	private boolean UnlimitedLavaDisableBig(CommandSender sender, String[] args) {
 		plugin.config.set("sources.big", false);
 		plugin.saveConfig();
@@ -421,7 +421,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Disable permissions with /unlimitedlava disable permissions or /ulava disable permissions
+	// Disables permissions with /unlimitedlava disable permissions or /ulava disable permissions
 	private boolean UnlimitedLavaDisablePermissions(CommandSender sender, String[] args) {
 		plugin.config.set("configuration.permissions", false);
 		plugin.saveConfig();
@@ -430,7 +430,7 @@ public class UnlimitedLavaCommands {
 		return true;
 	}
 	
-	// Disable messages with /unlimitedlava disable messages or /ulava disable messages
+	// Disables messages with /unlimitedlava disable messages or /ulava disable messages
 	private boolean UnlimitedLavaDisableMessages(CommandSender sender, String[] args) {
 		plugin.config.set("configuration.messages", false);
 		plugin.saveConfig();
