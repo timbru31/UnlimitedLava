@@ -5,7 +5,7 @@ For support visit the old forum thread: http://bit.ly/n1Wex2
 or the new dev.bukkit.org page: http://bit.ly/pCj7v3
 
 This plugin sends usage statistics! If you wish to disable the usage stats, look at /plugins/PluginStats/config.yml!
-This plugin is released under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
+This plugin is released under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) license.
 
 Standard config:
 

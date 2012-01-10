@@ -40,25 +40,25 @@ import java.util.logging.Logger;
 public class Ping
 {
 
-    private static final File configFile = new File("plugins/PluginStats/config.yml");
-    private static final String logFile = "plugins/PluginStats/log.txt";
-    private static final YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-    private static Logger logger = null;
+    private final File configFile = new File("plugins/PluginStats/config.yml");
+    private final String logFile = "plugins/PluginStats/log.txt";
+    private final YamlConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+    private Logger logger = null;
 
-    public static void init(Plugin plugin)
+    public void init(Plugin plugin)
     {
     	if (configExists() && logExists() && !config.getBoolean("opt-out"))
         {
             plugin.getServer().getScheduler().scheduleAsyncRepeatingTask(plugin, new Pinger(plugin, config.getString("guid"), logger), 10L, 20L * 60L * 60 * 24);
-            System.out.println("[" + plugin.getDescription().getName() + "] Stats are being kept for this plugin. To opt-out for any reason, check plugins/PluginStats/config.yml");
+            System.out.println("[" + plugin.getDescription().getName() + "] Usage statistics are being kept for this plugin. To opt-out for any reason, check plugins/PluginStats/config.yml");
         }
     }
 
-    private static Boolean configExists()
+    private Boolean configExists()
     {
         config.addDefault("opt-out", false);
         config.addDefault("guid", UUID.randomUUID().toString());
-        if (!configFile.exists() || config.get("hash", null) == null)
+        if (!configFile.exists() || config.get("guid", null) == null)
         {
             System.out.println("PluginStats is initializing for the first time. To opt-out for any reason check plugins/PluginStats/config.yml");
             try
@@ -75,7 +75,7 @@ public class Ping
         return true;
     }
 
-    private static Boolean logExists()
+    private Boolean logExists()
     {
         try
         {
@@ -125,7 +125,7 @@ class Pinger implements Runnable
             }
             authors = authors.trim();
 
-            String url = String.format("http://pluginstats.randomappdev.com/ping.aspx?snam=%s&amp;sprt=%s&amp;shsh=%s&amp;sver=%s&amp;spcnt=%s&amp;pnam=%s&amp;pmcla=%s&amp;paut=%s&amp;pweb=%s&amp;pver=%s",
+            String url = String.format("http://pluginstats.randomappdev.com/ping.php?snam=%s&amp;sprt=%s&amp;shsh=%s&amp;sver=%s&amp;spcnt=%s&amp;pnam=%s&amp;pmcla=%s&amp;paut=%s&amp;pweb=%s&amp;pver=%s",
                     URLEncoder.encode(plugin.getServer().getServerName(), "UTF-8"),
                     plugin.getServer().getPort(),
                     guid,
@@ -134,7 +134,7 @@ class Pinger implements Runnable
                     URLEncoder.encode(plugin.getDescription().getName(), "UTF-8"),
                     URLEncoder.encode(plugin.getDescription().getMain(), "UTF-8"),
                     URLEncoder.encode(authors, "UTF-8"),
-                    URLEncoder.encode(plugin.getDescription().getWebsite(), "UTF-8"),
+                    URLEncoder.encode(plugin.getDescription().getWebsite().toLowerCase().replace("http://","").replace("https://",""), "UTF-8"),
                     URLEncoder.encode(plugin.getDescription().getVersion(), "UTF-8"));
 
             new URL(url).openConnection().getInputStream();

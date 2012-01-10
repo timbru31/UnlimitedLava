@@ -30,6 +30,7 @@ public class UnlimitedLava extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
+	private final UnlimitedLavaInventoryListener inventoryListener = new UnlimitedLavaInventoryListener(this);
 	public FileConfiguration config;
 	public File configFile;
 
@@ -45,7 +46,7 @@ public class UnlimitedLava extends JavaPlugin {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.BLOCK_SPREAD, blockListener, Event.Priority.Normal, this);
+		pm.registerEvent(Event.Type.FURNACE_BURN, inventoryListener, Event.Priority.Normal, this);
 
 		// Config
 		configFile = new File(getDataFolder(), "config.yml");
@@ -61,7 +62,8 @@ public class UnlimitedLava extends JavaPlugin {
 		log.info(pdfFile.getName() + " " + pdfFile.getVersion()	+ " is enabled!");
 		
 		// Stats
-		Ping.init(this);
+		Ping png = new Ping();
+		png.init(this);
 	}
 
 	// Reloads the config file, via command /unlimitedlava reload or /ulava reload and at the start!
