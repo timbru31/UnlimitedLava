@@ -2,14 +2,12 @@ package de.xghostkillerx.unlimitedlava;
 
 import java.io.*;
 import java.util.logging.Logger;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.Command;
-import org.bukkit.event.Event;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.*;
-import com.randomappdev.pluginstats.Ping;
+import org.bukkit.entity.Player;
 
 /**
  * UnlimitedLava for CraftBukkit/Bukkit
@@ -32,7 +30,10 @@ public class UnlimitedLava extends JavaPlugin {
 	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
 	private final UnlimitedLavaInventoryListener inventoryListener = new UnlimitedLavaInventoryListener(this);
 	public FileConfiguration config;
+	public FileConfiguration localization;
 	public File configFile;
+	public File localizationFile;
+	private UnlimitedLavaCommands executor;
 
 	// Shutdown
 	public void onDisable() {
@@ -44,9 +45,9 @@ public class UnlimitedLava extends JavaPlugin {
 	public void onEnable() {
 		// Events
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.BLOCK_FROMTO, blockListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.PLAYER_BUCKET_FILL, playerListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.FURNACE_BURN, inventoryListener, Event.Priority.Normal, this);
+		pm.registerEvents(blockListener, this);
+		pm.registerEvents(playerListener, this);
+		pm.registerEvents(inventoryListener, this);
 
 		// Config
 		configFile = new File(getDataFolder(), "config.yml");
@@ -56,14 +57,37 @@ public class UnlimitedLava extends JavaPlugin {
 	    }
 		config = this.getConfig();
 		loadConfig();
+		
+		// Localization
+		localizationFile = new File(getDataFolder(), "localization.yml");
+		if(!localizationFile.exists()){
+			localizationFile.getParentFile().mkdirs();
+			copy(getResource("localization.yml"), localizationFile);
+		}
+		// Try to load
+		try {
+			localization = YamlConfiguration.loadConfiguration(localizationFile);
+			loadLocalization();
+		}
+		// if it failed, tell it
+		catch (Exception e) {
+			log.warning("CookMe failed to load the localization!");
+		}
+		
+		//Refer to UnlimitedLavaCommands
+		executor = new UnlimitedLavaCommands(this);
+		getCommand("unlimitedlava").setExecutor(executor);
 
 		// Message
 		PluginDescriptionFile pdfFile = this.getDescription();
 		log.info(pdfFile.getName() + " " + pdfFile.getVersion()	+ " is enabled!");
 		
 		// Stats
-		Ping png = new Ping();
-		png.init(this);
+		try {
+			Metrics metrics = new Metrics();
+			metrics.beginMeasuringPlugin(this);
+		}
+		catch (IOException e) {}
 	}
 
 	// Reloads the config file, via command /unlimitedlava reload or /ulava reload and at the start!
@@ -80,12 +104,33 @@ public class UnlimitedLava extends JavaPlugin {
 		saveConfig();
 	}
 	
+	// Loads the localization
+	public void loadLocalization() {
+		localization.options().header("The underscores are used for the different lines!");
+		localization.addDefault("permission_denied", "&4You don''t have the permission to do this!");
+		localization.options().copyDefaults(true);
+		saveLocalization();
+	}
+
+	// Saves the localization
+	public void saveLocalization() {
+		try {
+			localization.save(localizationFile);
+		}
+		catch (IOException e) {
+			log.warning("CookMe failed to save the localization! Please report this!");
+		}
+	}
+	
 	// Reloads the config via command /unlimitedlava reload or /ulava reload
 	public void loadConfigAgain() {
 		try {
 			config.load(configFile);
 			saveConfig();
-		} catch (Exception e) {
+			localization.load(localizationFile);
+			saveLocalization();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -96,19 +141,30 @@ public class UnlimitedLava extends JavaPlugin {
 			OutputStream out = new FileOutputStream(file);
 			byte[] buf = new byte[1024];
 			int len;
-			while ((len=in.read(buf)) >0) {
+			while ((len=in.read(buf)) > 0) {
 				out.write(buf,0,len);
 			}
 			out.close();
 			in.close();
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	//Refer to UnlimitedLavaCommands
-	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
-		UnlimitedLavaCommands cmd = new UnlimitedLavaCommands(this);
-		return cmd.UnlimitedLavaCommand(sender, command, commandLabel, args);
+	// Message the sender or player
+	public void message(CommandSender sender, Player player, String message, String value) {
+		PluginDescriptionFile pdfFile = this.getDescription();
+		message = message
+				.replaceAll("&([0-9a-fk])", "\u00A7$1")
+				.replaceAll("%version", pdfFile.getVersion())
+				.replaceAll("%effect", value)
+				.replaceAll("%value", value);
+		if (player != null) {
+			player.sendMessage(message);
+		}
+		else if (sender != null) {
+			sender.sendMessage(message);
+		}
 	}
 }

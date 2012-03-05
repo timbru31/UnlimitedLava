@@ -1,10 +1,10 @@
 package de.xghostkillerx.unlimitedlava;
 
-import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBucketFillEvent;
-import org.bukkit.event.player.PlayerListener;
 import org.bukkit.inventory.ItemStack;
 
 /**
@@ -22,14 +22,15 @@ import org.bukkit.inventory.ItemStack;
  *
  */
 
-public class UnlimitedLavaPlayerListener extends PlayerListener {
+public class UnlimitedLavaPlayerListener implements Listener {
 
 	public static UnlimitedLava plugin;
 	public UnlimitedLavaPlayerListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
 
-	public void onPlayerBucketFill(PlayerBucketFillEvent event) {
+	@EventHandler
+	public void onPlayerBucketFill(final PlayerBucketFillEvent event) {
 		Block clicked = event.getBlockClicked();
 		Player player = event.getPlayer();
 		// Only if lava is clicked ;)
@@ -43,28 +44,24 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 				if (plugin.config.getBoolean("sources.two") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityTwo(clicked)) {
 						giveBucketBack(player, event);
-						message(player);
 					}
 				}
 				// 3x3 source
 				if (plugin.config.getBoolean("sources.three") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityThree(clicked)) {
 						giveBucketBack(player, event);
-						message(player);
 					}
 				}
 				// Other source
 				if (plugin.config.getBoolean("sources.other") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityOther(clicked)) {
 						giveBucketBack(player, event);
-						message(player);
 					}
 				}
 				// Big source
 				if (plugin.config.getBoolean("sources.big") == true) {
 					if (UnlimitedLavaCheck.checkSpreadValidityBig(clicked)) {
 						giveBucketBack(player, event);
-						message(player);
 					}
 				}
 			}
@@ -78,12 +75,10 @@ public class UnlimitedLavaPlayerListener extends PlayerListener {
 		ItemStack bucket = new ItemStack(325, 1);
 		player.setItemInHand(bucket);
 		player.updateInventory();
-	}
-	
-	// Sends a message to the player
-	public void message(Player player) {
+		// Message if wanted
 		if (plugin.config.getBoolean("configuration.messages") == true) {
-			player.sendMessage(ChatColor.DARK_RED + "You don't have the permission to use the UnlimitedLava!");
+			String message = plugin.localization.getString("permission_denied");
+			plugin.message(null, player, message, null);
 		}
 	}
 }
