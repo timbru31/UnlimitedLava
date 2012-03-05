@@ -30,6 +30,9 @@ permissions:
       unlimitedlava.enable.big: true
       unlimitedlava.enable.permissions: true
       unlimitedlava.enable.messages: true
+      unlimitedlava.enable.furnace: true
+      unlimitedlava.enable.lava_fall: true
+      unlimitedlava.enable.water_fall: true
   unlimitedlava.disable.*:
     description: Gives access to all UnlimitedLava disable commands
     children:
@@ -40,6 +43,9 @@ permissions:
       unlimitedlava.disable.big: true
       unlimitedlava.disable.permissions: true
       unlimitedlava.disable.messages: true
+      unlimitedlava.disable.furnace: true
+      unlimitedlava.disable.lava_fall: true
+      unlimitedlava.disable.water_fall: true
   unlimitedlava.help:
     description: Allows you to see the help
     default: op
@@ -70,6 +76,15 @@ permissions:
   unlimitedlava.enable.messages:
     description: Allows you to enable messages
     default: op
+  unlimitedlava.enable.furnace:
+    description: Allows you to enable the (custom) furnace
+    default: op
+  unlimitedlava.enable.lava_fall:
+    description: Allows you to enable the lava fall
+    default: op
+  unlimitedlava.enable.water_fall:
+    description: Allows you to enable the water fall
+    default: op
   unlimitedlava.disable.all:
     description: Allows you to disable all sources
     default: op
@@ -90,4 +105,13 @@ permissions:
     default: op
   unlimitedlava.disable.messages:
     description: Allows you to disable messages
+    default: op
+  unlimitedlava.disable.furnace:
+    description: Allows you to disable the (custom) furnace
+    default: op
+  unlimitedlava.disable.lava_fall:
+    description: Allows you to disable the lava fall
+    default: op
+  unlimitedlava.disable.water_fall:
+    description: Allows you to disable the water fall
     default: op

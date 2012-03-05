@@ -2,7 +2,6 @@ package de.xghostkillerx.unlimitedlava;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -35,7 +34,7 @@ public class UnlimitedLavaBlockListener implements Listener {
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
 
-
+		/* Removed for the time being
 		if (plugin.config.getBoolean("fall.lava") == true) {
 			if (sourceBlock.getY() > 60) {
 				Block currentBlock = sourceBlock.getRelative(BlockFace.DOWN);
@@ -47,6 +46,7 @@ public class UnlimitedLavaBlockListener implements Listener {
 				}
 			}
 		}
+		*/
 
 
 		/*

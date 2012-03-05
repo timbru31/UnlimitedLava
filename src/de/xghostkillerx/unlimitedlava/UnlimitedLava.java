@@ -102,7 +102,7 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("sources.big", false);
 		config.addDefault("sources.lava_fall", true);
 		config.addDefault("sources.water_fall", false);
-		config.addDefault("furnace.item", "LAVA_BUCKET");
+		config.addDefault("furnace.item", "BUCKET");
 		config.options().copyDefaults(true);
 		saveConfig();
 	}

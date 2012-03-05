@@ -4,7 +4,7 @@ Thanks for using!
 For support visit the old forum thread: http://bit.ly/n1Wex2
 or the new dev.bukkit.org page: http://bit.ly/pCj7v3
 
-This plugin sends usage statistics! If you wish to disable the usage stats, look at /plugins/PluginStats/config.yml!
+This plugin sends usage statistics! If you wish to disable the usage stats, look at /plugins/PluginMetrics/config.yml!
 This plugin is released under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0) license.
 
 Standard config:
@@ -13,11 +13,17 @@ Standard config:
 configuration:
   permissions: true
   messages: true
+  furnace: true
 sources:
   three: true
   two: true
   other: false
   big: false
+  lava_fall: true
+  water_fall: false
+furnace:
+  item: BUCKET
+
 
 Sources:
 L are still lava blocks, X is the unlimited lava block!
@@ -120,6 +126,21 @@ Description: Enables the permissions! (Only OPs or player with the permission ca
 Node: unlimitedlava.enable.messages
 Description: Enables the messages!
 
+/unlimitedlava enable furnace
+/ulava enable furnace
+Node: unlimitedlava.enable.furnace
+Description: Enables the (custom) furnace!
+
+/unlimitedlava enable lava_fall
+/ulava enable lava_fall
+Node: unlimitedlava.enable.lava_fall
+Description: Enables the lava_fall
+
+/unlimitedlava enable water_fall
+/ulava enable water_fall
+Node: unlimitedlava.enable.water_fall
+Description: Enables the water_fall
+
 /unlimitedlava disable all
 /ulava disable all
 Node: unlimitedlava.disable.all
@@ -154,3 +175,18 @@ Description: Disables the permissions! ALL players can use the commands!
 /ulava disable messages
 Node: unlimitedlava.disable.messages
 Description: Disables the messages!
+
+/unlimitedlava disable furnace
+/ulava disable furnace
+Node: unlimitedlava.disable.furnace
+Description: Disables the (custom) furnace!
+
+/unlimitedlava disable lava_fall
+/ulava disable lava_fall
+Node: unlimitedlava.disable.lava_fall
+Description: Disables the lava_fall
+
+/unlimitedlava disable water_fall
+/ulava disable water_fall
+Node: unlimitedlava.disable.water_fall
+Description: Disables the water_fall

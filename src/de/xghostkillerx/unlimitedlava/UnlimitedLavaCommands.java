@@ -288,6 +288,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources.two", true);
 		plugin.config.set("sources.other", true);
 		plugin.config.set("sources.big", true);
+		plugin.config.set("sources.water_fall", true);
+		plugin.config.set("sources.lava_fall", true);
 		plugin.saveConfig();
 		message = plugin.localization.getString("enable_all");
 		plugin.message(sender, null, message, null);
@@ -333,6 +335,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources.two", false);
 		plugin.config.set("sources.other", false);
 		plugin.config.set("sources.big", false);
+		plugin.config.set("sources.water_fall", false);
+		plugin.config.set("sources.lava_fall", false);
 		plugin.saveConfig();
 		message = plugin.localization.getString("disable_all");
 		plugin.message(sender, null, message, null);

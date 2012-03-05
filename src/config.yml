@@ -2,8 +2,13 @@
 configuration:
   permissions: true
   messages: true
+  furnace: true
 sources:
   three: true
   two: true
   other: false
   big: false
+  lava_fall: true
+  water_fall: false
+furnace:
+  item: BUCKET

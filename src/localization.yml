@@ -8,8 +8,7 @@ help_4: To enable something use &4/unlimitedlava enable &e<value>
 help_5: or &4/ulava enable &e<value
 help_6: To disable something use &4/unlimitedlava disable &e<value>
 help_7: or &4/ulava disable &e<value
-help_8: '&eValues: &fpermissions, messages, furnace, all, three, two, other, big,
-  lava_fall, water_fall'
+help_8: '&eValues: &fpermissions, messages, furnace, all, three, two, other, big, lava_fall, water_fall'
 enable_source: '&2UnlimitedLava source &4%source &2enabled!'
 enable_all: '&4All &2UnlimitedLava sources enabled!'
 enable_messages: '&2UnlimitedLava messages enabled!'
