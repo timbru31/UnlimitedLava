@@ -71,7 +71,7 @@ public class UnlimitedLava extends JavaPlugin {
 		}
 		// if it failed, tell it
 		catch (Exception e) {
-			log.warning("CookMe failed to load the localization!");
+			log.warning("UnlimitedLava failed to load the localization!");
 		}
 		
 		//Refer to UnlimitedLavaCommands
@@ -95,11 +95,14 @@ public class UnlimitedLava extends JavaPlugin {
 		config.options().header("For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
 		config.addDefault("configuration.permissions", true);
 		config.addDefault("configuration.messages", true);
+		config.addDefault("configuration.furnace", true);
 		config.addDefault("sources.three", true);
 		config.addDefault("sources.two", true);
 		config.addDefault("sources.other", false);
 		config.addDefault("sources.big", false);
-		config.addDefault("fall.lava", true);
+		config.addDefault("sources.lava_fall", true);
+		config.addDefault("sources.water_fall", false);
+		config.addDefault("furnace.item", "LAVA_BUCKET");
 		config.options().copyDefaults(true);
 		saveConfig();
 	}
@@ -108,6 +111,27 @@ public class UnlimitedLava extends JavaPlugin {
 	public void loadLocalization() {
 		localization.options().header("The underscores are used for the different lines!");
 		localization.addDefault("permission_denied", "&4You don''t have the permission to do this!");
+		localization.addDefault("reload", "&2UnlimitedLava &4%version &2reloaded!");
+		localization.addDefault("help_1", "&2Welcome to the UnlimitedLava version &4%version &2help");
+		localization.addDefault("help_2", "To see the help type &4/unlimitedlava help &for &4/ulava help");
+		localization.addDefault("help_3", "To reload use &4/unlimitedlava reload &for &4/ulava reload");
+		localization.addDefault("help_4", "To enable something use &4/unlimitedlava enable &e<value>");
+		localization.addDefault("help_5", "or &4/ulava enable &e<value");
+		localization.addDefault("help_6", "To disable something use &4/unlimitedlava disable &e<value>");
+		localization.addDefault("help_7", "or &4/ulava disable &e<value");
+		localization.addDefault("help_8", "&eValues: &fpermissions, messages, furnace, all, three, two, other, big, lava_fall, water_fall");
+		localization.addDefault("enable_source", "&2UnlimitedLava source &4%source &2enabled!");
+		localization.addDefault("enable_all", "&4All &2UnlimitedLava sources enabled!");
+		localization.addDefault("enable_messages", "&2UnlimitedLava messages enabled!");
+		localization.addDefault("enable_permissions_1", "&2UnlimitedLava permissions enabled! Only OPs");
+		localization.addDefault("enable_permissions_2", "&2or players with the permission can use the plugin!");
+		localization.addDefault("enable_furnace", "&2UnlimitedLava &4furnace &2enabled!");
+		localization.addDefault("disable_source", "&2UnlimitedLava source &4%source &2disabled!");
+		localization.addDefault("disable_all", "&4All &2UnlimitedLava sources disabled!");
+		localization.addDefault("disable_messages", "&2UnlimitedLava messages disabled!");
+		localization.addDefault("disable_permissions_1", "&2UnlimitedLava permissions disabled! Only OPs");
+		localization.addDefault("disable_permissions_2", "&4All players can use the plugin!");
+		localization.addDefault("disable_furnace", "&2UnlimitedLava &4furnace &2disabled!");
 		localization.options().copyDefaults(true);
 		saveLocalization();
 	}
@@ -118,12 +142,12 @@ public class UnlimitedLava extends JavaPlugin {
 			localization.save(localizationFile);
 		}
 		catch (IOException e) {
-			log.warning("CookMe failed to save the localization! Please report this!");
+			log.warning("UnlimitedLava failed to save the localization! Please report this!");
 		}
 	}
 	
 	// Reloads the config via command /unlimitedlava reload or /ulava reload
-	public void loadConfigAgain() {
+	public void loadConfigsAgain() {
 		try {
 			config.load(configFile);
 			saveConfig();
@@ -158,7 +182,7 @@ public class UnlimitedLava extends JavaPlugin {
 		message = message
 				.replaceAll("&([0-9a-fk])", "\u00A7$1")
 				.replaceAll("%version", pdfFile.getVersion())
-				.replaceAll("%effect", value)
+				.replaceAll("%source", value)
 				.replaceAll("%value", value);
 		if (player != null) {
 			player.sendMessage(message);

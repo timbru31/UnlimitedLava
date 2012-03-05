@@ -3,8 +3,9 @@ package de.xghostkillerx.unlimitedlava;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
-import org.bukkit.event.block.BlockListener;
 
 /**
  * UnlimitedLavaBlockListener
@@ -21,7 +22,7 @@ import org.bukkit.event.block.BlockListener;
  * 
  */
 
-public class UnlimitedLavaBlockListener extends BlockListener {
+public class UnlimitedLavaBlockListener implements Listener {
 
 	public static UnlimitedLava plugin;
 	public UnlimitedLavaBlockListener(UnlimitedLava instance) {
@@ -29,28 +30,24 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 	}
 
 	// Unlimited sources
-	public void onBlockFromTo(BlockFromToEvent event) {
+	@EventHandler
+	public void onBlockFromTo(final BlockFromToEvent event) {
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
 
-		//		if (plugin.config.getBoolean("fall.lava") == true) {
-		//			if (sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA) {
-		//				int i = 1;
-		//				while (sourceBlock.getRelative(BlockFace.DOWN, i).getType() == Material.LAVA && i < 3) {
-		//					i++;
-		//				}
-		//				sourceBlock.getRelative(BlockFace.DOWN, i).setType(Material.LAVA);
-		//			}
-		//		}
+
 		if (plugin.config.getBoolean("fall.lava") == true) {
-			int i = 1;
-			if (sourceBlock.getType() == Material.STATIONARY_LAVA) {
-				while (sourceBlock.getRelative(BlockFace.DOWN, i).getType() == Material.LAVA) {
-					i++;
+			if (sourceBlock.getY() > 60) {
+				Block currentBlock = sourceBlock.getRelative(BlockFace.DOWN);
+				while(currentBlock.getType() == Material.LAVA && currentBlock.getY() > 60) {
+					currentBlock = currentBlock.getRelative(BlockFace.DOWN);
 				}
-				sourceBlock.getRelative(BlockFace.DOWN, i).setType(Material.STATIONARY_LAVA);
+				if (currentBlock.getType() == Material.AIR || currentBlock.getType() == Material.LAVA) {
+					currentBlock.setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
+				}
 			}
 		}
+
 
 		/*
 		 * Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
@@ -70,28 +67,28 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 					if (plugin.config.getBoolean("sources.two") == true) {
 						if (UnlimitedLavaCheck.checkSpreadValidityTwo(targetBlock)) {
 							// Only full blocks
-							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 					// Spread if possible for THREE
 					if (plugin.config.getBoolean("sources.three") == true) {
 						if (UnlimitedLavaCheck.checkSpreadValidityThree(targetBlock)) {
 							// Only full blocks
-							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 					// Spread if possible for OTHER
 					if (plugin.config.getBoolean("sources.other") == true) {
 						if (UnlimitedLavaCheck.checkSpreadValidityOther(targetBlock)) {
 							// Only full blocks
-							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 					// Spread if possible for BIG
 					if (plugin.config.getBoolean("sources.big") == true) {
 						if (UnlimitedLavaCheck.checkSpreadValidityBig(targetBlock)) {
 							// Only full blocks
-							event.getToBlock().setType(Material.LAVA);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 				}
@@ -104,32 +101,28 @@ public class UnlimitedLavaBlockListener extends BlockListener {
 						// Spread if possible for TWO
 						if (UnlimitedLavaCheck.checkSpreadValidityTwo(event.getToBlock())) {
 							// Yay, we got a full lava block!
-							event.getToBlock().setType(Material.LAVA);
-							event.getToBlock().setData((byte) 0x0);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 					if (plugin.config.getBoolean("sources.three") == true) {
 						// Spread if possible for THREE
 						if (UnlimitedLavaCheck.checkSpreadValidityThree(event.getToBlock())) {
 							// Yay, we got a full lava block!
-							event.getToBlock().setType(Material.LAVA);
-							event.getToBlock().setData((byte) 0x0);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 					if (plugin.config.getBoolean("sources.other") == true) {
 						// Spread if possible for OTHER
 						if (UnlimitedLavaCheck.checkSpreadValidityOther(event.getToBlock())) {
 							// Yay, we got a full lava block!
-							event.getToBlock().setType(Material.LAVA);
-							event.getToBlock().setData((byte) 0x0);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 					if (plugin.config.getBoolean("sources.big") == true) {
 						// Spread if possible for BIG
 						if (UnlimitedLavaCheck.checkSpreadValidityBig(event.getToBlock())) {
 							// Yay, we got a full lava block!
-							event.getToBlock().setType(Material.LAVA);
-							event.getToBlock().setData((byte) 0x0);
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}
 				}
