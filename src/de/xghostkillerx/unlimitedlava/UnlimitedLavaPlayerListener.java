@@ -19,6 +19,7 @@ import org.bukkit.inventory.ItemStack;
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
  * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
+ * @thanks to ferrybig for the awesome fall code!
  *
  */
 

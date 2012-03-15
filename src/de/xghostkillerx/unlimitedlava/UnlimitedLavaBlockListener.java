@@ -2,6 +2,7 @@ package de.xghostkillerx.unlimitedlava;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
@@ -18,6 +19,7 @@ import org.bukkit.event.block.BlockFromToEvent;
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
  * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
+ * @thanks to ferrybig for the awesome fall code!
  * 
  */
 
@@ -31,32 +33,49 @@ public class UnlimitedLavaBlockListener implements Listener {
 	// Unlimited sources
 	@EventHandler
 	public void onBlockFromTo(final BlockFromToEvent event) {
+		// Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
+		
+		// Only if the height is greater or the same
+		if (sourceBlock.getY() < plugin.config.getInt("configuration.height")) return;
 
-		/* Removed for the time being
-		if (plugin.config.getBoolean("fall.lava") == true) {
-			if (sourceBlock.getY() > 60) {
-				Block currentBlock = sourceBlock.getRelative(BlockFace.DOWN);
-				while(currentBlock.getType() == Material.LAVA && currentBlock.getY() > 60) {
-					currentBlock = currentBlock.getRelative(BlockFace.DOWN);
-				}
-				if (currentBlock.getType() == Material.AIR || currentBlock.getType() == Material.LAVA) {
-					currentBlock.setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
+		// Lava fall
+		if (plugin.config.getBoolean("sources.lava_fall") == true) {
+			// Security check with 0
+			if (sourceBlock.getY() > 0) {
+				if(event.getFace() == BlockFace.DOWN) {
+					if (event.getToBlock().getRelative(BlockFace.UP).getType() == Material.LAVA
+							|| event.getToBlock().getRelative(BlockFace.UP).getType() == Material.STATIONARY_LAVA) {
+						if( event.getToBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
+							event.setCancelled(true);
+						}
+					}
 				}
 			}
 		}
-		*/
+		
+		// Water fall
+		if (plugin.config.getBoolean("sources.water_fall") == true) {
+			// Security check with 0
+			if (sourceBlock.getY() > 0) {
+				if(event.getFace() == BlockFace.DOWN) {
+					if (event.getToBlock().getRelative(BlockFace.UP).getType() == Material.WATER
+							|| event.getToBlock().getRelative(BlockFace.UP).getType() == Material.STATIONARY_WATER) {
+						if( event.getToBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+							event.getToBlock().setTypeIdAndData(Material.WATER.getId(), (byte) 0x0, true);
+							event.setCancelled(true);
+						}
+					}
+				}
+			}
+		}
 
-
-		/*
-		 * Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
-		 * Check if we got a full block of lava
-		 */
+		// Check if we got a full block of lava
 		if (sourceBlock.getData() != 0x0) {
 			return;
 		}
-
 
 		if (sourceBlock.getType() == Material.LAVA || sourceBlock.getType() == Material.STATIONARY_LAVA) {
 			// Check if we can use the surrounded check
@@ -88,40 +107,6 @@ public class UnlimitedLavaBlockListener implements Listener {
 					if (plugin.config.getBoolean("sources.big") == true) {
 						if (UnlimitedLavaCheck.checkSpreadValidityBig(targetBlock)) {
 							// Only full blocks
-							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-						}
-					}
-				}
-				/*
-				 * If the block flows into air, check if the air can get a full
-				 * lava block
-				 */
-				else if (targetBlock.getType() == Material.AIR) {
-					if (plugin.config.getBoolean("sources.two") == true) {
-						// Spread if possible for TWO
-						if (UnlimitedLavaCheck.checkSpreadValidityTwo(event.getToBlock())) {
-							// Yay, we got a full lava block!
-							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-						}
-					}
-					if (plugin.config.getBoolean("sources.three") == true) {
-						// Spread if possible for THREE
-						if (UnlimitedLavaCheck.checkSpreadValidityThree(event.getToBlock())) {
-							// Yay, we got a full lava block!
-							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-						}
-					}
-					if (plugin.config.getBoolean("sources.other") == true) {
-						// Spread if possible for OTHER
-						if (UnlimitedLavaCheck.checkSpreadValidityOther(event.getToBlock())) {
-							// Yay, we got a full lava block!
-							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-						}
-					}
-					if (plugin.config.getBoolean("sources.big") == true) {
-						// Spread if possible for BIG
-						if (UnlimitedLavaCheck.checkSpreadValidityBig(event.getToBlock())) {
-							// Yay, we got a full lava block!
 							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 						}
 					}

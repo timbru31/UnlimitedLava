@@ -8,6 +8,21 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * UnlimitedLavaInventoryListener
+ * Handles the furnace burn stuff
+ * 
+ * Refer to the forum thread:
+ * http://bit.ly/n1Wex2
+ * Refer to the dev.bukkit.org page:
+ * http://bit.ly/pCj7v3
+ *
+ * @author xGhOsTkiLLeRx
+ * @thanks to loganwm for the help!!
+ * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
+ * @thanks to ferrybig for the awesome fall code!
+ * 
+ */
 
 public class UnlimitedLavaInventoryListener implements Listener {
 	public static UnlimitedLava plugin;
@@ -17,7 +32,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
 	private Material item = null;
 
 	@EventHandler
-	public void onFurnanceBurn (final FurnaceBurnEvent event) {
+	public void onFurnaceBurn (final FurnaceBurnEvent event) {
 		if (plugin.config.getBoolean("configuration.furnace") == true) {
 			if (event.getFuel().getType() == Material.LAVA_BUCKET) {
 				final Block furnace = event.getBlock();

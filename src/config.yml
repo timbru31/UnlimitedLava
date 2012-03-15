@@ -3,6 +3,7 @@ configuration:
   permissions: true
   messages: true
   furnace: true
+  height: 60
 sources:
   three: true
   two: true

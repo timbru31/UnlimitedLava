@@ -21,6 +21,7 @@ import org.bukkit.entity.Player;
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
  * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
+ * @thanks to ferrybig for the awesome fall code!
  * 
  */
 
@@ -96,6 +97,7 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("configuration.permissions", true);
 		config.addDefault("configuration.messages", true);
 		config.addDefault("configuration.furnace", true);
+		config.addDefault("configuration.height", 60);
 		config.addDefault("sources.three", true);
 		config.addDefault("sources.two", true);
 		config.addDefault("sources.other", false);

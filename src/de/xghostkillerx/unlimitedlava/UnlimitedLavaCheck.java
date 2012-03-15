@@ -16,6 +16,7 @@ import org.bukkit.block.BlockFace;
  * @author xGhOsTkiLLeRx
  * @thanks to loganwm for the help!!
  * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
+ * @thanks to ferrybig for the awesome fall code!
  * 
  */
 
@@ -91,18 +92,10 @@ public class UnlimitedLavaCheck {
 		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
 			n++;
 		}
-		if (block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
+		if (block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) n++;
 		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA) return false;
 		if (block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA) return false;
 		if (block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA) return false;
@@ -135,31 +128,14 @@ public class UnlimitedLavaCheck {
 		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
 			n++;
 		}
-		if (block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-		}
-		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA) {
-			n++;
-
-		}
+		if (block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA) n++;
+		if (block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA) n++;
 		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR) return false;
 		
 		// If more than 9 flow exists, yay, it's okay!

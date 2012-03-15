@@ -1,5 +1,6 @@
 This is the README of UnlimitedLava
 Thanks to loganwm for helping me :)!
+Thanks to ferrybig for the awesome fall code!
 Thanks for using!
 For support visit the old forum thread: http://bit.ly/n1Wex2
 or the new dev.bukkit.org page: http://bit.ly/pCj7v3
@@ -14,6 +15,7 @@ configuration:
   permissions: true
   messages: true
   furnace: true
+  height: 60
 sources:
   three: true
   two: true
@@ -26,7 +28,7 @@ furnace:
 
 
 Sources:
-L are still lava blocks, X is the unlimited lava block!
+L are still (full) lava blocks, X is the unlimited lava block!
 
 3x3 (three):
 
@@ -73,6 +75,10 @@ Big:
 
 You can get infinite lava from pools bigger than 3x3 (4x4, 5x5, etc.) from any block inside!
 Border blocks won't work!
+
+Falls:
+
+You can get infinite lava or water from a fall. Just let it flow into a hole an pick it up!
 
 Commands & Permissions (if no permissions system is detected, only OPs are able to use the commands!)
 Only bukkit's permissions system is supported! If a command is typed wrong, 
