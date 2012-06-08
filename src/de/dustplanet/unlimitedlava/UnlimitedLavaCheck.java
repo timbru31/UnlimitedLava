@@ -1,4 +1,4 @@
-package de.xghostkillerx.unlimitedlava;
+package de.dustplanet.unlimitedlava;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;

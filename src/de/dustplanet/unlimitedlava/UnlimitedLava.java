@@ -1,4 +1,4 @@
-package de.xghostkillerx.unlimitedlava;
+package de.dustplanet.unlimitedlava;
 
 import java.io.*;
 import java.util.logging.Logger;
@@ -182,7 +182,7 @@ public class UnlimitedLava extends JavaPlugin {
 	public void message(CommandSender sender, Player player, String message, String value) {
 		PluginDescriptionFile pdfFile = this.getDescription();
 		message = message
-				.replaceAll("&([0-9a-fk])", "\u00A7$1")
+				.replaceAll("&([0-9a-fk-or])", "\u00A7$1")
 				.replaceAll("%version", pdfFile.getVersion())
 				.replaceAll("%source", value)
 				.replaceAll("%value", value);

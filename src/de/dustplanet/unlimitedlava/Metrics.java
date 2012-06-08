@@ -1,4 +1,4 @@
-package de.xghostkillerx.unlimitedlava;
+package de.dustplanet.unlimitedlava;
 
 /*
  * Copyright 2011 Tyler Blair. All rights reserved.

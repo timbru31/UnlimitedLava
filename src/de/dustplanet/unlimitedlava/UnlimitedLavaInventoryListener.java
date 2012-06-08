@@ -1,4 +1,4 @@
-package de.xghostkillerx.unlimitedlava;
+package de.dustplanet.unlimitedlava;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,7 +32,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
 	private Material item = null;
 
 	@EventHandler
-	public void onFurnaceBurn (final FurnaceBurnEvent event) {
+	public void onFurnaceBurn (FurnaceBurnEvent event) {
 		if (plugin.config.getBoolean("configuration.furnace") == true) {
 			if (event.getFuel().getType() == Material.LAVA_BUCKET) {
 				final Block furnace = event.getBlock();

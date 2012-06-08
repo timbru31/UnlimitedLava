@@ -1,4 +1,4 @@
-package de.xghostkillerx.unlimitedlava;
+package de.dustplanet.unlimitedlava;
 
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -31,7 +31,7 @@ public class UnlimitedLavaPlayerListener implements Listener {
 	}
 
 	@EventHandler
-	public void onPlayerBucketFill(final PlayerBucketFillEvent event) {
+	public void onPlayerBucketFill(PlayerBucketFillEvent event) {
 		Block clicked = event.getBlockClicked();
 		Player player = event.getPlayer();
 		// Only if lava is clicked ;)

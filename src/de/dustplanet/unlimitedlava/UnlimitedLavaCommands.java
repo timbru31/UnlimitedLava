@@ -1,4 +1,4 @@
-package de.xghostkillerx.unlimitedlava;
+package de.dustplanet.unlimitedlava;
 
 import java.util.Arrays;
 import org.bukkit.command.Command;

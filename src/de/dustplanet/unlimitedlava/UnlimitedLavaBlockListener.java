@@ -1,4 +1,4 @@
-package de.xghostkillerx.unlimitedlava;
+package de.dustplanet.unlimitedlava;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -32,7 +32,7 @@ public class UnlimitedLavaBlockListener implements Listener {
 
 	// Unlimited sources
 	@EventHandler
-	public void onBlockFromTo(final BlockFromToEvent event) {
+	public void onBlockFromTo(BlockFromToEvent event) {
 		// Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
