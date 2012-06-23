@@ -21,6 +21,7 @@ import org.bukkit.inventory.ItemStack;
  * @thanks to loganwm for the help!!
  * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * @thanks to ferrybig for the awesome fall code!
+ * @thanks to Xastabus for the cool improvements of the checks!
  * 
  */
 
@@ -33,7 +34,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
 
 	@EventHandler
 	public void onFurnaceBurn (FurnaceBurnEvent event) {
-		if (plugin.config.getBoolean("configuration.furnace") == true) {
+		if (plugin.furnace) {
 			if (event.getFuel().getType() == Material.LAVA_BUCKET) {
 				final Block furnace = event.getBlock();
 				plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
@@ -43,11 +44,11 @@ public class UnlimitedLavaInventoryListener implements Listener {
 						try {
 							item = Material.valueOf(configItem.toUpperCase());
 						}
-						catch (Exception e) {
+						catch (IllegalArgumentException e) {
 							item = Material.AIR;
 						}
 						Furnace furn = (Furnace) furnace.getState();
-						furn.getInventory().setItem(1,new ItemStack(item, 1));
+						furn.getInventory().setItem(1, new ItemStack(item, 1));
 					}
 				});
 			}

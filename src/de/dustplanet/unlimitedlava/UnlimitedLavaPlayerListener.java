@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
  * @thanks to loganwm for the help!!
  * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * @thanks to ferrybig for the awesome fall code!
+ * @thanks to Xastabus for the cool improvements of the checks!
  *
  */
 
@@ -35,36 +36,35 @@ public class UnlimitedLavaPlayerListener implements Listener {
 		Block clicked = event.getBlockClicked();
 		Player player = event.getPlayer();
 		// Only if lava is clicked ;)
-		if (plugin.config.getBoolean("configuration.permissions") == true) {
+		if (plugin.permissions) {
 			if (event.getBlockClicked().getTypeId() == 9) {
 				return;
 			}
 			// If the player hasn't got the permissions, cancel the event and give an empty bucket back!
 			if (!player.hasPermission("unlimitedlava.use")) {
-				// 2x2 source
-				if (plugin.config.getBoolean("sources.two") == true) {
-					if (UnlimitedLavaCheck.checkSpreadValidityTwo(clicked)) {
-						giveBucketBack(player, event);
-					}
-				}
-				// 3x3 source
-				if (plugin.config.getBoolean("sources.three") == true) {
-					if (UnlimitedLavaCheck.checkSpreadValidityThree(clicked)) {
-						giveBucketBack(player, event);
-					}
-				}
-				// Other source
-				if (plugin.config.getBoolean("sources.other") == true) {
-					if (UnlimitedLavaCheck.checkSpreadValidityOther(clicked)) {
-						giveBucketBack(player, event);
-					}
-				}
-				// Big source
-				if (plugin.config.getBoolean("sources.big") == true) {
-					if (UnlimitedLavaCheck.checkSpreadValidityBig(clicked)) {
-						giveBucketBack(player, event);
-					}
-				}
+				// Check which cases are valid
+				int faces = UnlimitedLavaCheck.checkSpreadValidityFaces(clicked);
+				int corners = UnlimitedLavaCheck.checkSpreadValidityCorners(clicked);
+				boolean lake = UnlimitedLavaCheck.checkIsInLake(clicked);
+				boolean border = UnlimitedLavaCheck.checkIsOnBorder(clicked);
+				// Big
+				if (plugin.big && faces == 4 &&  corners == 4 && lake == true && border == false)
+					giveBucketBack(player, event);
+				// Three
+				else if (plugin.three && faces == 4 &&  corners == 4 && lake == false && border == false)
+					giveBucketBack(player, event);
+				// Two
+				else if (plugin.two && faces == 2 &&  corners == 1 && lake == false && border == true)
+					giveBucketBack(player, event);
+				// Plus
+				else if (plugin.plus && faces == 4 &&  corners == 0 && lake == false && border == true)
+					giveBucketBack(player, event);
+				// Other
+				else if (plugin.other && faces == 2 &&  corners == 0 && lake == false && border == true)
+					giveBucketBack(player, event);
+				// T Shape
+				else if (plugin.T && faces == 3 &&  corners == 0 && lake == false && border == true)
+					giveBucketBack(player, event);
 			}
 		}
 	}
@@ -77,7 +77,7 @@ public class UnlimitedLavaPlayerListener implements Listener {
 		player.setItemInHand(bucket);
 		player.updateInventory();
 		// Message if wanted
-		if (plugin.config.getBoolean("configuration.messages") == true) {
+		if (plugin.messages) {
 			String message = plugin.localization.getString("permission_denied");
 			plugin.message(null, player, message, null);
 		}

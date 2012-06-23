@@ -1,11 +1,16 @@
 package de.dustplanet.unlimitedlava;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+
+import org.bukkit.World;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.*;
 import org.bukkit.entity.Player;
 
@@ -22,6 +27,7 @@ import org.bukkit.entity.Player;
  * @thanks to loganwm for the help!!
  * @thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * @thanks to ferrybig for the awesome fall code!
+ * @thanks to Xastabus for the cool improvements of the checks!
  * 
  */
 
@@ -30,6 +36,9 @@ public class UnlimitedLava extends JavaPlugin {
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
 	private final UnlimitedLavaInventoryListener inventoryListener = new UnlimitedLavaInventoryListener(this);
+	public boolean three, two, other, big, plus, T, lavaFall, waterFall, messages = true, permissions = true, furnace;
+	public int height = 60;
+	public List<String> enabledWords = new ArrayList<String>();
 	public FileConfiguration config;
 	public FileConfiguration localization;
 	public File configFile;
@@ -58,6 +67,7 @@ public class UnlimitedLava extends JavaPlugin {
 	    }
 		config = this.getConfig();
 		loadConfig();
+		loadValues();
 		
 		// Localization
 		localizationFile = new File(getDataFolder(), "localization.yml");
@@ -66,14 +76,9 @@ public class UnlimitedLava extends JavaPlugin {
 			copy(getResource("localization.yml"), localizationFile);
 		}
 		// Try to load
-		try {
-			localization = YamlConfiguration.loadConfiguration(localizationFile);
-			loadLocalization();
-		}
-		// if it failed, tell it
-		catch (Exception e) {
-			log.warning("UnlimitedLava failed to load the localization!");
-		}
+		localization = YamlConfiguration.loadConfiguration(localizationFile);
+		loadLocalization();
+
 		
 		//Refer to UnlimitedLavaCommands
 		executor = new UnlimitedLavaCommands(this);
@@ -85,10 +90,9 @@ public class UnlimitedLava extends JavaPlugin {
 		
 		// Stats
 		try {
-			Metrics metrics = new Metrics();
-			metrics.beginMeasuringPlugin(this);
-		}
-		catch (IOException e) {}
+			Metrics metrics = new Metrics(this);
+			metrics.start();
+		} catch (IOException e) {}
 	}
 
 	// Reloads the config file, via command /unlimitedlava reload or /ulava reload and at the start!
@@ -102,11 +106,36 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("sources.two", true);
 		config.addDefault("sources.other", false);
 		config.addDefault("sources.big", false);
+		config.addDefault("sources.plus", true);
+		config.addDefault("sources.T", true);
 		config.addDefault("sources.lava_fall", true);
 		config.addDefault("sources.water_fall", false);
 		config.addDefault("furnace.item", "BUCKET");
+		List<World> temp = getServer().getWorlds();
+		List<String> tempList = new ArrayList<String>();
+		for (World w : temp) {
+			tempList.add(w.getName());
+		}
+		config.addDefault("enabled_worlds", tempList);
 		config.options().copyDefaults(true);
 		saveConfig();
+	}
+	
+	// Load the values into memory
+	public void loadValues() {
+		three = config.getBoolean("sources.three");
+		two = config.getBoolean("sources.two");
+		other = config.getBoolean("sources.other");
+		big = config.getBoolean("sources.big");
+		plus = config.getBoolean("sources.plus");
+		T = config.getBoolean("sources.T");
+		lavaFall = config.getBoolean("sources.lava_fall");
+		waterFall = config.getBoolean("sources.water_Fall");
+		permissions = config.getBoolean("configuration.permissions");
+		messages = config.getBoolean("configuration.messages");
+		furnace = config.getBoolean("configuration.furnace");
+		height = config.getInt("configuration.height");
+		enabledWords = config.getStringList("enabled_worlds");
 	}
 	
 	// Loads the localization
@@ -134,6 +163,7 @@ public class UnlimitedLava extends JavaPlugin {
 		localization.addDefault("disable_permissions_1", "&2UnlimitedLava permissions disabled! Only OPs");
 		localization.addDefault("disable_permissions_2", "&4All players can use the plugin!");
 		localization.addDefault("disable_furnace", "&2UnlimitedLava &4furnace &2disabled!");
+		localization.addDefault("status", "&2Currently enabled sources: &4 %source%");
 		localization.options().copyDefaults(true);
 		saveLocalization();
 	}
@@ -142,9 +172,8 @@ public class UnlimitedLava extends JavaPlugin {
 	public void saveLocalization() {
 		try {
 			localization.save(localizationFile);
-		}
-		catch (IOException e) {
-			log.warning("UnlimitedLava failed to save the localization! Please report this!");
+		} catch (IOException e) {
+			log.warning("UnlimitedLava failed to save the localization! Please report this! (I/O)");
 		}
 	}
 	
@@ -155,9 +184,12 @@ public class UnlimitedLava extends JavaPlugin {
 			saveConfig();
 			localization.load(localizationFile);
 			saveLocalization();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			log.warning("UnlimitedLava failed to save the localization! Please report this! (FileNotFound)");
+		} catch (IOException e) {
+			log.warning("UnlimitedLava failed to save the localization! Please report this! (I/O)");
+		} catch (InvalidConfigurationException e) {
+			log.warning("UnlimitedLava failed to save the localization! Please report this! (InvalidConfiguration)");
 		}
 	}
 	
@@ -172,8 +204,9 @@ public class UnlimitedLava extends JavaPlugin {
 			}
 			out.close();
 			in.close();
-		}
-		catch (Exception e) {
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
