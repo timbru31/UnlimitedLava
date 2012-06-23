@@ -130,7 +130,7 @@ public class UnlimitedLava extends JavaPlugin {
 		plus = config.getBoolean("sources.plus");
 		T = config.getBoolean("sources.T");
 		lavaFall = config.getBoolean("sources.lava_fall");
-		waterFall = config.getBoolean("sources.water_Fall");
+		waterFall = config.getBoolean("sources.water_fall");
 		permissions = config.getBoolean("configuration.permissions");
 		messages = config.getBoolean("configuration.messages");
 		furnace = config.getBoolean("configuration.furnace");
@@ -163,7 +163,6 @@ public class UnlimitedLava extends JavaPlugin {
 		localization.addDefault("disable_permissions_1", "&2UnlimitedLava permissions disabled! Only OPs");
 		localization.addDefault("disable_permissions_2", "&4All players can use the plugin!");
 		localization.addDefault("disable_furnace", "&2UnlimitedLava &4furnace &2disabled!");
-		localization.addDefault("status", "&2Currently enabled sources: &4 %source%");
 		localization.options().copyDefaults(true);
 		saveLocalization();
 	}
