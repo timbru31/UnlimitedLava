@@ -89,22 +89,22 @@ public class UnlimitedLavaBlockListener implements Listener {
 					boolean lake = UnlimitedLavaCheck.checkIsInLake(targetBlock);
 					boolean border = UnlimitedLavaCheck.checkIsOnBorder(targetBlock);
 					// Big
-					if (plugin.big && faces == 4 &&  corners == 4 && lake == true && border == false)
+					if (plugin.big && faces == 4 &&  corners == 4 && lake && !border)
 						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 					// Three
-					else if (plugin.three && faces == 4 &&  corners == 4 && lake == false && border == false)
+					else if (plugin.three && faces == 4 &&  corners == 4 && !lake && !border)
 						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 					// Two
-					else if (plugin.two && faces == 2 &&  corners == 1 && lake == false && border == true)
+					else if (plugin.two && faces == 2 &&  corners == 1 && !lake && border)
 						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 					// Plus
-					else if (plugin.plus && faces == 4 &&  corners == 0 && lake == false && border == true)
+					else if (plugin.plus && faces == 4 &&  corners == 0 && !lake && border)
 						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 					// Other
-					else if (plugin.other && faces == 2 &&  corners == 0 && lake == false && border == true)
+					else if (plugin.other && faces == 2 &&  corners == 0 && !lake && border)
 						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 					// T Shape
-					else if (plugin.T && faces == 3 &&  corners == 0 && lake == false && border == true)
+					else if (plugin.T && faces == 3 &&  corners == 0 && !lake && border)
 						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 				}
 			}

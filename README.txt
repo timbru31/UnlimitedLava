@@ -23,6 +23,8 @@ sources:
   big: false
   lava_fall: true
   water_fall: false
+  plus: true
+  T: true
 furnace:
   item: BUCKET
 
@@ -40,6 +42,34 @@ L L L
 
 X X
 X X
+
+Plus:
+
+  L
+L X L
+  L
+  
+T Shape:
+
+L X L
+  L
+
+or
+
+  L
+L X L
+
+or
+
+  L
+L X
+  L
+  
+or
+
+L
+X L
+L
 
 Other:
 

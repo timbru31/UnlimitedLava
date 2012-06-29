@@ -48,22 +48,22 @@ public class UnlimitedLavaPlayerListener implements Listener {
 				boolean lake = UnlimitedLavaCheck.checkIsInLake(clicked);
 				boolean border = UnlimitedLavaCheck.checkIsOnBorder(clicked);
 				// Big
-				if (plugin.big && faces == 4 &&  corners == 4 && lake == true && border == false)
+				if (plugin.big && faces == 4 &&  corners == 4 && lake && !border)
 					giveBucketBack(player, event);
 				// Three
-				else if (plugin.three && faces == 4 &&  corners == 4 && lake == false && border == false)
+				else if (plugin.three && faces == 4 &&  corners == 4 && !lake && !border)
 					giveBucketBack(player, event);
 				// Two
-				else if (plugin.two && faces == 2 &&  corners == 1 && lake == false && border == true)
+				else if (plugin.two && faces == 2 &&  corners == 1 && !lake && border)
 					giveBucketBack(player, event);
 				// Plus
-				else if (plugin.plus && faces == 4 &&  corners == 0 && lake == false && border == true)
+				else if (plugin.plus && faces == 4 &&  corners == 0 && !lake && border)
 					giveBucketBack(player, event);
 				// Other
-				else if (plugin.other && faces == 2 &&  corners == 0 && lake == false && border == true)
+				else if (plugin.other && faces == 2 &&  corners == 0 && !lake && border)
 					giveBucketBack(player, event);
 				// T Shape
-				else if (plugin.T && faces == 3 &&  corners == 0 && lake == false && border == true)
+				else if (plugin.T && faces == 3 &&  corners == 0 && !lake && border)
 					giveBucketBack(player, event);
 			}
 		}

@@ -11,5 +11,7 @@ sources:
   big: false
   lava_fall: true
   water_fall: false
+  plus: true
+  T: true
 furnace:
   item: BUCKET
