@@ -261,7 +261,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
 	// See the help with /unlimitedlava help or /ulava help
 	private void UnlimitedLavaHelp(CommandSender sender) {
-		for (i = 1; i <= 8; i++) {
+		for (i = 1; i <= 9; i++) {
 			message = plugin.localization.getString("help_" + Integer.toString(i));
 			plugin.message(sender, null, message, null);
 		}

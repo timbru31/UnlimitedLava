@@ -127,6 +127,11 @@ Description: Reloads the config
 Node: unlimitedlava.help
 Description: Displays the help
 
+/unlimitedlava status
+/ulava status
+Node: unlimitedlava.status
+Description: Displays the shows the status
+
 /unlimitedlava enable all
 /ulava enable all
 Node: unlimitedlava.enable.all
@@ -151,6 +156,16 @@ Description: Enables the other source
 /ulava enable big
 Node: unlimitedlava.enable.big
 Description: Enables the big sources
+
+/unlimitedlava enable plus
+/ulava enable plus
+Node: unlimitedlava.enable.plus
+Description: enables the plus sources
+
+/unlimitedlava enable T
+/ulava enable T
+Node: unlimitedlava.enable.T
+Description: enables the T sources
 
 /unlimitedlava enable permissions
 /ulava enable permissions
@@ -201,6 +216,16 @@ Description: Disables the other source
 /ulava disable big
 Node: unlimitedlava.disable.big
 Description: Disables the big sources
+
+/unlimitedlava disable plus
+/ulava disable plus
+Node: unlimitedlava.disable.plus
+Description: Disables the plus sources
+
+/unlimitedlava disable T
+/ulava disable T
+Node: unlimitedlava.disable.T
+Description: Disables the T sources
 
 /unlimitedlava disable permissions
 /ulava disable permissions

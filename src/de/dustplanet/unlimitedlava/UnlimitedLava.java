@@ -147,10 +147,11 @@ public class UnlimitedLava extends JavaPlugin {
 		localization.addDefault("help_2", "To see the help type &4/unlimitedlava help &for &4/ulava help");
 		localization.addDefault("help_3", "To reload use &4/unlimitedlava reload &for &4/ulava reload");
 		localization.addDefault("help_4", "To enable something use &4/unlimitedlava enable &e<value>");
-		localization.addDefault("help_5", "or &4/ulava enable &e<value");
+		localization.addDefault("help_5", "or &4/ulava enable &e<value>");
 		localization.addDefault("help_6", "To disable something use &4/unlimitedlava disable &e<value>");
-		localization.addDefault("help_7", "or &4/ulava disable &e<value");
-		localization.addDefault("help_8", "&eValues: &fpermissions, messages, furnace, all, three, two, other, big, lava_fall, water_fall");
+		localization.addDefault("help_7", "or &4/ulava disable &e<value>");
+		localization.addDefault("help_8", "&eValues: &fpermissions, messages, furnace, all, three, two, other, big, lava_fall, water_fall, plus, T");
+		localization.addDefault("help_9", "&eThe status of UnlimitedLava can be seen with &4/ulava status");
 		localization.addDefault("enable_source", "&2UnlimitedLava source &4%source &2enabled!");
 		localization.addDefault("enable_all", "&4All &2UnlimitedLava sources enabled!");
 		localization.addDefault("enable_messages", "&2UnlimitedLava messages enabled!");
