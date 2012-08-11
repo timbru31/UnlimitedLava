@@ -38,18 +38,19 @@ public class UnlimitedLavaBlockListener implements Listener {
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
 		
-		if (!plugin.enabledWords.contains(sourceBlock.getWorld().getName())) return;
+		// Is the world on the list?
+		if (!plugin.enabledWorlds.contains(sourceBlock.getWorld().getName())) return;
 
 		// Only if the height is greater or the same
 		if (sourceBlock.getY() <= plugin.height) return;
 
+		
 		// Lava fall
-		if (plugin.lavaFall) {
+		if (UnlimitedLava.lavaFall) {
 			// Security check with 0
 			if (sourceBlock.getY() > 0) {
 				if(event.getFace() == BlockFace.DOWN) {
-					if (event.getToBlock().getRelative(BlockFace.UP).getType() == Material.LAVA
-							|| event.getToBlock().getRelative(BlockFace.UP).getType() == Material.STATIONARY_LAVA) {
+					if (event.getToBlock().getRelative(BlockFace.UP).getType() == Material.LAVA || event.getToBlock().getRelative(BlockFace.UP).getType() == Material.STATIONARY_LAVA) {
 						if( event.getToBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
 							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 							event.setCancelled(true);
@@ -60,12 +61,11 @@ public class UnlimitedLavaBlockListener implements Listener {
 		}
 
 		// Water fall
-		if (plugin.waterFall) {
+		if (UnlimitedLava.waterFall) {
 			// Security check with 0
 			if (sourceBlock.getY() > 0) {
 				if(event.getFace() == BlockFace.DOWN) {
-					if (event.getToBlock().getRelative(BlockFace.UP).getType() == Material.WATER
-							|| event.getToBlock().getRelative(BlockFace.UP).getType() == Material.STATIONARY_WATER) {
+					if (event.getToBlock().getRelative(BlockFace.UP).getType() == Material.WATER || event.getToBlock().getRelative(BlockFace.UP).getType() == Material.STATIONARY_WATER) {
 						if( event.getToBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
 							event.getToBlock().setTypeIdAndData(Material.WATER.getId(), (byte) 0x0, true);
 							event.setCancelled(true);
@@ -83,29 +83,9 @@ public class UnlimitedLavaBlockListener implements Listener {
 			if (targetBlock.getType() == Material.LAVA || targetBlock.getType() == Material.STATIONARY_LAVA) {
 				// Full block (0x0) and not falling (0x8)
 				if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
-					// Check which cases are valid
-					int faces = UnlimitedLavaCheck.checkSpreadValidityFaces(targetBlock);
-					int corners = UnlimitedLavaCheck.checkSpreadValidityCorners(targetBlock);
-					boolean lake = UnlimitedLavaCheck.checkIsInLake(targetBlock);
-					boolean border = UnlimitedLavaCheck.checkIsOnBorder(targetBlock);
-					// Big
-					if (plugin.big && faces == 4 &&  corners == 4 && lake && !border)
-						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-					// Three
-					else if (plugin.three && faces == 4 &&  corners == 4 && !lake && !border)
-						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-					// Two
-					else if (plugin.two && faces == 2 &&  corners == 1 && !lake && border)
-						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-					// Plus
-					else if (plugin.plus && faces == 4 &&  corners == 0 && !lake && border)
-						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-					// Other
-					else if (plugin.other && faces == 2 &&  corners == 0 && !lake && border)
-						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
-					// T Shape
-					else if (plugin.T && faces == 3 &&  corners == 0 && !lake && border)
-						event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
+					// Call the "SpreadCheck" if valid refill the block
+					if (UnlimitedLavaCheck.checkLavaSpreadValidity(targetBlock))
+						targetBlock.setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 				}
 			}
 		}

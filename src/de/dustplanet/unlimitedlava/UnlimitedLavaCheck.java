@@ -23,147 +23,114 @@ import org.bukkit.block.BlockFace;
 
 public class UnlimitedLavaCheck {
 
-	static UnlimitedLava plugin;
+	public static UnlimitedLava plugin;
 	public UnlimitedLavaCheck(UnlimitedLava instance) {
 		plugin = instance;
 	}
 
-	static int checkSpreadValidityFaces(Block block) {
-		/* Find the number of blocks adjacent to the target that are filled with lava.
-		 * This value will be used to determine whether to fill trenches of the "other" (2) and "plus" (4) configuration 
+	public static boolean checkLavaSpreadValidity(Block block) {
+		/*
+		 * NEW* Consolidated check code. Returns true if block is fillable, false if block is not fillable.
+		 * Our previous methods read several blocks multiple times and the test logic is duplicated in two places.  This processing time could be better spent elsewhere.
+		 * Previous code was duplicated between UnlimitedLavaBlockListener and UnlimitedLavaPlayerListener.  Consolidation of these tests allows changes to be made in one place.
+		 * checkLavaSpreadValidity is intended to reduce redundancy and improve efficiency over our previous code. 
 		 */
-		int i = 0;
-		// Do not fill above air.
-		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR) return i;
 
-		// Find the number of adjacent blocks are full blocks of Lava.  Return that value.
-		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
-			i++;
+		//Don't fill above air and don't initialize variables if we aren't going to use them.
+		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR) return false;
+
+		// blockRelitive, blockMaterial, blockData, and blockIsSolid arrays collect info of each block in a two block radius for later use in the evaluation section.
+		Material [] blockMaterial = new Material [24];
+		byte [] blockData = new byte [24];
+		boolean [] blockIsSolid = new boolean [24];
+		Block [] blockRelative = {block.getRelative(BlockFace.NORTH), block.getRelative(BlockFace.NORTH_EAST), block.getRelative(BlockFace.EAST), 
+				block.getRelative(BlockFace.SOUTH_EAST), block.getRelative(BlockFace.SOUTH), block.getRelative(BlockFace.SOUTH_WEST), block.getRelative(BlockFace.WEST), 
+				block.getRelative(BlockFace.NORTH_WEST), block.getRelative(BlockFace.NORTH, 2), block.getRelative(BlockFace.NORTH_NORTH_EAST), block.getRelative(BlockFace.NORTH_EAST, 2),
+				block.getRelative(BlockFace.EAST_NORTH_EAST), block.getRelative(BlockFace.EAST, 2), block.getRelative(BlockFace.EAST_SOUTH_EAST), block.getRelative(BlockFace.SOUTH_EAST, 2),
+				block.getRelative(BlockFace.SOUTH_SOUTH_EAST), block.getRelative(BlockFace.SOUTH, 2), block.getRelative(BlockFace.SOUTH_SOUTH_WEST), block.getRelative(BlockFace.SOUTH_WEST, 2),
+				block.getRelative(BlockFace.WEST_SOUTH_WEST), block.getRelative(BlockFace.WEST, 2), block.getRelative(BlockFace.WEST_NORTH_WEST), block.getRelative(BlockFace.NORTH_WEST, 2),
+				block.getRelative(BlockFace.NORTH_NORTH_WEST) };
+		int faces = 0, borders = 0, corners = 0, cBlocks = 0, lBlocks = 0, rBlocks = 0;
+		boolean lake = false, fill = false;
+		// cBlock, lBlock, and rBlock contain lists of blocks to be tested for Corners, Lakes, and Rings respectively.
+		int [][] cBlock = {{0,1,2},{2,3,4},{4,5,6},{6,7,0}};
+		int [][] lBlock = {{8,9,10,11,12},{12,13,14,15,16},{16,17,18,19,20},{20,21,22,23,8}};
+		int [][] rBlock = {{6,7,23,8,9,1,2},{0,8,9,10,11,12,2},{0,1,11,12,13,3,4},{2,12,13,14,15,16,4},{2,3,15,16,17,5,6},{4,16,17,18,19,20,6},{4,5,19,20,21,7,0},{6,20,21,22,23,8,0}};
+
+
+		for(int i = 0; i < blockMaterial.length; i++){
+			blockMaterial[i] = blockRelative[i].getType();
+			blockData[i] = blockRelative[i].getData();
+			if (!(blockRelative[i].isLiquid() || blockRelative[i].isEmpty())) blockIsSolid[i] = true;
+			else blockIsSolid[i] = false;
 		}
 
-		return i;
-	}
-
-	static int checkSpreadValidityCorners(Block block) {
-		/* 
-		 * Find the number of 3 block corners surrounding the target block that are filled with lava.
-		 * This value will be used to determine whether to fill 2x2 (requires 1 corner) or 3x3 (requires 4 corners) pools.
+		/*
+		 * Evaluations
+		 * Faces and Borders:
+		 * Faces are full blocks of lava one block N, S, E, or W of the target.
+		 * Borders are any solid block (not liquid or air) one block N, S, E, or W of the target.
+		 * A diagonal solid is not considered a border because it would not prevent flow from the target block.
 		 */
-		int i = 0, n = 0, ne = 0, s = 0, nw = 0, sw = 0, w = 0, e = 0, se = 0;
-		// Do not fill above air.
-		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR) return i;
-
-
-		// Check 1 block radius for full lava blocks.
-		if ((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) {
-			e++;
+		for (int i = 0; i <= 3; i++) {
+			int v = i * 2;
+			if ((((blockMaterial[v] == Material.LAVA) || (blockMaterial[v] == Material.STATIONARY_LAVA)) && (blockData[v] == 0x0))) faces++;
+			else if (blockIsSolid[v]) borders++;
+			/* 
+			 * Corners and Lake
+			 * Corners are three contiguous full lava blocks (face, diagonal, face) and are required to further test for a lake.
+			 * A Lake is valid when at least 4 blocks contiguous to the tested corner contain lava of any amount. 
+			 */
+			cBlocks = 0;
+			for (int c = 0; c <= 2; c++) {
+				if (((blockMaterial[cBlock[i][c]] == Material.LAVA) || (blockMaterial[cBlock[i][c]] == Material.STATIONARY_LAVA)) && (blockData[cBlock[i][c]] == 0x0)) cBlocks++;
+			}
+			if (cBlocks == 3) {
+				corners++;
+				lBlocks = 0;
+				for (int l = 0; l <= 4; l++) {
+					if ((blockMaterial[lBlock[i][l]] == Material.LAVA) || (blockMaterial[lBlock[i][l]] == Material.STATIONARY_LAVA)) lBlocks++;
+					// Lake blocks do not need to be full beyond the previously tested corner.
+				}
+				if (lBlocks >= 4) lake = true;
+			}
 		}
-		if ((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST).getData() == 0x0) {
-			w++;
+		UnlimitedLava.log.info(lake + " " + borders + " " + corners + " " + faces + " " + rBlocks + " " + lBlocks + " " + cBlocks + " " );
+		// Final Checks
+		// Ring, 7 full lava blocks around a solid. Block to be filled must have 2 bordering solids.
+		// The ring test it is evaluated only if necessary because it is a huge test and not reusable.
+		if (UnlimitedLava.ring) {
+			for(int i = 0; i <= 7; i++) {
+				rBlocks = 0;
+				for(int r = 0; r <= 6; r++) {
+					if ((((blockMaterial[rBlock[i][r]] == Material.LAVA) || (blockMaterial[rBlock[i][r]] == Material.STATIONARY_LAVA)) && (blockData[rBlock[i][r]] == 0x0)))
+						rBlocks++;
+				}
+				if (faces == 2 && borders == 2 && rBlocks == 7) {
+					fill = true;
+					break;
+				}
+			}
 		}
-		if ((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) {
-			n++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) {
-			s++;
-		}
-		if ((block.getRelative(BlockFace.NORTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH_EAST).getData() == 0x0) {
-			ne++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH_WEST).getData() == 0x0) {
-			sw++;
-		}
-		if ((block.getRelative(BlockFace.NORTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH_WEST).getData() == 0x0) {
-			nw++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH_EAST).getData() == 0x0) {
-			se++;
-		}
-
-		// Calculate 3 block corners of lava.
-		if (n + ne + e == 3) i++;
-		if (e + se + s == 3) i++;
-		if (s + sw + w == 3) i++;
-		if (w + nw + n == 3) i++;
-
-		return i;
-	}
-	
-	static boolean checkIsInLake(Block block) {
-		int i = 0;
-		// Lake test.  If any 2 blocks in a 2 block radius are filled with lava then the target block is part of a lake.
-		if ((block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH_NORTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH_NORTH_EAST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH_SOUTH_WEST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH_NORTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH_NORTH_WEST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH_SOUTH_EAST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.EAST_NORTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST_NORTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST_NORTH_EAST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.WEST_SOUTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST_SOUTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST_SOUTH_WEST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.WEST_NORTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST_NORTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST_NORTH_WEST).getData() == 0x0) {
-			i++;
-		}
-		if ((block.getRelative(BlockFace.EAST_SOUTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST_SOUTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST_SOUTH_EAST).getData() == 0x0) {
-			i++;
-		}
-
-		return (i >=2 ) ? true : false;
-	}
-
-	static boolean checkIsOnBorder(Block block) {
-		int i = 0;
-		/* Border test for "big" option.
-		 * Find the number of blocks in a 1 block radius that are not filled with Lava.
-		 * If 2 or more blocks in the 1 block radius are not filled with Lava the target block is on the border and
-		 * should not be filled if "big" is enabled.
-		 */
-		// Do not fill above air.
-		if (block.getRelative(BlockFace.DOWN).getType() == Material.AIR) return true;
-
-		if (((block.getRelative(BlockFace.EAST).getType() == Material.LAVA || block.getRelative(BlockFace.EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.EAST).getData() == 0x0) != true){
-			i++;
-		}
-		if (((block.getRelative(BlockFace.WEST).getType() == Material.LAVA || block.getRelative(BlockFace.WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.WEST).getData() == 0x0) != true){
-			i++;
-		}
-		if (((block.getRelative(BlockFace.NORTH).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH).getData() == 0x0) != true){
-			i++;
-		}
-		if (((block.getRelative(BlockFace.SOUTH).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH).getData() == 0x0) != true){
-			i++;
-		}
-		if (((block.getRelative(BlockFace.NORTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH_EAST).getData() == 0x0) != true){
-			i++;
-		}
-		if (((block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH_EAST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH_EAST).getData() == 0x0) != true){
-			i++;
-		}
-		if (((block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.SOUTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.SOUTH_WEST).getData() == 0x0) != true){
-			i++;
-		}
-		if (((block.getRelative(BlockFace.NORTH_WEST).getType() == Material.LAVA || block.getRelative(BlockFace.NORTH_WEST).getType() == Material.STATIONARY_LAVA) && block.getRelative(BlockFace.NORTH_WEST).getData() == 0x0) != true){
-			i++;
-		}
-
-		return (i >=2 ) ? true : false;
+		// Big, fill any block in the middle of a lake.  Minimum requirement: 4 full faces, one full corner, and at least 4 lava blocks of any amount contiguous with the full corner.
+		else if (UnlimitedLava.big && faces == 4 && lake) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
+			fill = true;
+		// Three, a 3x3 pool. Minimum Requirement: 4 full corners (includes faces)
+		else if (UnlimitedLava.three && borders == 0 && corners == 4 && faces == 4)
+			fill = true;
+		// Two. a 2x2 pool. Conditional requirements depending on status of Big allows larger lava pools to be filled of other options are disabled.
+		else if (UnlimitedLava.two && borders == 2 && corners == 1 && faces == 2)
+			fill = true;
+		// Plus, fills the center block of a + shape.  Can be free standing.
+		// Diagonal borders are no longer tested. Corners will invalidate valid fills.  Do not use either of these variables for Plus.
+		else if (UnlimitedLava.plus && borders == 0 && corners == 0 && faces == 4)
+			fill = true;
+		// Other, a block will be filled from any 2 faces of full lava but only if it is bordered by 2 solid blocks.
+		else if (UnlimitedLava.other && borders == 2 && corners == 0 && faces == 2)
+			fill = true;
+		// T Shape, the "T" block from Tetris. Requires 3 faces, 1 border. Conditional 0 corners if Big is enabled to prevent shore filling.
+		else if (UnlimitedLava.T && borders == 1 && corners == 0 && faces == 3)
+			fill = true;
+		return fill;		
 	}
 }

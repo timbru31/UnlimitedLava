@@ -30,7 +30,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	public UnlimitedLavaCommands(UnlimitedLava instance) {
 		plugin = instance;
 	}
-	private String[] values = {"three", "two", "other", "big", "lava_fall", "water_fall", "plus", "T"};
+	private String[] values = {"three", "two", "other", "big", "lava_fall", "water_fall", "plus", "T", "ring"};
 	private String message, value;
 	private int i;
 
@@ -207,31 +207,34 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		String header = ChatColor.YELLOW + "Status of UnlimitedLava";
 		String string = "";
 		// Big
-		if (plugin.big) string += "Big: " +  ChatColor.DARK_GREEN + plugin.big + ChatColor.WHITE + ", ";
-		else string += "Big: " +  ChatColor.DARK_RED + plugin.big + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.big) string += "Big: " +  ChatColor.DARK_GREEN + UnlimitedLava.big + ChatColor.WHITE + ", ";
+		else string += "Big: " +  ChatColor.DARK_RED + UnlimitedLava.big + ChatColor.WHITE + ", ";
 		// Three
-		if (plugin.three) string += "three: " +  ChatColor.DARK_GREEN + plugin.three + ChatColor.WHITE + ", ";
-		else string += "three: " +  ChatColor.DARK_RED + plugin.three + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.three) string += "three: " +  ChatColor.DARK_GREEN + UnlimitedLava.three + ChatColor.WHITE + ", ";
+		else string += "three: " +  ChatColor.DARK_RED + UnlimitedLava.three + ChatColor.WHITE + ", ";
 		// Two
-		if (plugin.two) string += "two: " +  ChatColor.DARK_GREEN + plugin.two + ChatColor.WHITE + ", ";
-		else string += "two:" +  ChatColor.DARK_RED + plugin.two + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.two) string += "two: " +  ChatColor.DARK_GREEN + UnlimitedLava.two + ChatColor.WHITE + ", ";
+		else string += "two:" +  ChatColor.DARK_RED + UnlimitedLava.two + ChatColor.WHITE + ", ";
 		string += "\n";
 		// Other
-		if (plugin.other) string += "other: " +  ChatColor.DARK_GREEN + plugin.other + ChatColor.WHITE + ", ";
-		else string += "other: " +  ChatColor.DARK_RED + plugin.other + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.other) string += "other: " +  ChatColor.DARK_GREEN + UnlimitedLava.other + ChatColor.WHITE + ", ";
+		else string += "other: " +  ChatColor.DARK_RED + UnlimitedLava.other + ChatColor.WHITE + ", ";
 		// Plus
-		if (plugin.plus) string += "plus: " +  ChatColor.DARK_GREEN + plugin.plus + ChatColor.WHITE + ", ";
-		else string += "plus: " +  ChatColor.DARK_RED + plugin.plus + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.plus) string += "plus: " +  ChatColor.DARK_GREEN + UnlimitedLava.plus + ChatColor.WHITE + ", ";
+		else string += "plus: " +  ChatColor.DARK_RED + UnlimitedLava.plus + ChatColor.WHITE + ", ";
 		// T
-		if (plugin.T) string += "T: " +  ChatColor.DARK_GREEN + plugin.T + ChatColor.WHITE + ", ";
-		else string += "T: " +  ChatColor.DARK_RED + plugin.T + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.T) string += "T: " +  ChatColor.DARK_GREEN + UnlimitedLava.T + ChatColor.WHITE + ", ";
+		else string += "T: " +  ChatColor.DARK_RED + UnlimitedLava.T + ChatColor.WHITE + ", ";
+		// Ring
+		if (UnlimitedLava.ring) string += "ring: " + ChatColor.DARK_GREEN + UnlimitedLava.ring + ChatColor.WHITE + ", ";
+		else string += "ring: " +  ChatColor.DARK_RED + UnlimitedLava.ring + ChatColor.WHITE + ", ";
 		string += "\n";
 		// LavaFall
-		if (plugin.lavaFall) string += "lavaFall: " +  ChatColor.DARK_GREEN + plugin.lavaFall + ChatColor.WHITE + ", ";
-		else string += "lavaFall: " +  ChatColor.DARK_RED + plugin.lavaFall + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.lavaFall) string += "lavaFall: " +  ChatColor.DARK_GREEN + UnlimitedLava.lavaFall + ChatColor.WHITE + ", ";
+		else string += "lavaFall: " +  ChatColor.DARK_RED + UnlimitedLava.lavaFall + ChatColor.WHITE + ", ";
 		// WaterFall
-		if (plugin.waterFall) string += "waterFall: " +  ChatColor.DARK_GREEN + plugin.waterFall + ChatColor.WHITE + ", ";
-		else string += "waterFall: " +  ChatColor.DARK_RED + plugin.waterFall + ChatColor.WHITE + ", ";
+		if (UnlimitedLava.waterFall) string += "waterFall: " +  ChatColor.DARK_GREEN + UnlimitedLava.waterFall + ChatColor.WHITE + ", ";
+		else string += "waterFall: " +  ChatColor.DARK_RED + UnlimitedLava.waterFall + ChatColor.WHITE + ", ";
 		// MinHeight
 		string += "minHeight: " +  ChatColor.YELLOW + plugin.height + ChatColor.WHITE + ", ";
 		string += "\n";
@@ -244,7 +247,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		// Messages
 		if (plugin.messages) string += "messages: " +  ChatColor.DARK_GREEN + plugin.messages + ChatColor.WHITE + ", ";
 		else string += "messages: " +  ChatColor.DARK_RED + plugin.messages + ChatColor.WHITE + ", ";
-		String worlds = ChatColor.YELLOW + "Active worlds: " + ChatColor.DARK_GREEN + plugin.enabledWords.toString().replace("[", "").replace("]", "");
+		String worlds = ChatColor.YELLOW + "Active worlds: " + ChatColor.DARK_GREEN + plugin.enabledWorlds.toString().replace("[", "").replace("]", "");
 		sender.sendMessage(header);
 		sender.sendMessage(string);
 		sender.sendMessage(worlds);
@@ -284,17 +287,19 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources.big", true);
 		plugin.config.set("sources.plus", true);
 		plugin.config.set("sources.T", true);
+		plugin.config.set("sources.ring", true);
 		plugin.config.set("sources.water_fall", true);
 		plugin.config.set("sources.lava_fall", true);
 		plugin.saveConfig();
-		plugin.three = true;
-		plugin.two = true;
-		plugin.other = true;
-		plugin.plus = true;
-		plugin.big = true;
-		plugin.T = true;
-		plugin.waterFall = true;
-		plugin.lavaFall = true;
+		UnlimitedLava.three = true;
+		UnlimitedLava.two = true;
+		UnlimitedLava.other = true;
+		UnlimitedLava.plus = true;
+		UnlimitedLava.big = true;
+		UnlimitedLava.T = true;
+		UnlimitedLava.ring = true;
+		UnlimitedLava.waterFall = true;
+		UnlimitedLava.lavaFall = true;
 		message = plugin.localization.getString("enable_all");
 		plugin.message(sender, null, message, null);
 	}
@@ -345,17 +350,19 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources.big", false);
 		plugin.config.set("sources.plus", false);
 		plugin.config.set("sources.T", false);
+		plugin.config.set("sources.ring", false);
 		plugin.config.set("sources.water_fall", false);
 		plugin.config.set("sources.lava_fall", false);
 		plugin.saveConfig();
-		plugin.three = false;
-		plugin.two = false;
-		plugin.other = false;
-		plugin.plus = false;
-		plugin.big = false;
-		plugin.T = false;
-		plugin.waterFall = false;
-		plugin.lavaFall = false;
+		UnlimitedLava.three = false;
+		UnlimitedLava.two = false;
+		UnlimitedLava.other = false;
+		UnlimitedLava.plus = false;
+		UnlimitedLava.big = false;
+		UnlimitedLava.T = false;
+		UnlimitedLava.ring = false;
+		UnlimitedLava.waterFall = false;
+		UnlimitedLava.lavaFall = false;
 		message = plugin.localization.getString("disable_all");
 		plugin.message(sender, null, message, null);
 	}

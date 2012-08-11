@@ -42,6 +42,9 @@ public class UnlimitedLavaPlayerListener implements Listener {
 			}
 			// If the player hasn't got the permissions, cancel the event and give an empty bucket back!
 			if (!player.hasPermission("unlimitedlava.use")) {
+				if (UnlimitedLavaCheck.checkLavaSpreadValidity(clicked) == true)
+					giveBucketBack(player, event);
+				/* Logic below has been replaced
 				// Check which cases are valid
 				int faces = UnlimitedLavaCheck.checkSpreadValidityFaces(clicked);
 				int corners = UnlimitedLavaCheck.checkSpreadValidityCorners(clicked);
@@ -65,6 +68,11 @@ public class UnlimitedLavaPlayerListener implements Listener {
 				// T Shape
 				else if (plugin.T && faces == 3 &&  corners == 0 && !lake && border)
 					giveBucketBack(player, event);
+				/*
+				boolean gotLava = UnlimitedLavaCheck.checkSpreadValidityAll(clicked);
+				if (gotLava)
+					giveBucketBack(player, event);
+				 */
 			}
 		}
 	}

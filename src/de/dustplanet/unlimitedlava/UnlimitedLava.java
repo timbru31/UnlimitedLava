@@ -36,17 +36,21 @@ public class UnlimitedLava extends JavaPlugin {
 	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
 	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
 	private final UnlimitedLavaInventoryListener inventoryListener = new UnlimitedLavaInventoryListener(this);
-	public boolean three, two, other, big, plus, T, lavaFall, waterFall, messages = true, permissions = true, furnace;
+	public static boolean three, two, other, big, plus, T, ring, lavaFall, waterFall;
+	public boolean messages = true;
+	public boolean permissions = true;
+	public boolean furnace;
 	public int height = 60;
-	public List<String> enabledWords = new ArrayList<String>();
+	public List<String> enabledWorlds = new ArrayList<String>();
 	public FileConfiguration config;
 	public FileConfiguration localization;
 	public File configFile;
 	public File localizationFile;
 	private UnlimitedLavaCommands executor;
-
+	
 	// Shutdown
 	public void onDisable() {
+		enabledWorlds.clear();
 		PluginDescriptionFile pdfFile = this.getDescription();
 		log.info(pdfFile.getName() + " " + pdfFile.getVersion()	+ " has been disabled!");
 	}
@@ -108,6 +112,7 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("sources.big", false);
 		config.addDefault("sources.plus", true);
 		config.addDefault("sources.T", true);
+		config.addDefault("sources.ring", true);
 		config.addDefault("sources.lava_fall", true);
 		config.addDefault("sources.water_fall", false);
 		config.addDefault("furnace.item", "BUCKET");
@@ -129,13 +134,14 @@ public class UnlimitedLava extends JavaPlugin {
 		big = config.getBoolean("sources.big");
 		plus = config.getBoolean("sources.plus");
 		T = config.getBoolean("sources.T");
+		ring = config.getBoolean("sources.ring");
 		lavaFall = config.getBoolean("sources.lava_fall");
 		waterFall = config.getBoolean("sources.water_fall");
 		permissions = config.getBoolean("configuration.permissions");
 		messages = config.getBoolean("configuration.messages");
 		furnace = config.getBoolean("configuration.furnace");
 		height = config.getInt("configuration.height");
-		enabledWords = config.getStringList("enabled_worlds");
+		enabledWorlds = config.getStringList("enabled_worlds");
 	}
 	
 	// Loads the localization
@@ -219,11 +225,8 @@ public class UnlimitedLava extends JavaPlugin {
 				.replaceAll("%version", pdfFile.getVersion())
 				.replaceAll("%source", value)
 				.replaceAll("%value", value);
-		if (player != null) {
-			player.sendMessage(message);
-		}
-		else if (sender != null) {
-			sender.sendMessage(message);
-		}
+		if (player != null)	player.sendMessage(message);
+		else if (sender != null) sender.sendMessage(message);
+		else log.info("[UnlimitedLava] Player and sender are null! Please report this");
 	}
 }
