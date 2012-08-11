@@ -25,6 +25,7 @@ sources:
   water_fall: false
   plus: true
   T: true
+  ring: true
 furnace:
   item: BUCKET
 

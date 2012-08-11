@@ -31,6 +31,7 @@ permissions:
       unlimitedlava.enable.big: true
       unlimitedlava.enable.plus: true
       unlimitedlava.enable.T: true
+      unlimitedlava.enable.ring: true
       unlimitedlava.enable.permissions: true
       unlimitedlava.enable.messages: true
       unlimitedlava.enable.furnace: true
@@ -46,6 +47,7 @@ permissions:
       unlimitedlava.disable.big: true
       unlimitedlava.disable.plus: true
       unlimitedlava.disable.T: true
+      unlimitedlava.disable.ring: true
       unlimitedlava.disable.permissions: true
       unlimitedlava.disable.messages: true
       unlimitedlava.disable.furnace: true
@@ -84,6 +86,9 @@ permissions:
   unlimitedlava.enable.T:
     description: Allows you to enable T shaped sources
     default: op
+  unlimitedlava.enable.ring:
+    description: Allows you to enable ring shaped sources
+    default: op
   unlimitedlava.enable.permissions:
     description: Allows you to enable permissions
     default: op
@@ -119,6 +124,9 @@ permissions:
     default: op
   unlimitedlava.disable.T:
     description: Allows you to disable T shaped sources
+    default: op
+  unlimitedlava.disable.ring:
+    description: Allows you to disable ring shaped sources
     default: op
   unlimitedlava.disable.permissions:
     description: Allows you to disable permissions
