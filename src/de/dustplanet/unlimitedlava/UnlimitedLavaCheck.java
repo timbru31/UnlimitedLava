@@ -95,7 +95,6 @@ public class UnlimitedLavaCheck {
 				if (lBlocks >= 4) lake = true;
 			}
 		}
-		UnlimitedLava.log.info(lake + " " + borders + " " + corners + " " + faces + " " + rBlocks + " " + lBlocks + " " + cBlocks + " " );
 		// Final Checks
 		// Ring, 7 full lava blocks around a solid. Block to be filled must have 2 bordering solids.
 		// The ring test it is evaluated only if necessary because it is a huge test and not reusable.
