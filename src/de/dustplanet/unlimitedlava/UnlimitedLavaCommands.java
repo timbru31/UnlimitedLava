@@ -26,16 +26,15 @@ import org.bukkit.command.CommandSender;
 
 public class UnlimitedLavaCommands implements CommandExecutor {
 
-	UnlimitedLava plugin;
+	private UnlimitedLava plugin;
 	public UnlimitedLavaCommands(UnlimitedLava instance) {
 		plugin = instance;
 	}
 	private String[] values = {"three", "two", "other", "big", "lava_fall", "water_fall", "plus", "T", "ring"};
-	private String message, value;
-	private int i;
 
 	// Commands... First check if config value permissions is true
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
+		String message, value;
 		// reload
 		if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 			if (sender.hasPermission("unlimitedlava.reload") || !plugin.permissions) {
@@ -207,34 +206,34 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		String header = ChatColor.YELLOW + "Status of UnlimitedLava";
 		String string = "";
 		// Big
-		if (UnlimitedLava.big) string += "Big: " +  ChatColor.DARK_GREEN + UnlimitedLava.big + ChatColor.WHITE + ", ";
-		else string += "Big: " +  ChatColor.DARK_RED + UnlimitedLava.big + ChatColor.WHITE + ", ";
+		if (plugin.big) string += "Big: " +  ChatColor.DARK_GREEN + plugin.big + ChatColor.WHITE + ", ";
+		else string += "Big: " +  ChatColor.DARK_RED + plugin.big + ChatColor.WHITE + ", ";
 		// Three
-		if (UnlimitedLava.three) string += "three: " +  ChatColor.DARK_GREEN + UnlimitedLava.three + ChatColor.WHITE + ", ";
-		else string += "three: " +  ChatColor.DARK_RED + UnlimitedLava.three + ChatColor.WHITE + ", ";
+		if (plugin.three) string += "three: " +  ChatColor.DARK_GREEN + plugin.three + ChatColor.WHITE + ", ";
+		else string += "three: " +  ChatColor.DARK_RED + plugin.three + ChatColor.WHITE + ", ";
 		// Two
-		if (UnlimitedLava.two) string += "two: " +  ChatColor.DARK_GREEN + UnlimitedLava.two + ChatColor.WHITE + ", ";
-		else string += "two:" +  ChatColor.DARK_RED + UnlimitedLava.two + ChatColor.WHITE + ", ";
+		if (plugin.two) string += "two: " +  ChatColor.DARK_GREEN + plugin.two + ChatColor.WHITE + ", ";
+		else string += "two:" +  ChatColor.DARK_RED + plugin.two + ChatColor.WHITE + ", ";
 		string += "\n";
 		// Other
-		if (UnlimitedLava.other) string += "other: " +  ChatColor.DARK_GREEN + UnlimitedLava.other + ChatColor.WHITE + ", ";
-		else string += "other: " +  ChatColor.DARK_RED + UnlimitedLava.other + ChatColor.WHITE + ", ";
+		if (plugin.other) string += "other: " +  ChatColor.DARK_GREEN + plugin.other + ChatColor.WHITE + ", ";
+		else string += "other: " +  ChatColor.DARK_RED + plugin.other + ChatColor.WHITE + ", ";
 		// Plus
-		if (UnlimitedLava.plus) string += "plus: " +  ChatColor.DARK_GREEN + UnlimitedLava.plus + ChatColor.WHITE + ", ";
-		else string += "plus: " +  ChatColor.DARK_RED + UnlimitedLava.plus + ChatColor.WHITE + ", ";
+		if (plugin.plus) string += "plus: " +  ChatColor.DARK_GREEN + plugin.plus + ChatColor.WHITE + ", ";
+		else string += "plus: " +  ChatColor.DARK_RED + plugin.plus + ChatColor.WHITE + ", ";
 		// T
-		if (UnlimitedLava.T) string += "T: " +  ChatColor.DARK_GREEN + UnlimitedLava.T + ChatColor.WHITE + ", ";
-		else string += "T: " +  ChatColor.DARK_RED + UnlimitedLava.T + ChatColor.WHITE + ", ";
+		if (plugin.T) string += "T: " +  ChatColor.DARK_GREEN + plugin.T + ChatColor.WHITE + ", ";
+		else string += "T: " +  ChatColor.DARK_RED + plugin.T + ChatColor.WHITE + ", ";
 		// Ring
-		if (UnlimitedLava.ring) string += "ring: " + ChatColor.DARK_GREEN + UnlimitedLava.ring + ChatColor.WHITE + ", ";
-		else string += "ring: " +  ChatColor.DARK_RED + UnlimitedLava.ring + ChatColor.WHITE + ", ";
+		if (plugin.ring) string += "ring: " + ChatColor.DARK_GREEN + plugin.ring + ChatColor.WHITE + ", ";
+		else string += "ring: " +  ChatColor.DARK_RED + plugin.ring + ChatColor.WHITE + ", ";
 		string += "\n";
 		// LavaFall
-		if (UnlimitedLava.lavaFall) string += "lavaFall: " +  ChatColor.DARK_GREEN + UnlimitedLava.lavaFall + ChatColor.WHITE + ", ";
-		else string += "lavaFall: " +  ChatColor.DARK_RED + UnlimitedLava.lavaFall + ChatColor.WHITE + ", ";
+		if (plugin.lavaFall) string += "lavaFall: " +  ChatColor.DARK_GREEN + plugin.lavaFall + ChatColor.WHITE + ", ";
+		else string += "lavaFall: " +  ChatColor.DARK_RED + plugin.lavaFall + ChatColor.WHITE + ", ";
 		// WaterFall
-		if (UnlimitedLava.waterFall) string += "waterFall: " +  ChatColor.DARK_GREEN + UnlimitedLava.waterFall + ChatColor.WHITE + ", ";
-		else string += "waterFall: " +  ChatColor.DARK_RED + UnlimitedLava.waterFall + ChatColor.WHITE + ", ";
+		if (plugin.waterFall) string += "waterFall: " +  ChatColor.DARK_GREEN + plugin.waterFall + ChatColor.WHITE + ", ";
+		else string += "waterFall: " +  ChatColor.DARK_RED + plugin.waterFall + ChatColor.WHITE + ", ";
 		// MinHeight
 		string += "minHeight: " +  ChatColor.YELLOW + plugin.height + ChatColor.WHITE + ", ";
 		string += "\n";
@@ -258,14 +257,14 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	private void UnlimitedLavaReload(CommandSender sender) {
 		plugin.loadConfigsAgain();		
 		plugin.loadValues();
-		message = plugin.localization.getString("reload");
+		String message = plugin.localization.getString("reload");
 		plugin.message(sender, null, message, null);
 	}
 
 	// See the help with /unlimitedlava help or /ulava help
 	private void UnlimitedLavaHelp(CommandSender sender) {
-		for (i = 1; i <= 9; i++) {
-			message = plugin.localization.getString("help_" + Integer.toString(i));
+		for (int i = 1; i <= 9; i++) {
+			String message = plugin.localization.getString("help_" + Integer.toString(i));
 			plugin.message(sender, null, message, null);
 		}
 	}
@@ -275,7 +274,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources." + value, true);
 		plugin.saveConfig();
 		plugin.loadValues();
-		message = plugin.localization.getString("enable_source");
+		String message = plugin.localization.getString("enable_source");
 		plugin.message(sender, null, message, value);
 	}
 
@@ -291,16 +290,16 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources.water_fall", true);
 		plugin.config.set("sources.lava_fall", true);
 		plugin.saveConfig();
-		UnlimitedLava.three = true;
-		UnlimitedLava.two = true;
-		UnlimitedLava.other = true;
-		UnlimitedLava.plus = true;
-		UnlimitedLava.big = true;
-		UnlimitedLava.T = true;
-		UnlimitedLava.ring = true;
-		UnlimitedLava.waterFall = true;
-		UnlimitedLava.lavaFall = true;
-		message = plugin.localization.getString("enable_all");
+		plugin.three = true;
+		plugin.two = true;
+		plugin.other = true;
+		plugin.plus = true;
+		plugin.big = true;
+		plugin.T = true;
+		plugin.ring = true;
+		plugin.waterFall = true;
+		plugin.lavaFall = true;
+		String message = plugin.localization.getString("enable_all");
 		plugin.message(sender, null, message, null);
 	}
 
@@ -309,8 +308,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("configuration.permissions", true);
 		plugin.saveConfig();
 		plugin.permissions = true;
-		for (i = 1; i <= 2; i++) {
-			message = plugin.localization.getString("enable_permissions_" + Integer.toString(i));
+		for (int i = 1; i <= 2; i++) {
+			String message = plugin.localization.getString("enable_permissions_" + Integer.toString(i));
 			plugin.message(sender, null, message, null);
 		}
 	}
@@ -320,7 +319,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("configuration.messages", true);
 		plugin.saveConfig();
 		plugin.messages = true;
-		message = plugin.localization.getString("enable_messages");
+		String message = plugin.localization.getString("enable_messages");
 		plugin.message(sender, null, message, null);
 	}
 
@@ -329,7 +328,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("configuration.furnace", true);
 		plugin.saveConfig();
 		plugin.furnace = true;
-		message = plugin.localization.getString("enable_furnace");
+		String message = plugin.localization.getString("enable_furnace");
 		plugin.message(sender, null, message, null);
 	}
 
@@ -338,7 +337,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources." + value, false);
 		plugin.saveConfig();
 		plugin.loadValues();
-		message = plugin.localization.getString("disable_source");
+		String message = plugin.localization.getString("disable_source");
 		plugin.message(sender, null, message, value);
 	}
 
@@ -354,16 +353,16 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("sources.water_fall", false);
 		plugin.config.set("sources.lava_fall", false);
 		plugin.saveConfig();
-		UnlimitedLava.three = false;
-		UnlimitedLava.two = false;
-		UnlimitedLava.other = false;
-		UnlimitedLava.plus = false;
-		UnlimitedLava.big = false;
-		UnlimitedLava.T = false;
-		UnlimitedLava.ring = false;
-		UnlimitedLava.waterFall = false;
-		UnlimitedLava.lavaFall = false;
-		message = plugin.localization.getString("disable_all");
+		plugin.three = false;
+		plugin.two = false;
+		plugin.other = false;
+		plugin.plus = false;
+		plugin.big = false;
+		plugin.T = false;
+		plugin.ring = false;
+		plugin.waterFall = false;
+		plugin.lavaFall = false;
+		String message = plugin.localization.getString("disable_all");
 		plugin.message(sender, null, message, null);
 	}
 
@@ -372,8 +371,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("configuration.permissions", false);
 		plugin.saveConfig();
 		plugin.permissions = false;
-		for (i = 1; i <= 2; i++) {
-			message = plugin.localization.getString("disable_permissions_" + Integer.toString(i));
+		for (int i = 1; i <= 2; i++) {
+			String message = plugin.localization.getString("disable_permissions_" + Integer.toString(i));
 			plugin.message(sender, null, message, null);
 		}
 	}
@@ -383,7 +382,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("configuration.messages", false);
 		plugin.saveConfig();
 		plugin.messages = false;
-		message = plugin.localization.getString("disable_messages");
+		String message = plugin.localization.getString("disable_messages");
 		plugin.message(sender, null, message, null);
 	}
 
@@ -392,7 +391,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 		plugin.config.set("configuration.furnace", false);
 		plugin.saveConfig();
 		plugin.furnace = false;
-		message = plugin.localization.getString("disable_furnace");
+		String message = plugin.localization.getString("disable_furnace");
 		plugin.message(sender, null, message, null);
 	}
 }

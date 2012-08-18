@@ -26,9 +26,11 @@ import org.bukkit.event.block.BlockFromToEvent;
 
 public class UnlimitedLavaBlockListener implements Listener {
 
-	public static UnlimitedLava plugin;
-	public UnlimitedLavaBlockListener(UnlimitedLava instance) {
+	private UnlimitedLava plugin;
+	private UnlimitedLavaCheck check;
+	public UnlimitedLavaBlockListener(UnlimitedLava instance, UnlimitedLavaCheck instanceCheck) {
 		plugin = instance;
+		check = instanceCheck;
 	}
 
 	// Unlimited sources
@@ -46,7 +48,7 @@ public class UnlimitedLavaBlockListener implements Listener {
 
 		
 		// Lava fall
-		if (UnlimitedLava.lavaFall) {
+		if (plugin.lavaFall) {
 			// Security check with 0
 			if (sourceBlock.getY() > 0) {
 				if(event.getFace() == BlockFace.DOWN) {
@@ -61,7 +63,7 @@ public class UnlimitedLavaBlockListener implements Listener {
 		}
 
 		// Water fall
-		if (UnlimitedLava.waterFall) {
+		if (plugin.waterFall) {
 			// Security check with 0
 			if (sourceBlock.getY() > 0) {
 				if(event.getFace() == BlockFace.DOWN) {
@@ -84,7 +86,7 @@ public class UnlimitedLavaBlockListener implements Listener {
 				// Full block (0x0) and not falling (0x8)
 				if (targetBlock.getData() != 0x0 && targetBlock.getData() != 0x8) {
 					// Call the "SpreadCheck" if valid refill the block
-					if (UnlimitedLavaCheck.checkLavaSpreadValidity(targetBlock))
+					if (check.checkLavaSpreadValidity(targetBlock))
 						targetBlock.setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 				}
 			}

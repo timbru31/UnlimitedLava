@@ -32,21 +32,17 @@ import org.bukkit.entity.Player;
  */
 
 public class UnlimitedLava extends JavaPlugin {
-	public static final Logger log = Logger.getLogger("Minecraft");
-	private final UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this);
-	private final UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this);
-	private final UnlimitedLavaInventoryListener inventoryListener = new UnlimitedLavaInventoryListener(this);
-	public static boolean three, two, other, big, plus, T, ring, lavaFall, waterFall;
-	public boolean messages = true;
-	public boolean permissions = true;
-	public boolean furnace;
+	public Logger log = Logger.getLogger("Minecraft");
+	private UnlimitedLavaBlockListener blockListener;
+	private UnlimitedLavaPlayerListener playerListener;
+	private UnlimitedLavaInventoryListener inventoryListener;
+	public boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace;
 	public int height = 60;
 	public List<String> enabledWorlds = new ArrayList<String>();
-	public FileConfiguration config;
-	public FileConfiguration localization;
-	public File configFile;
-	public File localizationFile;
+	public FileConfiguration config, localization;
+	public File configFile, localizationFile;
 	private UnlimitedLavaCommands executor;
+	private UnlimitedLavaCheck unlimitedLavaCheck;
 	
 	// Shutdown
 	public void onDisable() {
@@ -57,6 +53,10 @@ public class UnlimitedLava extends JavaPlugin {
 
 	// Start
 	public void onEnable() {
+		unlimitedLavaCheck = new UnlimitedLavaCheck(this);
+		blockListener = new UnlimitedLavaBlockListener(this, unlimitedLavaCheck);
+		playerListener = new UnlimitedLavaPlayerListener(this, unlimitedLavaCheck);
+		inventoryListener = new UnlimitedLavaInventoryListener(this);
 		// Events
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(blockListener, this);

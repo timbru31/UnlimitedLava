@@ -26,7 +26,7 @@ import org.bukkit.inventory.ItemStack;
  */
 
 public class UnlimitedLavaInventoryListener implements Listener {
-	public static UnlimitedLava plugin;
+	private UnlimitedLava plugin;
 	public UnlimitedLavaInventoryListener(UnlimitedLava instance) {
 		plugin = instance;
 	}

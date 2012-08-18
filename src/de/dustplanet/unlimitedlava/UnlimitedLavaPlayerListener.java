@@ -26,9 +26,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class UnlimitedLavaPlayerListener implements Listener {
 
-	public static UnlimitedLava plugin;
-	public UnlimitedLavaPlayerListener(UnlimitedLava instance) {
+	private UnlimitedLava plugin;
+	private UnlimitedLavaCheck check;
+	public UnlimitedLavaPlayerListener(UnlimitedLava instance, UnlimitedLavaCheck instanceCheck) {
 		plugin = instance;
+		check = instanceCheck;
 	}
 
 	@EventHandler
@@ -42,7 +44,7 @@ public class UnlimitedLavaPlayerListener implements Listener {
 			}
 			// If the player hasn't got the permissions, cancel the event and give an empty bucket back!
 			if (!player.hasPermission("unlimitedlava.use")) {
-				if (UnlimitedLavaCheck.checkLavaSpreadValidity(clicked))
+				if (check.checkLavaSpreadValidity(clicked))
 					giveBucketBack(player, event);
 			}
 		}

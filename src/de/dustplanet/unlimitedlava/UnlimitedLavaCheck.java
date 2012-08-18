@@ -22,13 +22,12 @@ import org.bukkit.block.BlockFace;
  */
 
 public class UnlimitedLavaCheck {
-
-	public static UnlimitedLava plugin;
+	public UnlimitedLava plugin;
 	public UnlimitedLavaCheck(UnlimitedLava instance) {
 		plugin = instance;
 	}
 
-	public static boolean checkLavaSpreadValidity(Block block) {
+	public boolean checkLavaSpreadValidity(Block block) {
 		/*
 		 * NEW* Consolidated check code. Returns true if block is fillable, false if block is not fillable.
 		 * Our previous methods read several blocks multiple times and the test logic is duplicated in two places.  This processing time could be better spent elsewhere.
@@ -98,7 +97,7 @@ public class UnlimitedLavaCheck {
 		// Final Checks
 		// Ring, 7 full lava blocks around a solid. Block to be filled must have 2 bordering solids.
 		// The ring test it is evaluated only if necessary because it is a huge test and not reusable.
-		if (UnlimitedLava.ring) {
+		if (plugin.ring) {
 			for(int i = 0; i <= 7; i++) {
 				rBlocks = 0;
 				for(int r = 0; r <= 6; r++) {
@@ -112,23 +111,23 @@ public class UnlimitedLavaCheck {
 			}
 		}
 		// Big, fill any block in the middle of a lake.  Minimum requirement: 4 full faces, one full corner, and at least 4 lava blocks of any amount contiguous with the full corner.
-		else if (UnlimitedLava.big && faces == 4 && lake) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
+		else if (plugin.big && faces == 4 && lake) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
 			fill = true;
 		// Three, a 3x3 pool. Minimum Requirement: 4 full corners (includes faces)
-		else if (UnlimitedLava.three && borders == 0 && corners == 4 && faces == 4)
+		else if (plugin.three && borders == 0 && corners == 4 && faces == 4)
 			fill = true;
 		// Two. a 2x2 pool. Conditional requirements depending on status of Big allows larger lava pools to be filled of other options are disabled.
-		else if (UnlimitedLava.two && borders == 2 && corners == 1 && faces == 2)
+		else if (plugin.two && borders == 2 && corners == 1 && faces == 2)
 			fill = true;
 		// Plus, fills the center block of a + shape.  Can be free standing.
 		// Diagonal borders are no longer tested. Corners will invalidate valid fills.  Do not use either of these variables for Plus.
-		else if (UnlimitedLava.plus && borders == 0 && corners == 0 && faces == 4)
+		else if (plugin.plus && borders == 0 && corners == 0 && faces == 4)
 			fill = true;
 		// Other, a block will be filled from any 2 faces of full lava but only if it is bordered by 2 solid blocks.
-		else if (UnlimitedLava.other && borders == 2 && corners == 0 && faces == 2)
+		else if (plugin.other && borders == 2 && corners == 0 && faces == 2)
 			fill = true;
 		// T Shape, the "T" block from Tetris. Requires 3 faces, 1 border. Conditional 0 corners if Big is enabled to prevent shore filling.
-		else if (UnlimitedLava.T && borders == 1 && corners == 0 && faces == 3)
+		else if (plugin.T && borders == 1 && corners == 0 && faces == 3)
 			fill = true;
 		return fill;		
 	}
