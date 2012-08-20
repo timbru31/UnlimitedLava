@@ -94,12 +94,13 @@ public class UnlimitedLavaCheck {
 				if (lBlocks >= 4) lake = true;
 			}
 		}
+		plugin.log.info(borders + " " + corners + " " + faces + " " + lake + " " + cBlocks + " " + lBlocks);
 		// Final Checks
 		// Big, fill any block in the middle of a lake.  Minimum requirement: 4 full faces, one full corner, and at least 4 lava blocks of any amount contiguous with the full corner.
-		if (plugin.big && faces == 4 && lake) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
+		if (plugin.big && faces == 4 && lBlocks == 2) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
 			fill = true;
 		// Three, a 3x3 pool. Minimum Requirement: 4 full corners (includes faces)
-		else if (plugin.three && borders == 0 && corners == 4 && faces == 4)
+		else if (plugin.three && borders == 0 && corners == 4 && faces == 4 && !lake && lBlocks == 0)
 			fill = true;
 		// Two. a 2x2 pool. Conditional requirements depending on status of Big allows larger lava pools to be filled of other options are disabled.
 		else if (plugin.two && borders == 2 && corners == 1 && faces == 2)
