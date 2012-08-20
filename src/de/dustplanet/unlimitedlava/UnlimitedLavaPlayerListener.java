@@ -25,7 +25,6 @@ import org.bukkit.inventory.ItemStack;
  */
 
 public class UnlimitedLavaPlayerListener implements Listener {
-
 	private UnlimitedLava plugin;
 	private UnlimitedLavaCheck check;
 	public UnlimitedLavaPlayerListener(UnlimitedLava instance, UnlimitedLavaCheck instanceCheck) {

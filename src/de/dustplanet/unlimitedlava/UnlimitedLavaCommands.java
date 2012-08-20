@@ -25,7 +25,6 @@ import org.bukkit.command.CommandSender;
  */
 
 public class UnlimitedLavaCommands implements CommandExecutor {
-
 	private UnlimitedLava plugin;
 	public UnlimitedLavaCommands(UnlimitedLava instance) {
 		plugin = instance;

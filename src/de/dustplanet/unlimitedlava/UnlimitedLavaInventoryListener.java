@@ -30,7 +30,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
 	public UnlimitedLavaInventoryListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
-	private Material item = null;
+	private Material item = Material.AIR;
 
 	@EventHandler
 	public void onFurnaceBurn (FurnaceBurnEvent event) {

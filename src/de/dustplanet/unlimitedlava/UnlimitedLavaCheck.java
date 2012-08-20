@@ -22,14 +22,14 @@ import org.bukkit.block.BlockFace;
  */
 
 public class UnlimitedLavaCheck {
-	public UnlimitedLava plugin;
+	private UnlimitedLava plugin;
 	public UnlimitedLavaCheck(UnlimitedLava instance) {
 		plugin = instance;
 	}
 
 	public boolean checkLavaSpreadValidity(Block block) {
 		/*
-		 * NEW* Consolidated check code. Returns true if block is fillable, false if block is not fillable.
+		 * NEW Consolidated check code. Returns true if block is fillable, false if block is not fillable.
 		 * Our previous methods read several blocks multiple times and the test logic is duplicated in two places.  This processing time could be better spent elsewhere.
 		 * Previous code was duplicated between UnlimitedLavaBlockListener and UnlimitedLavaPlayerListener.  Consolidation of these tests allows changes to be made in one place.
 		 * checkLavaSpreadValidity is intended to reduce redundancy and improve efficiency over our previous code. 
@@ -95,23 +95,8 @@ public class UnlimitedLavaCheck {
 			}
 		}
 		// Final Checks
-		// Ring, 7 full lava blocks around a solid. Block to be filled must have 2 bordering solids.
-		// The ring test it is evaluated only if necessary because it is a huge test and not reusable.
-		if (plugin.ring) {
-			for(int i = 0; i <= 7; i++) {
-				rBlocks = 0;
-				for(int r = 0; r <= 6; r++) {
-					if ((((blockMaterial[rBlock[i][r]] == Material.LAVA) || (blockMaterial[rBlock[i][r]] == Material.STATIONARY_LAVA)) && (blockData[rBlock[i][r]] == 0x0)))
-						rBlocks++;
-				}
-				if (faces == 2 && borders == 2 && rBlocks == 7) {
-					fill = true;
-					break;
-				}
-			}
-		}
 		// Big, fill any block in the middle of a lake.  Minimum requirement: 4 full faces, one full corner, and at least 4 lava blocks of any amount contiguous with the full corner.
-		else if (plugin.big && faces == 4 && lake) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
+		if (plugin.big && faces == 4 && lake) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
 			fill = true;
 		// Three, a 3x3 pool. Minimum Requirement: 4 full corners (includes faces)
 		else if (plugin.three && borders == 0 && corners == 4 && faces == 4)
@@ -129,6 +114,21 @@ public class UnlimitedLavaCheck {
 		// T Shape, the "T" block from Tetris. Requires 3 faces, 1 border. Conditional 0 corners if Big is enabled to prevent shore filling.
 		else if (plugin.T && borders == 1 && corners == 0 && faces == 3)
 			fill = true;
+		// Ring, 7 full lava blocks around a solid. Block to be filled must have 2 bordering solids.
+		// The ring test it is evaluated only if necessary because it is a huge test and not reusable.
+		if (plugin.ring) {
+			for(int i = 0; i <= 7; i++) {
+				rBlocks = 0;
+				for(int r = 0; r <= 6; r++) {
+					if ((((blockMaterial[rBlock[i][r]] == Material.LAVA) || (blockMaterial[rBlock[i][r]] == Material.STATIONARY_LAVA)) && (blockData[rBlock[i][r]] == 0x0)))
+						rBlocks++;
+				}
+				if (faces == 2 && borders == 2 && rBlocks == 7) {
+					fill = true;
+					break;
+				}
+			}
+		}
 		return fill;		
 	}
 }

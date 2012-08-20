@@ -1,6 +1,7 @@
 This is the README of UnlimitedLava
 Thanks to loganwm for helping me :)!
 Thanks to ferrybig for the awesome fall code!
+Thanks for the new check code, Xastabus!
 Thanks for using!
 For support visit the old forum thread: http://bit.ly/n1Wex2
 or the new dev.bukkit.org page: http://bit.ly/pCj7v3
@@ -12,11 +13,16 @@ Standard config:
 
 # For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3
 configuration:
+  # Should permissions be enabled or not?
   permissions: true
+  # Should a message displayed, if a player without the permission picks up lava?
   messages: true
+  # Enabled the custom furnace, configure the output of a lava bucket below
   furnace: true
+  # At which height (block - not line of sight!) is the lava unlimited
   height: 60
 sources:
+  # Different sources -> See the schematics below
   three: true
   two: true
   other: false
@@ -27,6 +33,7 @@ sources:
   T: true
   ring: true
 furnace:
+  # What item should appear in the furnace if you place a lava bucket as the fuel?
   item: BUCKET
 
 
