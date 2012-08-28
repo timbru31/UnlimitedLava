@@ -47,8 +47,6 @@ public class UnlimitedLava extends JavaPlugin {
 	// Shutdown
 	public void onDisable() {
 		enabledWorlds.clear();
-		PluginDescriptionFile pdfFile = this.getDescription();
-		log.info(pdfFile.getName() + " " + pdfFile.getVersion()	+ " has been disabled!");
 	}
 
 	// Start
@@ -87,10 +85,6 @@ public class UnlimitedLava extends JavaPlugin {
 		//Refer to UnlimitedLavaCommands
 		executor = new UnlimitedLavaCommands(this);
 		getCommand("unlimitedlava").setExecutor(executor);
-
-		// Message
-		PluginDescriptionFile pdfFile = this.getDescription();
-		log.info(pdfFile.getName() + " " + pdfFile.getVersion()	+ " is enabled!");
 		
 		// Stats
 		try {
