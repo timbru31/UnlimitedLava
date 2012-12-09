@@ -27,10 +27,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class UnlimitedLavaInventoryListener implements Listener {
 	private UnlimitedLava plugin;
+	private Material item = Material.AIR;
+	
 	public UnlimitedLavaInventoryListener(UnlimitedLava instance) {
 		plugin = instance;
 	}
-	private Material item = Material.AIR;
 
 	@EventHandler
 	public void onFurnaceBurn (FurnaceBurnEvent event) {

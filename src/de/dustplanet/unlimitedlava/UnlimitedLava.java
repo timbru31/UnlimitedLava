@@ -3,8 +3,6 @@ package de.dustplanet.unlimitedlava;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
-
 import org.bukkit.World;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -32,11 +30,10 @@ import org.bukkit.entity.Player;
  */
 
 public class UnlimitedLava extends JavaPlugin {
-	public Logger log = Logger.getLogger("Minecraft");
 	private UnlimitedLavaBlockListener blockListener;
 	private UnlimitedLavaPlayerListener playerListener;
 	private UnlimitedLavaInventoryListener inventoryListener;
-	public boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace;
+	public boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace, debug;
 	public int height = 60;
 	public List<String> enabledWorlds = new ArrayList<String>();
 	public FileConfiguration config, localization;
@@ -67,7 +64,7 @@ public class UnlimitedLava extends JavaPlugin {
 	        configFile.getParentFile().mkdirs();
 	        copy(getResource("config.yml"), configFile);
 	    }
-		config = this.getConfig();
+		config = getConfig();
 		loadConfig();
 		loadValues();
 		
@@ -90,7 +87,8 @@ public class UnlimitedLava extends JavaPlugin {
 		try {
 			Metrics metrics = new Metrics(this);
 			metrics.start();
-		} catch (IOException e) {}
+		}
+		catch (IOException e) {}
 	}
 
 	// Reloads the config file, via command /unlimitedlava reload or /ulava reload and at the start!
@@ -110,12 +108,13 @@ public class UnlimitedLava extends JavaPlugin {
 		config.addDefault("sources.lava_fall", true);
 		config.addDefault("sources.water_fall", false);
 		config.addDefault("furnace.item", "BUCKET");
-		List<World> temp = getServer().getWorlds();
-		List<String> tempList = new ArrayList<String>();
-		for (World w : temp) {
-			tempList.add(w.getName());
+		List<World> worlds = getServer().getWorlds();
+		List<String> worldNames = new ArrayList<String>();
+		for (World w : worlds) {
+			worldNames.add(w.getName());
 		}
-		config.addDefault("enabled_worlds", tempList);
+		config.addDefault("enabled_worlds", worldNames);
+		config.addDefault("debug", false);
 		config.options().copyDefaults(true);
 		saveConfig();
 	}
@@ -136,6 +135,7 @@ public class UnlimitedLava extends JavaPlugin {
 		furnace = config.getBoolean("configuration.furnace");
 		height = config.getInt("configuration.height");
 		enabledWorlds = config.getStringList("enabled_worlds");
+		debug = config.getBoolean("debug");
 	}
 	
 	// Loads the localization
@@ -173,7 +173,7 @@ public class UnlimitedLava extends JavaPlugin {
 		try {
 			localization.save(localizationFile);
 		} catch (IOException e) {
-			log.warning("UnlimitedLava failed to save the localization! Please report this! (I/O)");
+			getLogger().warning("Failed to save the localization! Please report this! (I/O)");
 		}
 	}
 	
@@ -185,11 +185,11 @@ public class UnlimitedLava extends JavaPlugin {
 			localization.load(localizationFile);
 			saveLocalization();
 		} catch (FileNotFoundException e) {
-			log.warning("UnlimitedLava failed to save the localization! Please report this! (FileNotFound)");
+			getLogger().warning("Failed to save the localization! Please report this! (FileNotFound)");
 		} catch (IOException e) {
-			log.warning("UnlimitedLava failed to save the localization! Please report this! (I/O)");
+			getLogger().warning("Failed to save the localization! Please report this! (I/O)");
 		} catch (InvalidConfigurationException e) {
-			log.warning("UnlimitedLava failed to save the localization! Please report this! (InvalidConfiguration)");
+			getLogger().warning("Failed to save the localization! Please report this! (InvalidConfiguration)");
 		}
 	}
 	
@@ -221,6 +221,6 @@ public class UnlimitedLava extends JavaPlugin {
 				.replaceAll("%value", value);
 		if (player != null)	player.sendMessage(message);
 		else if (sender != null) sender.sendMessage(message);
-		else log.info("[UnlimitedLava] Player and sender are null! Please report this");
+		else getLogger().info("Player and sender are null! Please report this");
 	}
 }

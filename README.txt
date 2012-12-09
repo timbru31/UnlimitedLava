@@ -35,6 +35,7 @@ sources:
 furnace:
   # What item should appear in the furnace if you place a lava bucket as the fuel?
   item: BUCKET
+debug: false
 
 
 Sources:

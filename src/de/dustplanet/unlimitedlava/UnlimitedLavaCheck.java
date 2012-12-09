@@ -94,10 +94,10 @@ public class UnlimitedLavaCheck {
 				if (lBlocks >= 4) lake = true;
 			}
 		}
-		plugin.log.info(borders + " " + corners + " " + faces + " " + lake + " " + cBlocks + " " + lBlocks);
+		if (plugin.debug) plugin.getLogger().info("Borders: " + borders + ", corners: " + corners + ", faces: " + faces + ", lake: " + lake + ", cBlocks: " + cBlocks + ", lBlocks: " + lBlocks);
 		// Final Checks
 		// Big, fill any block in the middle of a lake.  Minimum requirement: 4 full faces, one full corner, and at least 4 lava blocks of any amount contiguous with the full corner.
-		if (plugin.big && faces == 4 && lBlocks == 2) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
+		if (plugin.big && faces == 4 && (lBlocks == 0 || lBlocks == 2 || lBlocks == 3 || lBlocks == 4 || lBlocks == 5)) // borders and corners are not used here because it they would be redundant and could invalidate a valid fill.
 			fill = true;
 		// Three, a 3x3 pool. Minimum Requirement: 4 full corners (includes faces)
 		else if (plugin.three && borders == 0 && corners == 4 && faces == 4 && !lake && lBlocks == 0)
@@ -124,7 +124,8 @@ public class UnlimitedLavaCheck {
 					if ((((blockMaterial[rBlock[i][r]] == Material.LAVA) || (blockMaterial[rBlock[i][r]] == Material.STATIONARY_LAVA)) && (blockData[rBlock[i][r]] == 0x0)))
 						rBlocks++;
 				}
-				if (faces == 2 && borders == 2 && rBlocks == 7) {
+				if (plugin.debug) plugin.getLogger().info("rBlocks: " + rBlocks);
+				if (faces == 2 && borders == 2 && rBlocks == 7 && corners == 0) {
 					fill = true;
 					break;
 				}

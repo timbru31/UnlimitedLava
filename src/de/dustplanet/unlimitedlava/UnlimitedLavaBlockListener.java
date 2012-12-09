@@ -25,9 +25,9 @@ import org.bukkit.event.block.BlockFromToEvent;
  */
 
 public class UnlimitedLavaBlockListener implements Listener {
-
 	private UnlimitedLava plugin;
 	private UnlimitedLavaCheck check;
+	
 	public UnlimitedLavaBlockListener(UnlimitedLava instance, UnlimitedLavaCheck instanceCheck) {
 		plugin = instance;
 		check = instanceCheck;
@@ -53,7 +53,7 @@ public class UnlimitedLavaBlockListener implements Listener {
 			if (sourceBlock.getY() > 0) {
 				if(event.getFace() == BlockFace.DOWN) {
 					if (event.getToBlock().getRelative(BlockFace.UP).getType() == Material.LAVA || event.getToBlock().getRelative(BlockFace.UP).getType() == Material.STATIONARY_LAVA) {
-						if( event.getToBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+						if (event.getToBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
 							event.getToBlock().setTypeIdAndData(Material.LAVA.getId(), (byte) 0x0, true);
 							event.setCancelled(true);
 						}

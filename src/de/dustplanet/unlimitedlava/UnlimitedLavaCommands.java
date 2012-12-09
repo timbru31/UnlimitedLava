@@ -26,10 +26,11 @@ import org.bukkit.command.CommandSender;
 
 public class UnlimitedLavaCommands implements CommandExecutor {
 	private UnlimitedLava plugin;
+	private String[] values = {"three", "two", "other", "big", "lava_fall", "water_fall", "plus", "T", "ring"};
+	
 	public UnlimitedLavaCommands(UnlimitedLava instance) {
 		plugin = instance;
 	}
-	private String[] values = {"three", "two", "other", "big", "lava_fall", "water_fall", "plus", "T", "ring"};
 
 	// Commands... First check if config value permissions is true
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
