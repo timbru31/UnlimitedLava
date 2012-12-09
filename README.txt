@@ -120,8 +120,7 @@ Falls:
 You can get infinite lava or water from a fall. Just let it flow into a hole an pick it up!
 
 Commands & Permissions (if no permissions system is detected, only OPs are able to use the commands!)
-Only bukkit's permissions system is supported! If a command is typed wrong, 
-it will return, that you should type /unlimitedlava help or /ulava help for more information!
+Only bukkit's permissions system is supported!
 
 Node: unlimitedlava.use
 Description: Ability to use the unlimited blocks

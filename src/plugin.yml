@@ -10,7 +10,7 @@ commands:
   unlimitedlava:
     description: Handles all the UnlimitedLava commands
     usage: /unlimitedlava help or /ulava help - to see a list of available commands
-    aliases: [ulava, ulaba, unlimitedlaba]
+    aliases: [ulava, ulaba, unlimitedlaba, ul]
 permissions:
   unlimitedlava.*:
     description: Gives access to all UnlimitedLava permissions
