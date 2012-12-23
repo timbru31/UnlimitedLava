@@ -1,6 +1,6 @@
 name: UnlimitedLava
 main: de.dustplanet.unlimitedlava.UnlimitedLava
-version: 1.9
+version: ${project.version}
 author: xGhOsTkiLLeRx
 authors: [Edward Hand, Xastabus]
 description: Ability to enjoy unlimited lava sources

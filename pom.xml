@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.dustplanet</groupId>
 	<artifactId>UnlimitedLava</artifactId>
-	<version>1.9-SNAPSHOT</version>
+	<version>1.9.1-SNAPSHOT</version>
 	<name>UnlimitedLava</name>
 	<description>Enjoy infinite lava sources</description>
 	<url>http://dev.bukkit.org/server-mods/unlimited-lava/</url>
