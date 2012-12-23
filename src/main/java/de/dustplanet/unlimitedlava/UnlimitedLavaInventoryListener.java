@@ -28,7 +28,7 @@ import org.bukkit.inventory.ItemStack;
 public class UnlimitedLavaInventoryListener implements Listener {
 	private UnlimitedLava plugin;
 	private Material item = Material.AIR;
-	
+
 	public UnlimitedLavaInventoryListener(UnlimitedLava instance) {
 		plugin = instance;
 	}

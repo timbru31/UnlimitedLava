@@ -27,7 +27,7 @@ import org.bukkit.inventory.ItemStack;
 public class UnlimitedLavaPlayerListener implements Listener {
 	private UnlimitedLava plugin;
 	private UnlimitedLavaCheck check;
-	
+
 	public UnlimitedLavaPlayerListener(UnlimitedLava instance, UnlimitedLavaCheck instanceCheck) {
 		plugin = instance;
 		check = instanceCheck;
@@ -49,7 +49,7 @@ public class UnlimitedLavaPlayerListener implements Listener {
 			}
 		}
 	}
-	
+
 	// Gives a bucket back
 	@SuppressWarnings("deprecation")
 	private void giveBucketBack(Player player, PlayerBucketFillEvent event) {

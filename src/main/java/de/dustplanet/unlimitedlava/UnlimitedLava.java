@@ -40,7 +40,7 @@ public class UnlimitedLava extends JavaPlugin {
 	public File configFile, localizationFile;
 	private UnlimitedLavaCommands executor;
 	private UnlimitedLavaCheck unlimitedLavaCheck;
-	
+
 	// Shutdown
 	public void onDisable() {
 		enabledWorlds.clear();
@@ -67,7 +67,7 @@ public class UnlimitedLava extends JavaPlugin {
 		config = getConfig();
 		loadConfig();
 		loadValues();
-		
+
 		// Localization
 		localizationFile = new File(getDataFolder(), "localization.yml");
 		if(!localizationFile.exists()){
@@ -78,11 +78,11 @@ public class UnlimitedLava extends JavaPlugin {
 		localization = YamlConfiguration.loadConfiguration(localizationFile);
 		loadLocalization();
 
-		
+
 		//Refer to UnlimitedLavaCommands
 		executor = new UnlimitedLavaCommands(this);
 		getCommand("unlimitedlava").setExecutor(executor);
-		
+
 		// Stats
 		try {
 			Metrics metrics = new Metrics(this);
@@ -118,7 +118,7 @@ public class UnlimitedLava extends JavaPlugin {
 		config.options().copyDefaults(true);
 		saveConfig();
 	}
-	
+
 	// Load the values into memory
 	public void loadValues() {
 		three = config.getBoolean("sources.three");
@@ -137,7 +137,7 @@ public class UnlimitedLava extends JavaPlugin {
 		enabledWorlds = config.getStringList("enabled_worlds");
 		debug = config.getBoolean("debug");
 	}
-	
+
 	// Loads the localization
 	public void loadLocalization() {
 		localization.options().header("The underscores are used for the different lines!");
@@ -176,7 +176,7 @@ public class UnlimitedLava extends JavaPlugin {
 			getLogger().warning("Failed to save the localization! Please report this! (I/O)");
 		}
 	}
-	
+
 	// Reloads the config via command /unlimitedlava reload or /ulava reload
 	public void loadConfigsAgain() {
 		try {
@@ -192,7 +192,7 @@ public class UnlimitedLava extends JavaPlugin {
 			getLogger().warning("Failed to save the localization! Please report this! (InvalidConfiguration)");
 		}
 	}
-	
+
 	// If no config is found, copy the default one!
 	private void copy(InputStream in, File file) {
 		try {
@@ -210,7 +210,7 @@ public class UnlimitedLava extends JavaPlugin {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// Message the sender or player
 	public void message(CommandSender sender, Player player, String message, String value) {
 		PluginDescriptionFile pdfFile = this.getDescription();

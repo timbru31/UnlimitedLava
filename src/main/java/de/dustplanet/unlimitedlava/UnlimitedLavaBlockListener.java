@@ -27,7 +27,7 @@ import org.bukkit.event.block.BlockFromToEvent;
 public class UnlimitedLavaBlockListener implements Listener {
 	private UnlimitedLava plugin;
 	private UnlimitedLavaCheck check;
-	
+
 	public UnlimitedLavaBlockListener(UnlimitedLava instance, UnlimitedLavaCheck instanceCheck) {
 		plugin = instance;
 		check = instanceCheck;
@@ -39,14 +39,14 @@ public class UnlimitedLavaBlockListener implements Listener {
 		// Refer to http://www.minecraftwiki.net/wiki/Data_values#Water_and_Lava
 		Block sourceBlock = event.getBlock();
 		Block targetBlock = event.getToBlock();
-		
+
 		// Is the world on the list?
 		if (!plugin.enabledWorlds.contains(sourceBlock.getWorld().getName())) return;
 
 		// Only if the height is greater or the same
 		if (sourceBlock.getY() <= plugin.height) return;
 
-		
+
 		// Lava fall
 		if (plugin.lavaFall) {
 			// Security check with 0
