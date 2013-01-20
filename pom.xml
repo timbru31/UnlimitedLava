@@ -7,6 +7,9 @@
 	<name>UnlimitedLava</name>
 	<description>Enjoy infinite lava sources</description>
 	<url>http://dev.bukkit.org/server-mods/unlimited-lava/</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<repositories>
 		<repository>
 			<id>bukkit-repo</id>
