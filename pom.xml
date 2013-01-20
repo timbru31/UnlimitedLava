@@ -17,7 +17,7 @@
 		</repository>
 	</repositories>
 	<build>
-		<defaultGoal>clean compile</defaultGoal>
+		<defaultGoal>clean compile package</defaultGoal>
 		<sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
