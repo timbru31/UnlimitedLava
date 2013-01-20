@@ -62,8 +62,7 @@ public class UnlimitedLava extends JavaPlugin {
 		// Config
 		configFile = new File(getDataFolder(), "config.yml");
 		if (!configFile.exists()) {
-	        configFile.getParentFile().mkdirs();
-	        copy(getResource("config.yml"), configFile);
+	        if (configFile.getParentFile().mkdirs()) copy(getResource("config.yml"), configFile);
 	    }
 		config = getConfig();
 		loadConfig();
@@ -208,9 +207,9 @@ public class UnlimitedLava extends JavaPlugin {
 			out.close();
 			in.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			getLogger().warning("Failed to copy the default config! (FileNotFound)");
 		} catch (IOException e) {
-			e.printStackTrace();
+			getLogger().warning("Failed to copy the default config! (I/O)");
 		}
 	}
 
