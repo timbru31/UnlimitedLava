@@ -11,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.*;
 import org.bukkit.entity.Player;
+import org.mcstats.Metrics;
 
 /**
  * UnlimitedLava for CraftBukkit/Bukkit
@@ -85,10 +86,12 @@ public class UnlimitedLava extends JavaPlugin {
 
 		// Stats
 		try {
-			BukkitMetrics metrics = new BukkitMetrics(this);
+			Metrics metrics = new Metrics(this);
 			metrics.start();
 		}
-		catch (IOException e) {}
+		catch (IOException e) {
+			getLogger().warning("Could not start Metrics!");
+		}
 	}
 
 	// Reloads the config file, via command /unlimitedlava reload or /ulava reload and at the start!
