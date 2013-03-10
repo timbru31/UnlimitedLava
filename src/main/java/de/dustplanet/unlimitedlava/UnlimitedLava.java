@@ -62,9 +62,15 @@ public class UnlimitedLava extends JavaPlugin {
 
 	// Config
 	configFile = new File(getDataFolder(), "config.yml");
-	if (!configFile.exists()) {
-	    if (configFile.getParentFile().mkdirs())
-		copy(getResource("config.yml"), configFile);
+	// One file and the folder not existent
+	if (!configFile.exists() && !getDataFolder().exists()) {
+	    // Break if no folder can be created!
+	    if (!getDataFolder().mkdirs()) {
+		getLogger().severe("The config folder could NOT be created, make sure it's writable!");
+		getLogger().severe("Disabling now!");
+		setEnabled(false);
+		return;
+	    }
 	}
 	config = getConfig();
 	loadConfig();
@@ -73,7 +79,6 @@ public class UnlimitedLava extends JavaPlugin {
 	// Localization
 	localizationFile = new File(getDataFolder(), "localization.yml");
 	if (!localizationFile.exists()) {
-	    localizationFile.getParentFile().mkdirs();
 	    copy(getResource("localization.yml"), localizationFile);
 	}
 	// Try to load
@@ -198,20 +203,36 @@ public class UnlimitedLava extends JavaPlugin {
 	}
     }
 
-    // If no config is found, copy the default one!
+    // If no config is found, copy the default one(s)!
     private void copy(InputStream in, File file) {
+	OutputStream out = null;
 	try {
-	    OutputStream out = new FileOutputStream(file);
+	    out = new FileOutputStream(file);
 	    byte[] buf = new byte[1024];
 	    int len;
 	    while ((len = in.read(buf)) > 0) {
 		out.write(buf, 0, len);
 	    }
-	    out.close();
-	    in.close();
 	} catch (IOException e) {
 	    getLogger().warning("Failed to copy the default config! (I/O)");
 	    e.printStackTrace();
+	} finally {
+	    try {
+		if (out != null) {
+		    out.close();
+		}
+	    } catch (IOException e) {
+		getLogger().warning("Failed to close the streams! (I/O -> Output)");
+		e.printStackTrace();
+	    }
+	    try {
+		if (in != null) {
+		    in.close();
+		}
+	    } catch (IOException e) {
+		getLogger().warning("Failed to close the streams! (I/O -> Input)");
+		e.printStackTrace();
+	    }
 	}
     }
 
