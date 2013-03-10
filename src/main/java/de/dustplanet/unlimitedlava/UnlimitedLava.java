@@ -237,8 +237,7 @@ public class UnlimitedLava extends JavaPlugin {
     }
 
     // Message the sender or player
-    public void message(CommandSender sender, Player player, String message,
-	    String value) {
+    public void message(CommandSender sender, Player player, String message, String value) {
 	PluginDescriptionFile pdfFile = this.getDescription();
 	message = message
 		.replaceAll("&([0-9a-fk-or])", "\u00A7$1")

@@ -5,7 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBucketFillEvent;
-import org.bukkit.inventory.ItemStack;
 
 /**
  * UnlimitedLavaPlayerListener
@@ -45,24 +44,14 @@ public class UnlimitedLavaPlayerListener implements Listener {
 	    }
 	    // If the player hasn't got the permissions, cancel the event and
 	    // give an empty bucket back!
-	    if (!player.hasPermission("unlimitedlava.use")) {
-		if (check.checkLavaSpreadValidity(clicked))
-		    giveBucketBack(player, event);
+	    if (!player.hasPermission("unlimitedlava.use") && check.checkLavaSpreadValidity(clicked)) {
+		event.setCancelled(true);
+		// Message if wanted
+		if (plugin.messages) {
+		    String message = plugin.localization.getString("permission_denied");
+		    plugin.message(null, player, message, null);
+		}
 	    }
-	}
-    }
-
-    // Gives a bucket back
-    @SuppressWarnings("deprecation")
-    private void giveBucketBack(Player player, PlayerBucketFillEvent event) {
-	event.setCancelled(true);
-	ItemStack bucket = new ItemStack(325, 1);
-	player.setItemInHand(bucket);
-	player.updateInventory();
-	// Message if wanted
-	if (plugin.messages) {
-	    String message = plugin.localization.getString("permission_denied");
-	    plugin.message(null, player, message, null);
 	}
     }
 }
