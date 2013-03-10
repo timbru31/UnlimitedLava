@@ -38,7 +38,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	// reload
 	if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 	    if (sender.hasPermission("unlimitedlava.reload") || !plugin.permissions) {
-		UnlimitedLavaReload(sender);
+		unlimitedLavaReload(sender);
 		return true;
 	    } else {
 		message = plugin.localization.getString("permission_denied");
@@ -49,7 +49,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	// status
 	else if (args.length > 0 && args[0].equalsIgnoreCase("status")) {
 	    if (sender.hasPermission("unlimitedlava.status") || !plugin.permissions) {
-		UnlimitedLavaStatus(sender);
+		unlimitedLavaStatus(sender);
 		return true;
 	    } else {
 		message = plugin.localization.getString("permission_denied");
@@ -60,7 +60,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	// help
 	else if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
 	    if (sender.hasPermission("unlimitedlava.help") || !plugin.permissions) {
-		UnlimitedLavaHelp(sender);
+		unlimitedLavaHelp(sender);
 		return true;
 	    } else {
 		message = plugin.localization.getString("permission_denied");
@@ -73,7 +73,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Enable all
 	    if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
 		if (sender.hasPermission("unlimitedlava.enable.all") || !plugin.permissions) {
-		    UnlimitedLavaEnableAll(sender);
+		    unlimitedLavaEnableAll(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -85,7 +85,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
 		value = args[1];
 		if (sender.hasPermission("unlimitedlava.enable." + args[1]) || !plugin.permissions) {
-		    UnlimitedLavaEnableSource(sender, value);
+		    unlimitedLavaEnableSource(sender, value);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -96,7 +96,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Enable furnace
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
 		if (sender.hasPermission("unlimitedlava.enable.furnace") || !plugin.permissions) {
-		    UnlimitedLavaEnableFurnace(sender);
+		    unlimitedLavaEnableFurnace(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -107,7 +107,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Enable permissions
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
 		if (sender.hasPermission("unlimitedlava.enable.permissions") || !plugin.permissions) {
-		    UnlimitedLavaEnablePermissions(sender);
+		    unlimitedLavaEnablePermissions(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -118,7 +118,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Enable messages
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
 		if (sender.hasPermission("unlimitedlava.enable.messages") || !plugin.permissions) {
-		    UnlimitedLavaEnableMessages(sender);
+		    unlimitedLavaEnableMessages(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -132,7 +132,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Disable all
 	    if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
 		if (sender.hasPermission("unlimitedlava.disable.all") || !plugin.permissions) {
-		    UnlimitedLavaDisableAll(sender);
+		    unlimitedLavaDisableAll(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -144,7 +144,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
 		value = args[1];
 		if (sender.hasPermission("unlimitedlava.disable." + args[1]) || !plugin.permissions) {
-		    UnlimitedLavaDisableSource(sender, value);
+		    unlimitedLavaDisableSource(sender, value);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -155,7 +155,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Disable permissions
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
 		if (sender.hasPermission("unlimitedlava.disable.permissions") || !plugin.permissions) {
-		    UnlimitedLavaDisablePermissions(sender);
+		    unlimitedLavaDisablePermissions(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -166,7 +166,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Disable messages
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
 		if (sender.hasPermission("unlimitedlava.disable.messages") || !plugin.permissions) {
-		    UnlimitedLavaDisableMessages(sender);
+		    unlimitedLavaDisableMessages(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -177,7 +177,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    // Disable furnace
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
 		if (sender.hasPermission("unlimitedlava.disable.furnace") || !plugin.permissions) {
-		    UnlimitedLavaDisableFurnace(sender);
+		    unlimitedLavaDisableFurnace(sender);
 		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
@@ -189,7 +189,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	return false;
     }
 
-    private void UnlimitedLavaStatus(CommandSender sender) {
+    private void unlimitedLavaStatus(CommandSender sender) {
 	String header = ChatColor.YELLOW + "Status of UnlimitedLava";
 	String string = "";
 	// Big
@@ -276,7 +276,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     // Reloads the config with /unlimitedlava reload or /ulava reload
-    private void UnlimitedLavaReload(CommandSender sender) {
+    private void unlimitedLavaReload(CommandSender sender) {
 	plugin.loadConfigsAgain();
 	plugin.loadValues();
 	String message = plugin.localization.getString("reload");
@@ -284,7 +284,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     // See the help with /unlimitedlava help or /ulava help
-    private void UnlimitedLavaHelp(CommandSender sender) {
+    private void unlimitedLavaHelp(CommandSender sender) {
 	for (int i = 1; i <= 9; i++) {
 	    String message = plugin.localization.getString("help_" + Integer.toString(i));
 	    plugin.message(sender, null, message, null);
@@ -292,7 +292,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     // Enable a source
-    private void UnlimitedLavaEnableSource(CommandSender sender, String value) {
+    private void unlimitedLavaEnableSource(CommandSender sender, String value) {
 	plugin.config.set("sources." + value, true);
 	plugin.saveConfig();
 	plugin.loadValues();
@@ -301,7 +301,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     // Enables all sources with /unlimitedlava enable all or /ulava enable all
-    private void UnlimitedLavaEnableAll(CommandSender sender) {
+    private void unlimitedLavaEnableAll(CommandSender sender) {
 	plugin.config.set("sources.three", true);
 	plugin.config.set("sources.two", true);
 	plugin.config.set("sources.other", true);
@@ -327,7 +327,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // Enables permissions with /unlimitedlava enable permissions or /ulava
     // enable permissions
-    private void UnlimitedLavaEnablePermissions(CommandSender sender) {
+    private void unlimitedLavaEnablePermissions(CommandSender sender) {
 	plugin.config.set("configuration.permissions", true);
 	plugin.saveConfig();
 	plugin.permissions = true;
@@ -339,7 +339,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // Enables messages with /unlimitedlava enable messages or /ulava enable
     // messages
-    private void UnlimitedLavaEnableMessages(CommandSender sender) {
+    private void unlimitedLavaEnableMessages(CommandSender sender) {
 	plugin.config.set("configuration.messages", true);
 	plugin.saveConfig();
 	plugin.messages = true;
@@ -349,7 +349,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // Enables furnace with /unlimitedlava enable furnace or /ulava enable
     // furnace
-    private void UnlimitedLavaEnableFurnace(CommandSender sender) {
+    private void unlimitedLavaEnableFurnace(CommandSender sender) {
 	plugin.config.set("configuration.furnace", true);
 	plugin.saveConfig();
 	plugin.furnace = true;
@@ -358,7 +358,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     // Disable a source
-    private void UnlimitedLavaDisableSource(CommandSender sender, String value) {
+    private void unlimitedLavaDisableSource(CommandSender sender, String value) {
 	plugin.config.set("sources." + value, false);
 	plugin.saveConfig();
 	plugin.loadValues();
@@ -368,7 +368,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // Disables all sources with /unlimitedlava disable all or /ulava disable
     // all
-    private void UnlimitedLavaDisableAll(CommandSender sender) {
+    private void unlimitedLavaDisableAll(CommandSender sender) {
 	plugin.config.set("sources.three", false);
 	plugin.config.set("sources.two", false);
 	plugin.config.set("sources.other", false);
@@ -394,7 +394,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // Disables permissions with /unlimitedlava disable permissions or /ulava
     // disable permissions
-    private void UnlimitedLavaDisablePermissions(CommandSender sender) {
+    private void unlimitedLavaDisablePermissions(CommandSender sender) {
 	plugin.config.set("configuration.permissions", false);
 	plugin.saveConfig();
 	plugin.permissions = false;
@@ -406,7 +406,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // Disables messages with /unlimitedlava disable messages or /ulava disable
     // messages
-    private void UnlimitedLavaDisableMessages(CommandSender sender) {
+    private void unlimitedLavaDisableMessages(CommandSender sender) {
 	plugin.config.set("configuration.messages", false);
 	plugin.saveConfig();
 	plugin.messages = false;
@@ -416,7 +416,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // Disables furnace with /unlimitedlava disable furnace or /ulava disable
     // furnace
-    private void UnlimitedLavaDisableFurnace(CommandSender sender) {
+    private void unlimitedLavaDisableFurnace(CommandSender sender) {
 	plugin.config.set("configuration.furnace", false);
 	plugin.saveConfig();
 	plugin.furnace = false;
