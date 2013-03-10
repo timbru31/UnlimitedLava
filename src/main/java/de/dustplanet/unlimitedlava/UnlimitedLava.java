@@ -72,6 +72,11 @@ public class UnlimitedLava extends JavaPlugin {
 		return;
 	    }
 	}
+	
+	if (!configFile.exists()) {
+	    copy(getResource("config.yml"), configFile);
+	}
+	
 	config = getConfig();
 	loadConfig();
 	loadValues();
