@@ -7,12 +7,12 @@
 	<name>UnlimitedLava</name>
 	<description>Enjoy infinite lava sources</description>
 	<url>http://dev.bukkit.org/server-mods/unlimited-lava/</url>
-	
+
 	<!-- Encode in UTF-8 -->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<!-- Repositories -->
 	<repositories>
 		<repository>
@@ -24,13 +24,13 @@
 			<url>http://repo.mcstats.org/content/repositories/public</url>
 		</repository>
 	</repositories>
-	
+
 	<!-- Dependencies -->
 	<dependencies>
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>1.4.7-R0.2-SNAPSHOT</version>
+			<version>1.4.7-R1.1-SNAPSHOT</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -41,7 +41,7 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<!-- Compile for 1.6 and clean before -->
 		<defaultGoal>clean compile package</defaultGoal>
@@ -59,7 +59,7 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Shade Plugin to include Metrics -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -90,7 +90,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 		<!-- Include the .yml files -->
 		<resources>
 			<resource>
@@ -101,11 +101,12 @@
 					<include>plugin.yml</include>
 					<include>config.yml</include>
 					<include>localization.yml</include>
+					<include>README.txt</include>
 				</includes>
 			</resource>
 		</resources>
 	</build>
-	
+
 	<!-- GitHub information -->
 	<scm>
 		<url>https://github.com/xGhOsTkiLLeRx/UnlimitedLava</url>
@@ -113,7 +114,7 @@
 		<tag>master</tag>
 		<developerConnection>scm:git:git@github.com:xGhOsTkiLLeRx/UnlimitedLava.git</developerConnection>
 	</scm>
-	
+
 	<!-- Jenkins information -->
 	<ciManagement>
 		<url>http://ci.dustplanet.de/job/UnlimitedLava</url>
