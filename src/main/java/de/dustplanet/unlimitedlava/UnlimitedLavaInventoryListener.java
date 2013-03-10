@@ -40,18 +40,17 @@ public class UnlimitedLavaInventoryListener implements Listener {
 	    if (event.getFuel().getType() == Material.LAVA_BUCKET) {
 		final Block furnace = event.getBlock();
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			    public void run() {
-				// Set the fuel item to the config one
-				String configItem = plugin.getConfig().getString("furnace.item");
-				try {
-				    item = Material.valueOf(configItem.toUpperCase());
-				} catch (IllegalArgumentException e) {
-				    item = Material.AIR;
-				}
-				Furnace furn = (Furnace) furnace.getState();
-				furn.getInventory().setItem(1, new ItemStack(item, 1));
-			    }
-			});
+		    public void run() {
+			// Set the fuel item to the config one
+			String configItem = plugin.getConfig().getString("furnace.item");
+			item = Material.matchMaterial(configItem);
+			if (item == null) {
+			    item = Material.AIR;
+			}
+			Furnace furn = (Furnace) furnace.getState();
+			furn.getInventory().setItem(1, new ItemStack(item, 1));
+		    }
+		});
 	    }
 	}
     }
