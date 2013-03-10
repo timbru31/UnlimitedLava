@@ -39,34 +39,31 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
 	    if (sender.hasPermission("unlimitedlava.reload") || !plugin.permissions) {
 		unlimitedLavaReload(sender);
-		return true;
 	    } else {
 		message = plugin.localization.getString("permission_denied");
 		plugin.message(sender, null, message, null);
-		return true;
 	    }
+	    return true;
 	}
 	// status
 	else if (args.length > 0 && args[0].equalsIgnoreCase("status")) {
 	    if (sender.hasPermission("unlimitedlava.status") || !plugin.permissions) {
 		unlimitedLavaStatus(sender);
-		return true;
 	    } else {
 		message = plugin.localization.getString("permission_denied");
 		plugin.message(sender, null, message, null);
-		return true;
 	    }
+	    return true;
 	}
 	// help
 	else if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
 	    if (sender.hasPermission("unlimitedlava.help") || !plugin.permissions) {
 		unlimitedLavaHelp(sender);
-		return true;
 	    } else {
 		message = plugin.localization.getString("permission_denied");
 		plugin.message(sender, null, message, null);
-		return true;
 	    }
+	    return true;
 	}
 	// Enable
 	else if (args.length > 0 && args[0].equalsIgnoreCase("enable")) {
@@ -74,57 +71,52 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
 		if (sender.hasPermission("unlimitedlava.enable.all") || !plugin.permissions) {
 		    unlimitedLavaEnableAll(sender);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Enable a source
 	    else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
 		value = args[1];
 		if (sender.hasPermission("unlimitedlava.enable." + args[1]) || !plugin.permissions) {
 		    unlimitedLavaEnableSource(sender, value);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Enable furnace
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
 		if (sender.hasPermission("unlimitedlava.enable.furnace") || !plugin.permissions) {
 		    unlimitedLavaEnableFurnace(sender);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Enable permissions
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
 		if (sender.hasPermission("unlimitedlava.enable.permissions") || !plugin.permissions) {
 		    unlimitedLavaEnablePermissions(sender);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Enable messages
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
 		if (sender.hasPermission("unlimitedlava.enable.messages") || !plugin.permissions) {
 		    unlimitedLavaEnableMessages(sender);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	}
 	// Disable
@@ -133,57 +125,53 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 	    if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
 		if (sender.hasPermission("unlimitedlava.disable.all") || !plugin.permissions) {
 		    unlimitedLavaDisableAll(sender);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Disable a source
 	    else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
 		value = args[1];
 		if (sender.hasPermission("unlimitedlava.disable." + args[1]) || !plugin.permissions) {
 		    unlimitedLavaDisableSource(sender, value);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Disable permissions
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
 		if (sender.hasPermission("unlimitedlava.disable.permissions") || !plugin.permissions) {
 		    unlimitedLavaDisablePermissions(sender);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Disable messages
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
 		if (sender.hasPermission("unlimitedlava.disable.messages") || !plugin.permissions) {
 		    unlimitedLavaDisableMessages(sender);
-		    return true;
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	    // Disable furnace
 	    else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
 		if (sender.hasPermission("unlimitedlava.disable.furnace") || !plugin.permissions) {
 		    unlimitedLavaDisableFurnace(sender);
-		    return true;
+
 		} else {
 		    message = plugin.localization.getString("permission_denied");
 		    plugin.message(sender, null, message, null);
-		    return true;
 		}
+		return true;
 	    }
 	}
 	return false;
