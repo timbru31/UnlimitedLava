@@ -1,5 +1,6 @@
 package de.dustplanet.unlimitedlava;
 
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -39,7 +40,7 @@ public class UnlimitedLavaPlayerListener implements Listener {
 	Player player = event.getPlayer();
 	// Only if lava is clicked ;)
 	if (plugin.permissions) {
-	    if (event.getBlockClicked().getTypeId() == 9) {
+	    if (event.getBlockClicked().getType() == Material.WATER || event.getBlockClicked().getType() == Material.STATIONARY_WATER) {
 		return;
 	    }
 	    // If the player hasn't got the permissions, cancel the event and

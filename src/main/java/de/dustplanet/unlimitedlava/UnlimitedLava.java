@@ -107,7 +107,7 @@ public class UnlimitedLava extends JavaPlugin {
     // Reloads the config file, via command /unlimitedlava reload or /ulava
     // reload and at the start!
     public void loadConfig() {
-	config.options().header("For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3");
+	config.options().header("For help please refer to this topic: http://dev.bukkit.org/server-mods/unlimited-lava/");
 	config.addDefault("configuration.permissions", true);
 	config.addDefault("configuration.messages", true);
 	config.addDefault("configuration.furnace", true);

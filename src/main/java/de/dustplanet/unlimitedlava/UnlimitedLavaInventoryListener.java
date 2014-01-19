@@ -28,7 +28,6 @@ import org.bukkit.inventory.ItemStack;
 
 public class UnlimitedLavaInventoryListener implements Listener {
     private UnlimitedLava plugin;
-    private Material item = Material.AIR;
 
     public UnlimitedLavaInventoryListener(UnlimitedLava instance) {
 	plugin = instance;
@@ -43,7 +42,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
 		    public void run() {
 			// Set the fuel item to the config one
 			String configItem = plugin.getConfig().getString("furnace.item");
-			item = Material.matchMaterial(configItem);
+			Material item = Material.matchMaterial(configItem);
 			if (item == null) {
 			    item = Material.AIR;
 			}
