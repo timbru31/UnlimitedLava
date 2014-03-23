@@ -11,11 +11,8 @@ import org.bukkit.event.player.PlayerBucketFillEvent;
  * UnlimitedLavaPlayerListener
  * Handles the players activities!
  *
- * Refer to the forum thread:
- * http://bit.ly/n1Wex2
- * 
  * Refer to the dev.bukkit.org page:
- * http://bit.ly/pCj7v3
+ * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
  *
  * @author xGhOsTkiLLeRx
  * thanks to loganwm for the help!!

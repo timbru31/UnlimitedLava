@@ -6,7 +6,7 @@
 	<version>1.9.2-SNAPSHOT</version>
 	<name>UnlimitedLava</name>
 	<description>Enjoy infinite lava sources</description>
-	<url>http://dev.bukkit.org/server-mods/unlimited-lava/</url>
+	<url>http://dev.bukkit.org/bukkit-plugins/unlimited-lava/</url>
 
 	<!-- Encode in UTF-8 -->
 	<properties>

@@ -17,9 +17,9 @@ This plugin is released under the
 *Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Unported (CC BY-NC-SA 4.0)* license.  
 Please see [LICENSE.md](LICENSE.md) for more information.
 
-## Standard config:
+## Standard config
 ````yaml
-# For help please refer to this topic: http://bit.ly/n1Wex2 or http://bit.ly/pCj7v3
+# For help please refer to the bukkit dev page: http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
 configuration:
   # Should permissions be enabled or not?
   permissions: true
@@ -183,7 +183,7 @@ In the following table the X needs to be replaced by one of these values
 * You - for using it!
 
 ## Support
-For support visit the dev.bukkit.org page: http://bit.ly/pCj7v3
+For support visit the dev.bukkit.org page: http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
 
 ## Pull Requests
 Feel free to submit any PRs here. :)  

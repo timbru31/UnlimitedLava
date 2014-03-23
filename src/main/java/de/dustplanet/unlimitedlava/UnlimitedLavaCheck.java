@@ -8,10 +8,8 @@ import org.bukkit.block.BlockFace;
  * UnlimitedLavaSpreadCheck
  * Handles the infinite sources spread checks for the Block- and PlayerListener
  * 
- * Refer to the forum thread:
- * http://bit.ly/n1Wex2
  * Refer to the dev.bukkit.org page:
- * http://bit.ly/pCj7v3
+ * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
  *
  * @author xGhOsTkiLLeRx
  * thanks to loganwm for the help!!
