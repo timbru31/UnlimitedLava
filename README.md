@@ -8,6 +8,7 @@ Special features are
 * Lava and water fall support
 * Furnace support for (custom) item that should appear if a lava bucket is used as fuel
 * Complete permissions support
+* Multiworld support
 
 *About the usage statistics*  
 This plugin sends usage statistics! If you wish to disable the usage stats, look at /plugins/PluginMetrics/config.yml!
@@ -43,6 +44,11 @@ sources:
 furnace:
   # What item should appear in the furnace if you place a lava bucket as the fuel?
   item: BUCKET
+# Define in which worlds the sources should be unlimited.
+enabled_worlds:
+  world
+  world_nether
+  myAwesomeWorld
 debug: false
 ````
 
