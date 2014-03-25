@@ -46,9 +46,9 @@ furnace:
   item: BUCKET
 # Define in which worlds the sources should be unlimited.
 enabled_worlds:
-  world
-  world_nether
-  myAwesomeWorld
+  - world
+  - world_nether
+  - myAwesomeWorld
 debug: false
 ````
 
