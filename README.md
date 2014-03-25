@@ -11,7 +11,7 @@ Special features are
 * Multiworld support
 
 *About the usage statistics*  
-This plugin sends usage statistics! If you wish to disable the usage stats, look at /plugins/PluginMetrics/config.yml!
+This plugin sends usage statistics! If you wish to disable the usage statistics, look at /plugins/PluginMetrics/config.yml!
 
 ## License
 This plugin is released under the  
@@ -52,31 +52,31 @@ enabled_worlds:
 debug: false
 ````
 
-## Sources:
+## Sources
 * `L` are still (full) lava blocks,
 * `X` is the unlimited lava block!
 
-####3x3 (three):
+#### 3x3 (three)
 ````
 L L L
 L X L
 L L L
 ````
 
-####2x2 (two):
+#### 2x2 (two)
 ````
 X X
 X X
 ````
 
-####Plus:
+#### Plus
 ````
   L
 L X L
   L
 ````
 
-####T Shape:
+#### T Shape
 ````
 L X L
   L
@@ -99,7 +99,7 @@ X L
 L
 ````
 
-####Other:
+#### Other
 ````
 L X L
 ````
@@ -130,16 +130,16 @@ or
 L X
 ````
 
-####Big:
+#### Big
 
 You can get infinite lava from pools bigger than 3x3 (4x4, 5x5, etc.) from any block inside!
 Border blocks won't work!
 
-####Falls:
+#### Falls
 You can get infinite lava or water from a fall. Just let it flow into a hole an pick it up!
 
 ## Commands & Permissions
-(Fallback to OPs, if no permisisons system is found)
+(Fallback to OPs, if no permissions system is found)
 
 **Please note that __/ulava is just an ALIAS for /unlimited lava__!**  
 Command alias list
@@ -149,7 +149,7 @@ Command alias list
 * /ulaba
 * /unlimitedlaba
 
-####General commands
+#### General commands
 | Command | Permission node | Description |
 |:----------:|:----------:|:----------:|
 | - | unlimitedlava.use | Ability to use the unlimited blocks |
@@ -157,7 +157,7 @@ Command alias list
 | /ulava help | unlimitedlava.help | Displays the help |
 | /ulava status | unlimitedlava.status | Displays the current status |
 
-####Enabling or disabling one of the sources or other things
+#### Enabling or disabling one of the sources or other things
 In the following table the X needs to be replaced by one of these values
 * all
 * three
@@ -177,7 +177,7 @@ In the following table the X needs to be replaced by one of these values
 | /ulava enable X | unlimitedlava.enable.X | Enables source (replace X) |
 | /ulava disable X | unlimitedlava.disable.X | Disables source (replace X) |
 
-####Special permissions
+#### Special permissions
 * unlimitedlava.* - Grants access to ALL other permissions
 * unlimitedlava.enable.* - Grants access to ALL enabling permissions
 * unlimitedlava.disable.* - Grants access to ALL disabling permissions
