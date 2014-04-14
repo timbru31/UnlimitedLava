@@ -15,7 +15,7 @@ This plugin sends usage statistics! If you wish to disable the usage statistics,
 
 ## License
 This plugin is released under the  
-*Creative Commons Attribution-NonCommercial-ShareAlike 4.0 Unported (CC BY-NC-SA 4.0)* license.  
+*Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)* license.  
 Please see [LICENSE.md](LICENSE.md) for more information.
 
 ## Standard config
