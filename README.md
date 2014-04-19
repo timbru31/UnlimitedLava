@@ -210,7 +210,7 @@ The file ../plugins/Plugin Metrics/config.yml contains an option to *opt-out*
 * Plugin version of the metrics-supported plugin
 * Mineshafter status - it does not properly propagate Metrics requests however it is a very simple check and does not read the filesystem
 
-#### The following data is **sent** to http://mcstats.org and can be seen under http://mcstats.org/plugin/CookMe
+#### The following data is **sent** to http://mcstats.org and can be seen under http://mcstats.org/plugin/UnlimitedLava
 * Metrics revision of the implementing class
 * Server's GUID
 * Players currently online (not max player count)
