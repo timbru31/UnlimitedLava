@@ -1,8 +1,13 @@
 package de.dustplanet.unlimitedlava;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.bukkit.World;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -32,11 +37,11 @@ public class UnlimitedLava extends JavaPlugin {
     private UnlimitedLavaBlockListener blockListener;
     private UnlimitedLavaPlayerListener playerListener;
     private UnlimitedLavaInventoryListener inventoryListener;
-    public boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace, debug;
-    public int height = 60;
-    public List<String> enabledWorlds = new ArrayList<String>();
-    public FileConfiguration config, localization;
-    public File configFile, localizationFile;
+    protected boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace, debug;
+    protected int height = 60;
+    protected List<String> enabledWorlds = new ArrayList<String>();
+    protected FileConfiguration config, localization;
+    private File configFile, localizationFile;
     private UnlimitedLavaCommands executor;
     private UnlimitedLavaCheck unlimitedLavaCheck;
 
