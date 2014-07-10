@@ -39,7 +39,7 @@ public class UnlimitedLava extends JavaPlugin {
     private UnlimitedLavaInventoryListener inventoryListener;
     protected boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace, debug;
     protected int height = 60;
-    protected List<String> enabledWorlds = new ArrayList<String>();
+    protected List<String> enabledWorlds = new ArrayList<>();
     protected FileConfiguration config, localization;
     private File configFile, localizationFile;
     private UnlimitedLavaCommands executor;
@@ -76,7 +76,7 @@ public class UnlimitedLava extends JavaPlugin {
 	}
 	
 	if (!configFile.exists()) {
-	    copy(getResource("config.yml"), configFile);
+	    copy("config.yml", configFile);
 	}
 	
 	config = getConfig();
@@ -86,7 +86,7 @@ public class UnlimitedLava extends JavaPlugin {
 	// Localization
 	localizationFile = new File(getDataFolder(), "localization.yml");
 	if (!localizationFile.exists()) {
-	    copy(getResource("localization.yml"), localizationFile);
+	    copy("localization.yml", localizationFile);
 	}
 	// Try to load
 	localization = YamlConfiguration.loadConfiguration(localizationFile);
@@ -201,20 +201,16 @@ public class UnlimitedLava extends JavaPlugin {
 	    saveConfig();
 	    localization.load(localizationFile);
 	    saveLocalization();
-	} catch (IOException e) {
-	    getLogger().warning("Failed to save the localization! Please report this! (I/O)");
-	    e.printStackTrace();
-	} catch (InvalidConfigurationException e) {
-	    getLogger().warning("Failed to save the localization! Please report this! (InvalidConfiguration)");
+	} catch (IOException | InvalidConfigurationException e) {
+	    getLogger().warning("Failed to save the localization! Please report this!");
 	    e.printStackTrace();
 	}
     }
 
     // If no config is found, copy the default one(s)!
-    private void copy(InputStream in, File file) {
-	OutputStream out = null;
-	try {
-	    out = new FileOutputStream(file);
+    private void copy(String yml, File file) {
+	try (OutputStream out = new FileOutputStream(file);
+		InputStream in = getResource(yml)) {
 	    byte[] buf = new byte[1024];
 	    int len;
 	    while ((len = in.read(buf)) > 0) {
@@ -223,23 +219,6 @@ public class UnlimitedLava extends JavaPlugin {
 	} catch (IOException e) {
 	    getLogger().warning("Failed to copy the default config! (I/O)");
 	    e.printStackTrace();
-	} finally {
-	    try {
-		if (out != null) {
-		    out.close();
-		}
-	    } catch (IOException e) {
-		getLogger().warning("Failed to close the streams! (I/O -> Output)");
-		e.printStackTrace();
-	    }
-	    try {
-		if (in != null) {
-		    in.close();
-		}
-	    } catch (IOException e) {
-		getLogger().warning("Failed to close the streams! (I/O -> Input)");
-		e.printStackTrace();
-	    }
 	}
     }
 
