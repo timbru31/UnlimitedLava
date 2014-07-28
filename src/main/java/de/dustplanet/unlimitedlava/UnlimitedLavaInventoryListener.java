@@ -20,34 +20,34 @@ import org.bukkit.inventory.ItemStack;
  * thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * thanks to ferrybig for the awesome fall code!
  * thanks to Xastabus for the cool improvements of the checks!
- * 
+ *
  */
 
 public class UnlimitedLavaInventoryListener implements Listener {
     private UnlimitedLava plugin;
 
     public UnlimitedLavaInventoryListener(UnlimitedLava instance) {
-	plugin = instance;
+        plugin = instance;
     }
 
     @EventHandler
     public void onFurnaceBurn(FurnaceBurnEvent event) {
-	if (plugin.furnace) {
-	    if (event.getFuel().getType() == Material.LAVA_BUCKET) {
-		final Block furnace = event.getBlock();
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-		    public void run() {
-			// Set the fuel item to the config one
-			String configItem = plugin.getConfig().getString("furnace.item");
-			Material item = Material.matchMaterial(configItem);
-			if (item == null) {
-			    item = Material.AIR;
-			}
-			Furnace furn = (Furnace) furnace.getState();
-			furn.getInventory().setItem(1, new ItemStack(item, 1));
-		    }
-		});
-	    }
-	}
+        if (plugin.furnace) {
+            if (event.getFuel().getType() == Material.LAVA_BUCKET) {
+                final Block furnace = event.getBlock();
+                plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    public void run() {
+                        // Set the fuel item to the config one
+                        String configItem = plugin.getConfig().getString("furnace.item");
+                        Material item = Material.matchMaterial(configItem);
+                        if (item == null) {
+                            item = Material.AIR;
+                        }
+                        Furnace furn = (Furnace) furnace.getState();
+                        furn.getInventory().setItem(1, new ItemStack(item, 1));
+                    }
+                });
+            }
+        }
     }
 }

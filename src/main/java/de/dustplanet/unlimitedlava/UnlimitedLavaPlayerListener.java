@@ -27,29 +27,29 @@ public class UnlimitedLavaPlayerListener implements Listener {
     private UnlimitedLavaCheck check;
 
     public UnlimitedLavaPlayerListener(UnlimitedLava instance, UnlimitedLavaCheck instanceCheck) {
-	plugin = instance;
-	check = instanceCheck;
+        plugin = instance;
+        check = instanceCheck;
     }
 
     @EventHandler
     public void onPlayerBucketFill(PlayerBucketFillEvent event) {
-	Block clicked = event.getBlockClicked();
-	Player player = event.getPlayer();
-	// Only if lava is clicked ;)
-	if (plugin.permissions) {
-	    if (event.getBlockClicked().getType() == Material.WATER || event.getBlockClicked().getType() == Material.STATIONARY_WATER) {
-		return;
-	    }
-	    // If the player hasn't got the permissions, cancel the event and
-	    // give an empty bucket back!
-	    if (!player.hasPermission("unlimitedlava.use") && check.checkLavaSpreadValidity(clicked)) {
-		event.setCancelled(true);
-		// Message if wanted
-		if (plugin.messages) {
-		    String message = plugin.localization.getString("permission_denied");
-		    plugin.message(null, player, message, null);
-		}
-	    }
-	}
+        Block clicked = event.getBlockClicked();
+        Player player = event.getPlayer();
+        // Only if lava is clicked ;)
+        if (plugin.permissions) {
+            if (event.getBlockClicked().getType() == Material.WATER || event.getBlockClicked().getType() == Material.STATIONARY_WATER) {
+                return;
+            }
+            // If the player hasn't got the permissions, cancel the event and
+            // give an empty bucket back!
+            if (!player.hasPermission("unlimitedlava.use") && check.checkLavaSpreadValidity(clicked)) {
+                event.setCancelled(true);
+                // Message if wanted
+                if (plugin.messages) {
+                    String message = plugin.localization.getString("permission_denied");
+                    plugin.message(null, player, message, null);
+                }
+            }
+        }
     }
 }
