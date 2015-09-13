@@ -19,7 +19,7 @@ import org.bukkit.command.CommandSender;
  * thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * thanks to ferrybig for the awesome fall code!
  * thanks to Xastabus for the cool improvements of the checks!
- * 
+ *
  */
 
 public class UnlimitedLavaCommands implements CommandExecutor {
@@ -31,6 +31,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     // Commands... First check if config value permissions is true
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         String message, value;
         // reload

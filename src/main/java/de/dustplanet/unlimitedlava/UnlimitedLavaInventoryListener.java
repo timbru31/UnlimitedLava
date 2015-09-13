@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 /**
  * UnlimitedLavaInventoryListener
  * Handles the furnace burn stuff
- *  
+ *
  * Refer to the dev.bukkit.org page:
  * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
  *
@@ -36,6 +36,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
             if (event.getFuel().getType() == Material.LAVA_BUCKET) {
                 final Block furnace = event.getBlock();
                 plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+                    @Override
                     public void run() {
                         // Set the fuel item to the config one
                         String configItem = plugin.getConfig().getString("furnace.item");

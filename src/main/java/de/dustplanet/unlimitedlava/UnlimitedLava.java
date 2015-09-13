@@ -9,22 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.*;
-import org.bukkit.entity.Player;
 import org.mcstats.Metrics;
 
 /**
  * UnlimitedLava for CraftBukkit/Bukkit
  * Handles some general stuff!
- * 
+ *
  * Refer to the dev.bukkit.org page:
  * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
- * 
+ *
  * @author xGhOsTkiLLeRx
  * thanks to loganwm for the help!!
  * thanks to Edward Hand for the idea and original InfiniteLava plugin!
@@ -46,11 +47,13 @@ public class UnlimitedLava extends JavaPlugin {
     private UnlimitedLavaCheck unlimitedLavaCheck;
 
     // Shutdown
+    @Override
     public void onDisable() {
         enabledWorlds.clear();
     }
 
     // Start
+    @Override
     public void onEnable() {
         unlimitedLavaCheck = new UnlimitedLavaCheck(this);
         blockListener = new UnlimitedLavaBlockListener(this, unlimitedLavaCheck);
@@ -125,7 +128,7 @@ public class UnlimitedLava extends JavaPlugin {
         config.addDefault("sources.water_fall", false);
         config.addDefault("furnace.item", "BUCKET");
         List<World> worlds = getServer().getWorlds();
-        List<String> worldNames = new ArrayList<String>();
+        List<String> worldNames = new ArrayList<>();
         for (World w : worlds) {
             worldNames.add(w.getName());
         }
