@@ -20,14 +20,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.Metrics;
 
 /**
- * UnlimitedLava for CraftBukkit/Bukkit
+ * UnlimitedLava for CraftBukkit/Spigot
  * Handles some general stuff!
  *
  * Refer to the dev.bukkit.org page:
  * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
  *
  * @author xGhOsTkiLLeRx
- * thanks to loganwm for the help!!
+ * thanks to loganwm for the help!
  * thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * thanks to ferrybig for the awesome fall code!
  * thanks to Xastabus for the cool improvements of the checks!
@@ -35,16 +35,16 @@ import org.mcstats.Metrics;
  */
 
 public class UnlimitedLava extends JavaPlugin {
+    private File configFile, localizationFile;
     private UnlimitedLavaBlockListener blockListener;
-    private UnlimitedLavaPlayerListener playerListener;
+    private UnlimitedLavaCheck unlimitedLavaCheck;
+    private UnlimitedLavaCommands executor;
     private UnlimitedLavaInventoryListener inventoryListener;
+    private UnlimitedLavaPlayerListener playerListener;
     protected boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace, debug;
+    protected FileConfiguration config, localization;
     protected int height = 60;
     protected List<String> enabledWorlds = new ArrayList<>();
-    protected FileConfiguration config, localization;
-    private File configFile, localizationFile;
-    private UnlimitedLavaCommands executor;
-    private UnlimitedLavaCheck unlimitedLavaCheck;
 
     // Shutdown
     @Override
@@ -158,7 +158,7 @@ public class UnlimitedLava extends JavaPlugin {
     // Loads the localization
     public void loadLocalization() {
         localization.options().header("The underscores are used for the different lines!");
-        localization.addDefault("permission_denied", "&4You don''t have the permission to do this!");
+        localization.addDefault("permission_denied", "&4You do not have the permission to do this!");
         localization.addDefault("reload", "&2UnlimitedLava &4%version &2reloaded!");
         localization.addDefault("help_1", "&2Welcome to the UnlimitedLava version &4%version &2help");
         localization.addDefault("help_2", "To see the help type &4/unlimitedlava help &for &4/ulava help");
@@ -226,15 +226,15 @@ public class UnlimitedLava extends JavaPlugin {
     // Message the sender or player
     public void message(CommandSender sender, Player player, String message, String value) {
         PluginDescriptionFile pdfFile = this.getDescription();
-        message = message
+        String msg = message
                 .replaceAll("&([0-9a-fk-or])", "\u00A7$1")
                 .replaceAll("%version", pdfFile.getVersion())
                 .replaceAll("%source", value)
                 .replaceAll("%value", value);
         if (player != null) {
-            player.sendMessage(message);
+            player.sendMessage(msg);
         } else if (sender != null) {
-            sender.sendMessage(message);
+            sender.sendMessage(msg);
         } else {
             getLogger().info("Player and sender are null! Please report this");
         }

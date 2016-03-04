@@ -12,7 +12,7 @@ import org.bukkit.block.BlockFace;
  * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
  *
  * @author xGhOsTkiLLeRx
- * thanks to loganwm for the help!!
+ * thanks to loganwm for the help!
  * thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * thanks to ferrybig for the awesome fall code!
  * thanks to Xastabus for the cool improvements of the checks!
@@ -106,7 +106,7 @@ public class UnlimitedLavaCheck {
          */
         for (int i = 0; i <= 3; i++) {
             int v = i * 2;
-            if ((((blockMaterial[v] == Material.LAVA) || (blockMaterial[v] == Material.STATIONARY_LAVA)) && (blockData[v] == 0x0))) {
+            if ((blockMaterial[v] == Material.LAVA || blockMaterial[v] == Material.STATIONARY_LAVA) && blockData[v] == 0x0) {
                 faces++;
             } else if (blockIsSolid[v]) {
                 borders++;
@@ -119,7 +119,7 @@ public class UnlimitedLavaCheck {
              */
             cBlocks = 0;
             for (int c = 0; c <= 2; c++) {
-                if (((blockMaterial[cBlock[i][c]] == Material.LAVA) || (blockMaterial[cBlock[i][c]] == Material.STATIONARY_LAVA)) && (blockData[cBlock[i][c]] == 0x0)) {
+                if ((blockMaterial[cBlock[i][c]] == Material.LAVA || blockMaterial[cBlock[i][c]] == Material.STATIONARY_LAVA) && blockData[cBlock[i][c]] == 0x0) {
                     cBlocks++;
                 }
             }
@@ -127,7 +127,7 @@ public class UnlimitedLavaCheck {
                 corners++;
                 lBlocks = 0;
                 for (int l = 0; l <= 4; l++) {
-                    if ((blockMaterial[lBlock[i][l]] == Material.LAVA) || (blockMaterial[lBlock[i][l]] == Material.STATIONARY_LAVA)) {
+                    if (blockMaterial[lBlock[i][l]] == Material.LAVA || blockMaterial[lBlock[i][l]] == Material.STATIONARY_LAVA) {
                         lBlocks++;
                     }
                     // Lake blocks do not need to be full beyond the previously tested corner.
@@ -181,7 +181,7 @@ public class UnlimitedLavaCheck {
             for (int i = 0; i <= 7; i++) {
                 rBlocks = 0;
                 for (int r = 0; r <= 6; r++) {
-                    if ((((blockMaterial[rBlock[i][r]] == Material.LAVA) || (blockMaterial[rBlock[i][r]] == Material.STATIONARY_LAVA)) && (blockData[rBlock[i][r]] == 0x0))) {
+                    if ((blockMaterial[rBlock[i][r]] == Material.LAVA || blockMaterial[rBlock[i][r]] == Material.STATIONARY_LAVA) && blockData[rBlock[i][r]] == 0x0) {
                         rBlocks++;
                     }
                 }

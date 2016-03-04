@@ -1,4 +1,8 @@
-# UnlimitedLava [![Build Status](http://ci.dustplanet.de/job/UnlimitedLava/badge/icon)](http://ci.dustplanet.de/job/UnlimitedLava/)
+# UnlimitedLava
+[![Build Status](https://ci.dustplanet.de/job/UnlimitedLava/badge/icon)](https://ci.dustplanet.de/job/UnlimitedLava/)
+[![Build Status](https://travis-ci.org/timbru31/UnlimitedLava.svg?branch=master)](https://travis-ci.org/timbru31/UnlimitedLava)
+[![Circle CI](https://img.shields.io/circleci/project/timbru31/UnlimitedLava.svg)](https://circleci.com/gh/timbru31/UnlimitedLava)
+[![Build status](https://ci.appveyor.com/api/projects/status/72ns97g6n7jqy6h2?svg=true)](https://ci.appveyor.com/project/timbru31/unlimitedlava)
 
 ## Info
 This CraftBukkit plugin aims to offer the same ability to lava that water has:
@@ -19,7 +23,7 @@ This plugin is released under the
 Please see [LICENSE.md](LICENSE.md) for more information.
 
 ## Standard config
-````yaml
+```yaml
 # For help please refer to the bukkit dev page: http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
 configuration:
   # Should permissions be enabled or not?
@@ -50,7 +54,7 @@ enabled_worlds:
   - world_nether
   - myAwesomeWorld
 debug: false
-````
+```
 
 ## Sources
 * `L` are still (full) lava blocks,

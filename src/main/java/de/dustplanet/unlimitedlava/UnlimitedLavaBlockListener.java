@@ -8,15 +8,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
 
 /**
- * UnlimitedLavaBlockListener Handles the infinite sources!
+ * UnlimitedLavaBlockListener
+ * Handles the infinite sources!
  *
  * Refer to the dev.bukkit.org page:
  * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
  *
- * @author xGhOsTkiLLeRx thanks to loganwm for the help!! thanks to Edward Hand
- *         for the idea and original InfiniteLava plugin! thanks to ferrybig for
- *         the awesome fall code! thanks to Xastabus for the cool improvements
- *         of the checks!
+ * @author xGhOsTkiLLeRx
+ * thanks to loganwm for the help!
+ * thanks to Edward Hand for the idea and original InfiniteLava plugin!
+ * thanks to ferrybig for the awesome fall code!
+ * thanks to Xastabus for the cool improvements of the checks!
  *
  */
 

@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
  * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
  *
  * @author xGhOsTkiLLeRx
- * thanks to loganwm for the help!!
+ * thanks to loganwm for the help!
  * thanks to Edward Hand for the idea and original InfiniteLava plugin!
  * thanks to ferrybig for the awesome fall code!
  * thanks to Xastabus for the cool improvements of the checks!

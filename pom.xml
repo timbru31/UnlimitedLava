@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.dustplanet</groupId>
   <artifactId>UnlimitedLava</artifactId>
@@ -10,6 +9,7 @@
 
   <!-- Encode in UTF-8 -->
   <properties>
+    <build.number>-b${BUILD_NUMBER}</build.number>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -30,15 +30,12 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.8.8-R0.1-SNAPSHOT</version>
-      <type>jar</type>
-      <scope>compile</scope>
+      <version>1.9-R0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.mcstats.bukkit</groupId>
       <artifactId>metrics</artifactId>
-      <version>R7</version>
-      <scope>compile</scope>
+      <version>R8-SNAPSHOT</version>
     </dependency>
   </dependencies>
 
@@ -50,7 +47,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
+        <version>3.5.1</version>
         <configuration>
           <verbose>true</verbose>
           <source>1.7</source>
@@ -62,7 +59,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
-        <version>2.4.1</version>
+        <version>2.4.3</version>
         <executions>
           <execution>
             <phase>package</phase>
@@ -86,6 +83,11 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>2.5.3</version>
       </plugin>
     </plugins>
 
@@ -123,7 +125,7 @@
 
   <!-- Jenkins information -->
   <ciManagement>
-    <url>http://ci.dustplanet.de/job/UnlimitedLava</url>
+    <url>https://ci.dustplanet.de/job/UnlimitedLava</url>
     <system>jenkins</system>
   </ciManagement>
 </project>
