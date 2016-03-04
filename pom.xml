@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>de.dustplanet</groupId>
   <artifactId>UnlimitedLava</artifactId>
-  <version>1.9.2-SNAPSHOT</version>
+  <version>1.9.2</version>
   <name>UnlimitedLava</name>
   <description>Enjoy infinite lava sources</description>
   <url>http://dev.bukkit.org/bukkit-plugins/unlimited-lava/</url>
@@ -119,7 +119,7 @@
   <scm>
     <url>https://github.com/timbru31/UnlimitedLava</url>
     <connection>scm:git:git://github.com/timbru31/UnlimitedLava.git</connection>
-    <tag>master</tag>
+    <tag>Unlimited_Lava-1.9.2</tag>
     <developerConnection>scm:git:git@github.com:timbru31/UnlimitedLava.git</developerConnection>
   </scm>
 
