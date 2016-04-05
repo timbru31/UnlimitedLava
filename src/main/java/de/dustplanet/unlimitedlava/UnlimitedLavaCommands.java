@@ -272,10 +272,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     // See the help with /unlimitedlava help or /ulava help
     private void unlimitedLavaHelp(CommandSender sender) {
-        for (int i = 1; i <= 9; i++) {
-            String message = plugin.localization.getString("help_" + Integer.toString(i));
-            plugin.message(sender, null, message, null);
-        }
+        String message = plugin.localization.getString("help");
+        plugin.message(sender, null, message, null);
     }
 
     // Enable a source
@@ -318,10 +316,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
         plugin.config.set("configuration.permissions", true);
         plugin.saveConfig();
         plugin.permissions = true;
-        for (int i = 1; i <= 2; i++) {
-            String message = plugin.localization.getString("enable_permissions_" + Integer.toString(i));
-            plugin.message(sender, null, message, null);
-        }
+        String message = plugin.localization.getString("enable_permissions");
+        plugin.message(sender, null, message, null);
     }
 
     // Enables messages with /unlimitedlava enable messages or /ulava enable
@@ -385,10 +381,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
         plugin.config.set("configuration.permissions", false);
         plugin.saveConfig();
         plugin.permissions = false;
-        for (int i = 1; i <= 2; i++) {
-            String message = plugin.localization.getString("disable_permissions_" + Integer.toString(i));
-            plugin.message(sender, null, message, null);
-        }
+        String message = plugin.localization.getString("disable_permissions");
+        plugin.message(sender, null, message, null);
     }
 
     // Disables messages with /unlimitedlava disable messages or /ulava disable

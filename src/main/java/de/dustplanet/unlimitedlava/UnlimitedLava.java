@@ -8,11 +8,11 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -90,7 +90,7 @@ public class UnlimitedLava extends JavaPlugin {
             copy("localization.yml", localizationFile);
         }
         // Try to load
-        localization = YamlConfiguration.loadConfiguration(localizationFile);
+        localization = ScalarYamlConfiguration.loadConfiguration(localizationFile);
         loadLocalization();
 
         // Refer to UnlimitedLavaCommands
@@ -157,29 +157,28 @@ public class UnlimitedLava extends JavaPlugin {
 
     // Loads the localization
     public void loadLocalization() {
-        localization.options().header("The underscores are used for the different lines!");
         localization.addDefault("permission_denied", "&4You do not have the permission to do this!");
         localization.addDefault("reload", "&2UnlimitedLava &4%version &2reloaded!");
-        localization.addDefault("help_1", "&2Welcome to the UnlimitedLava version &4%version &2help");
-        localization.addDefault("help_2", "To see the help type &4/unlimitedlava help &for &4/ulava help");
-        localization.addDefault("help_3", "To reload use &4/unlimitedlava reload &for &4/ulava reload");
-        localization.addDefault("help_4", "To enable something use &4/unlimitedlava enable &e<value>");
-        localization.addDefault("help_5", "or &4/ulava enable &e<value>");
-        localization.addDefault("help_6", "To disable something use &4/unlimitedlava disable &e<value>");
-        localization.addDefault("help_7", "or &4/ulava disable &e<value>");
-        localization.addDefault("help_8", "&eValues: &fpermissions, messages, furnace, all, three, two, other, big, lava_fall, water_fall, plus, T");
-        localization.addDefault("help_9", "&eThe status of UnlimitedLava can be seen with &4/ulava status");
+        localization.addDefault("help", "&2Welcome to the UnlimitedLava version &4%version &2help\n" +
+                "To see the help type &4/unlimitedlava help &for &4/ulava help\n" +
+                "To reload use &4/unlimitedlava reload &for &4/ulava reload\n" +
+                "To enable something use &4/unlimitedlava enable &e<value>\n" +
+                "or &4/ulava enable &e<value>\n" +
+                "To disable something use &4/unlimitedlava disable &e<value>\n" +
+                "or &4/ulava disable &e<value>\n" +
+                "&eValues: &fpermissions, messages, furnace, all, three, two, other, big, lava_fall, water_fall, plus, T\n" +
+                "&eThe status of UnlimitedLava can be seen with &4/ulava status");
         localization.addDefault("enable_source", "&2UnlimitedLava source &4%source &2enabled!");
         localization.addDefault("enable_all", "&4All &2UnlimitedLava sources enabled!");
         localization.addDefault("enable_messages", "&2UnlimitedLava messages enabled!");
-        localization.addDefault("enable_permissions_1", "&2UnlimitedLava permissions enabled! Only OPs");
-        localization.addDefault("enable_permissions_2", "&2or players with the permission can use the plugin!");
+        localization.addDefault("enable_permissions", "&2UnlimitedLava permissions enabled!\n" +
+                "&2Only OPs or players with the permission can use the plugin!");
         localization.addDefault("enable_furnace", "&2UnlimitedLava &4furnace &2enabled!");
         localization.addDefault("disable_source", "&2UnlimitedLava source &4%source &2disabled!");
         localization.addDefault("disable_all", "&4All &2UnlimitedLava sources disabled!");
         localization.addDefault("disable_messages", "&2UnlimitedLava messages disabled!");
-        localization.addDefault("disable_permissions_1", "&2UnlimitedLava permissions disabled! Only OPs");
-        localization.addDefault("disable_permissions_2", "&4All players can use the plugin!");
+        localization.addDefault("disable_permissions", "&2UnlimitedLava permissions disabled!\n" +
+                "&4All players can use the plugin!");
         localization.addDefault("disable_furnace", "&2UnlimitedLava &4furnace &2disabled!");
         localization.options().copyDefaults(true);
         saveLocalization();
@@ -190,7 +189,7 @@ public class UnlimitedLava extends JavaPlugin {
         try {
             localization.save(localizationFile);
         } catch (IOException e) {
-            getLogger().warning("Failed to save the localization! Please report this! (I/O)");
+            getLogger().warning("Failed to save the localization! Please report this!");
             e.printStackTrace();
         }
     }
@@ -218,19 +217,27 @@ public class UnlimitedLava extends JavaPlugin {
                 out.write(buf, 0, len);
             }
         } catch (IOException e) {
-            getLogger().warning("Failed to copy the default config! (I/O)");
+            getLogger().warning("Failed to copy the default config!");
             e.printStackTrace();
         }
     }
 
     // Message the sender or player
     public void message(CommandSender sender, Player player, String message, String value) {
+        if (message == null) {
+            return;
+        }
+
+        String newValue = value;
+        if (newValue == null) {
+            newValue = "";
+        }
         PluginDescriptionFile pdfFile = this.getDescription();
-        String msg = message
-                .replaceAll("&([0-9a-fk-or])", "\u00A7$1")
-                .replaceAll("%version", pdfFile.getVersion())
-                .replaceAll("%source", value)
-                .replaceAll("%value", value);
+        String[] msg = ChatColor.translateAlternateColorCodes('\u0026', message
+                .replace("%version", pdfFile.getVersion())
+                .replace("%source", newValue)
+                .replace("%value", newValue))
+                .split("\n");
         if (player != null) {
             player.sendMessage(msg);
         } else if (sender != null) {
