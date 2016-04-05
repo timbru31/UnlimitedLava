@@ -1,7 +1,6 @@
 package de.dustplanet.unlimitedlava;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.logging.Level;
 
@@ -41,11 +40,8 @@ public class ScalarYamlConfiguration extends YamlConfiguration {
 
         try {
             config.load(file);
-        } catch (FileNotFoundException ex) {
-        } catch (IOException ex) {
+        } catch (IOException | InvalidConfigurationException ex) {
             Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file, ex);
-        } catch (InvalidConfigurationException ex) {
-            Bukkit.getLogger().log(Level.SEVERE, "Cannot load " + file , ex);
         }
 
         return config;
