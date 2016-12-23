@@ -24,7 +24,7 @@ import org.mcstats.Metrics;
  * Handles some general stuff!
  *
  * Refer to the dev.bukkit.org page:
- * http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
+ * https://dev.bukkit.org/projects/unlimited-lava
  *
  * @author xGhOsTkiLLeRx
  * thanks to loganwm for the help!
@@ -110,7 +110,7 @@ public class UnlimitedLava extends JavaPlugin {
     // Reloads the config file, via command /unlimitedlava reload or /ulava
     // reload and at the start!
     public void loadConfig() {
-        config.options().header("For help please refer to bukkit dev page:\nhttp://dev.bukkit.org/bukkit-plugins/unlimited-lava/");
+        config.options().header("For help please refer to bukkit dev page:\nhttps://dev.bukkit.org/projects/unlimited-lava");
         config.addDefault("configuration.permissions", true);
         config.addDefault("configuration.messages", true);
         config.addDefault("configuration.furnace", true);

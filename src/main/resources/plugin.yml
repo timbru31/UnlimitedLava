@@ -4,7 +4,7 @@ version: ${project.version}${build.number}
 author: xGhOsTkiLLeRx
 authors: [Edward Hand, Xastabus]
 description: Ability to enjoy unlimited lava sources
-website: http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
+website: https://dev.bukkit.org/projects/unlimited-lava
 commands:
   unlimitedlava:
     description: Handles all the UnlimitedLava commands

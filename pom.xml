@@ -5,7 +5,7 @@
   <version>1.9.4-SNAPSHOT</version>
   <name>UnlimitedLava</name>
   <description>Enjoy infinite lava sources</description>
-  <url>http://dev.bukkit.org/bukkit-plugins/unlimited-lava/</url>
+  <url>https://dev.bukkit.org/projects/unlimited-lava</url>
 
   <!-- Encode in UTF-8 -->
   <properties>
@@ -21,7 +21,7 @@
     </repository>
     <repository>
       <id>Plugin Metrics</id>
-      <url>http://repo.mcstats.org/content/repositories/public</url>
+      <url>https://repo.mcstats.org/content/repositories/public</url>
     </repository>
   </repositories>
 
@@ -30,7 +30,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.10.2-R0.1-SNAPSHOT</version>
+      <version>1.11.2-R0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.mcstats.bukkit</groupId>

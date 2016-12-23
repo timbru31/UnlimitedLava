@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/timbru31/UnlimitedLava.svg?branch=master)](https://travis-ci.org/timbru31/UnlimitedLava)
 [![Circle CI](https://img.shields.io/circleci/project/timbru31/UnlimitedLava.svg)](https://circleci.com/gh/timbru31/UnlimitedLava)
 [![Build status](https://ci.appveyor.com/api/projects/status/72ns97g6n7jqy6h2?svg=true)](https://ci.appveyor.com/project/timbru31/unlimitedlava)
-[![BukkitDev](https://img.shields.io/badge/BukkitDev-v1.9.3-orange.svg)](http://dev.bukkit.org/bukkit-plugins/unlimited-lava/)
+[![BukkitDev](https://img.shields.io/badge/BukkitDev-v1.9.3-orange.svg)](https://dev.bukkit.org/projects/unlimited-lava)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue.svg)](LICENSE.md)
 
 ## Info
@@ -26,7 +26,7 @@ Please see [LICENSE.md](LICENSE.md) for more information.
 
 ## Standard config
 ```yaml
-# For help please refer to the bukkit dev page: http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
+# For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/unlimited-lava
 configuration:
   # Should permissions be enabled or not?
   permissions: true
@@ -195,7 +195,7 @@ In the following table the X needs to be replaced by one of these values
 * You - for using it!
 
 ## Support
-For support visit the dev.bukkit.org page: http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
+For support visit the dev.bukkit.org page: https://dev.bukkit.org/projects/unlimited-lava
 
 ## Pull Requests
 Feel free to submit any PRs here. :)

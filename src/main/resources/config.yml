@@ -1,4 +1,4 @@
-# For help please refer the bukkit dev page: http://dev.bukkit.org/bukkit-plugins/unlimited-lava/
+# For help please refer the bukkit dev page: https://dev.bukkit.org/projects/unlimited-lava
 configuration:
   permissions: true
   messages: true
