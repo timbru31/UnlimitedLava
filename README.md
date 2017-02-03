@@ -63,78 +63,78 @@ debug: false
 * `X` is the unlimited lava block!
 
 #### 3x3 (three)
-````
+```
 L L L
 L X L
 L L L
-````
+```
 
 #### 2x2 (two)
-````
+```
 X X
 X X
-````
+```
 
 #### Plus
-````
+```
   L
 L X L
   L
-````
+```
 
 #### T Shape
-````
+```
 L X L
   L
-````
+```
 or
-````
+```
   L
 L X L
-````
+```
 or
-````
+```
   L
 L X
   L
-````
+```
 or
-````
+```
 L
 X L
 L
-````
+```
 
 #### Other
-````
+```
 L X L
-````
+```
 or
-````
+```
 L
 X
 L
-````
+```
 or
-````
+```
 L X
   L
-````
+```
 or
-````
+```
 X L
 L
-````
+```
 or
-````
+```
 L
 X L
-````
+```
 or
-````
+```
   L
 L X
-````
+```
 
 #### Big
 
@@ -142,7 +142,7 @@ You can get infinite lava from pools bigger than 3x3 (4x4, 5x5, etc.) from any b
 Border blocks won't work!
 
 #### Falls
-You can get infinite lava or water from a fall. Just let it flow into a hole an pick it up!
+You can get infinite lava or water from a fall. Just let it flow into a hole and pick it up!
 
 ## Commands & Permissions
 (Fallback to OPs, if no permissions system is found)
@@ -156,15 +156,15 @@ Command alias list
 * /unlimitedlaba
 
 #### General commands
-| Command | Permission node | Description |
-|:----------:|:----------:|:----------:|
-| - | unlimitedlava.use | Ability to use the unlimited blocks |
-| /ulava reload | unlimitedlava.reload | Reloads the config |
-| /ulava help | unlimitedlava.help | Displays the help |
-| /ulava status | unlimitedlava.status | Displays the current status |
+| Command       | Permission node      | Description                         |
+|:-------------:|:--------------------:|:-----------------------------------:|
+| -             | unlimitedlava.use    | Ability to use the unlimited blocks |
+| /ulava reload | unlimitedlava.reload | Reloads the config                  |
+| /ulava help   | unlimitedlava.help   | Displays the help                   |
+| /ulava status | unlimitedlava.status | Displays the current status         |
 
 #### Enabling or disabling one of the sources or other things
-In the following table the X needs to be replaced by one of these values
+In the following table the X needs to be replaced by one of these values:
 * all
 * three
 * two
@@ -178,9 +178,9 @@ In the following table the X needs to be replaced by one of these values
 * permissions
 * messages
 
-| Command | Permission node | Description |
-|:----------:|:----------:|:----------:|
-| /ulava enable X | unlimitedlava.enable.X | Enables source (replace X) |
+| Command          | Permission node         | Description                 |
+|:----------------:|:-----------------------:|:---------------------------:|
+| /ulava enable X  | unlimitedlava.enable.X  | Enables source (replace X)  |
 | /ulava disable X | unlimitedlava.disable.X | Disables source (replace X) |
 
 #### Special permissions
@@ -207,7 +207,7 @@ Please follow the Sun Coding Guidelines, thanks!
 ## Data usage collection of Metrics
 
 #### Disabling Metrics
-The file ../plugins/Plugin Metrics/config.yml contains an option to *opt-out*
+The file `../plugins/Plugin Metrics/config.yml `contains an option to *opt-out*.
 
 #### The following data is **read** from the server in some way or another
 * File Contents of plugins/Plugin Metrics/config.yml (created if not existent)
@@ -226,5 +226,5 @@ The file ../plugins/Plugin Metrics/config.yml contains an option to *opt-out*
 ## Donation
 [![PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donation via PayPal")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T9TEV7Q88B9M2)
 
-![BitCoin](https://dl.dropboxusercontent.com/u/26476995/bitcoin_logo.png "Donation via BitCoins")
+![BitCoin](https://dl.dropboxusercontent.com/u/26476995/bitcoin_logo.png "Donation via BitCoins")  
 Address: 1NnrRgdy7CfiYN63vKHiypSi3MSctCP55C
