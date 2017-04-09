@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bstats.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -17,7 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.mcstats.Metrics;
 
 /**
  * UnlimitedLava for CraftBukkit/Spigot
@@ -46,30 +46,24 @@ public class UnlimitedLava extends JavaPlugin {
     protected int height = 60;
     protected List<String> enabledWorlds = new ArrayList<>();
 
-    // Shutdown
     @Override
     public void onDisable() {
         enabledWorlds.clear();
     }
 
-    // Start
     @Override
     public void onEnable() {
         unlimitedLavaCheck = new UnlimitedLavaCheck(this);
         blockListener = new UnlimitedLavaBlockListener(this, unlimitedLavaCheck);
         playerListener = new UnlimitedLavaPlayerListener(this, unlimitedLavaCheck);
         inventoryListener = new UnlimitedLavaInventoryListener(this);
-        // Events
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(blockListener, this);
         pm.registerEvents(playerListener, this);
         pm.registerEvents(inventoryListener, this);
 
-        // Config
         configFile = new File(getDataFolder(), "config.yml");
-        // One file and the folder not existent
         if (!configFile.exists() && !getDataFolder().exists() && !getDataFolder().mkdirs()) {
-            // Break if no folder can be created!
             getLogger().severe("The config folder could NOT be created, make sure it's writable!");
             getLogger().severe("Disabling now!");
             setEnabled(false);
@@ -84,31 +78,20 @@ public class UnlimitedLava extends JavaPlugin {
         loadConfig();
         loadValues();
 
-        // Localization
         localizationFile = new File(getDataFolder(), "localization.yml");
         if (!localizationFile.exists()) {
             copy("localization.yml", localizationFile);
         }
-        // Try to load
+
         localization = ScalarYamlConfiguration.loadConfiguration(localizationFile);
         loadLocalization();
 
-        // Refer to UnlimitedLavaCommands
         executor = new UnlimitedLavaCommands(this);
         getCommand("unlimitedlava").setExecutor(executor);
 
-        // Stats
-        try {
-            Metrics metrics = new Metrics(this);
-            metrics.start();
-        } catch (IOException e) {
-            getLogger().warning("Could not start Metrics!");
-            e.printStackTrace();
-        }
+        new Metrics(this);
     }
 
-    // Reloads the config file, via command /unlimitedlava reload or /ulava
-    // reload and at the start!
     public void loadConfig() {
         config.options().header("For help please refer to bukkit dev page:\nhttps://dev.bukkit.org/projects/unlimited-lava");
         config.addDefault("configuration.permissions", true);
@@ -136,7 +119,6 @@ public class UnlimitedLava extends JavaPlugin {
         saveConfig();
     }
 
-    // Load the values into memory
     public void loadValues() {
         three = config.getBoolean("sources.three");
         two = config.getBoolean("sources.two");
@@ -155,7 +137,6 @@ public class UnlimitedLava extends JavaPlugin {
         debug = config.getBoolean("debug");
     }
 
-    // Loads the localization
     public void loadLocalization() {
         localization.addDefault("permission_denied", "&4You do not have the permission to do this!");
         localization.addDefault("reload", "&2UnlimitedLava &4%version &2reloaded!");
@@ -184,7 +165,6 @@ public class UnlimitedLava extends JavaPlugin {
         saveLocalization();
     }
 
-    // Saves the localization
     public void saveLocalization() {
         try {
             localization.save(localizationFile);
@@ -194,7 +174,6 @@ public class UnlimitedLava extends JavaPlugin {
         }
     }
 
-    // Reloads the config via command /unlimitedlava reload or /ulava reload
     public void loadConfigsAgain() {
         try {
             config.load(configFile);
@@ -207,7 +186,6 @@ public class UnlimitedLava extends JavaPlugin {
         }
     }
 
-    // If no config is found, copy the default one(s)!
     private void copy(String yml, File file) {
         try (OutputStream out = new FileOutputStream(file);
                 InputStream in = getResource(yml)) {
@@ -222,7 +200,6 @@ public class UnlimitedLava extends JavaPlugin {
         }
     }
 
-    // Message the sender or player
     public void message(CommandSender sender, Player player, String message, String value) {
         if (message == null) {
             return;
