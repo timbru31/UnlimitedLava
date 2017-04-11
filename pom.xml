@@ -17,8 +17,8 @@
 
   <properties>
     <plugin.name>UnlimitedLava</plugin.name>
-    <plugin.main>de.dustplanet.unlimited.UnlimitedLava</plugin.main>
-    <plugin.package>de.dustplanet.unlimited</plugin.package>
+    <plugin.main>de.dustplanet.unlimitedlava.UnlimitedLava</plugin.main>
+    <plugin.package>de.dustplanet.unlimitedlava</plugin.package>
     <jdk.version>1.8</jdk.version>
   </properties>
 
