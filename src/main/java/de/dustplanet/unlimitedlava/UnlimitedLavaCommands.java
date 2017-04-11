@@ -7,21 +7,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-/**
- * UnlimitedLavaCommands
- * Handles all commands!
- *
- * Refer to the dev.bukkit.org page:
- * https://dev.bukkit.org/projects/unlimited-lava
- *
- * @author xGhOsTkiLLeRx
- * thanks to loganwm for the help!
- * thanks to Edward Hand for the idea and original InfiniteLava plugin!
- * thanks to ferrybig for the awesome fall code!
- * thanks to Xastabus for the cool improvements of the checks!
- *
- */
-
 public class UnlimitedLavaCommands implements CommandExecutor {
     private UnlimitedLava plugin;
     private String[] values = { "three", "two", "other", "big", "lava_fall", "water_fall", "plus", "T", "ring" };

@@ -19,7 +19,6 @@ public class ScalarYamlConfiguration extends YamlConfiguration {
     private final Representer yamlRepresenter = new YamlRepresenter();
     private final Yaml yaml = new Yaml(new YamlConstructor(), yamlRepresenter, yamlOptions);
 
-
     /**
      * Creates a new {@link YamlConfiguration}, loading from the given file.
      * <p>

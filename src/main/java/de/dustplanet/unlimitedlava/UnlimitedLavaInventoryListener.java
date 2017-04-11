@@ -8,21 +8,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.ItemStack;
 
-/**
- * UnlimitedLavaInventoryListener
- * Handles the furnace burn stuff
- *
- * Refer to the dev.bukkit.org page:
- * https://dev.bukkit.org/projects/unlimited-lava
- *
- * @author xGhOsTkiLLeRx
- * thanks to loganwm for the help!
- * thanks to Edward Hand for the idea and original InfiniteLava plugin!
- * thanks to ferrybig for the awesome fall code!
- * thanks to Xastabus for the cool improvements of the checks!
- *
- */
-
 public class UnlimitedLavaInventoryListener implements Listener {
     private UnlimitedLava plugin;
 

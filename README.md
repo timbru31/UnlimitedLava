@@ -189,16 +189,16 @@ In the following table the X needs to be replaced by one of these values:
 * unlimitedlava.disable.* - Grants access to ALL disabling permissions
 
 ## Credits
-* loganwm for helping me :)!
-* ferrybig for the awesome fall code!
-* Xastabus for the new check algorithm!
-* You - for using it!
+* Edward Hand for the original InfiniteLava plugin
+* loganwm for helping me to get started
+* ferrybig for the awesome fall code
+* Xastabus for the new check algorithm
 
 ## Support
-For support visit the dev.bukkit.org page: https://dev.bukkit.org/projects/unlimited-lava or open an issue.
+For support visit the [Bukkit page](https://dev.bukkit.org/projects/unlimited-lava) or open an [issue](https://github.com/timbru31/UnlimitedLava/issues/new).
 
 ## Pull Requests
-Feel free to submit any PRs here. :)
+Feel free to submit any PRs here. :)  
 Please follow the Sun Coding Guidelines, thanks!
 
 ## Usage statistics
