@@ -7,10 +7,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.bstats.Metrics;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,6 +19,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * UnlimitedLava for CraftBukkit/Spigot
@@ -36,15 +40,16 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class UnlimitedLava extends JavaPlugin {
     private File configFile, localizationFile;
-    private UnlimitedLavaBlockListener blockListener;
-    private UnlimitedLavaCheck unlimitedLavaCheck;
-    private UnlimitedLavaCommands executor;
-    private UnlimitedLavaInventoryListener inventoryListener;
-    private UnlimitedLavaPlayerListener playerListener;
-    protected boolean three, two, other, big, plus, T, ring, lavaFall, waterFall, messages = true, permissions = true, furnace, debug;
-    protected FileConfiguration config, localization;
-    protected int height = 60;
-    protected List<String> enabledWorlds = new ArrayList<>();
+    @Getter
+    @Setter
+    private boolean three, two, other, big, plus, tShape, ring, lavaFall, waterFall, messages = true, permissions = true, furnace, debug;
+    private FileConfiguration config;
+    @Getter
+    private FileConfiguration localization;
+    @Getter
+    private int height = 60;
+    @Getter
+    private List<UUID> enabledWorlds = new ArrayList<>();
 
     @Override
     public void onDisable() {
@@ -53,31 +58,38 @@ public class UnlimitedLava extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        unlimitedLavaCheck = new UnlimitedLavaCheck(this);
-        blockListener = new UnlimitedLavaBlockListener(this, unlimitedLavaCheck);
-        playerListener = new UnlimitedLavaPlayerListener(this, unlimitedLavaCheck);
-        inventoryListener = new UnlimitedLavaInventoryListener(this);
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(blockListener, this);
-        pm.registerEvents(playerListener, this);
-        pm.registerEvents(inventoryListener, this);
+        registerEvents();
 
+        if (!loadConfigFile()) {
+            return;
+        }
+        loadLocalizationFile();
+
+        registerCommand();
+
+        startMetrics();
+    }
+
+    private boolean loadConfigFile() {
         configFile = new File(getDataFolder(), "config.yml");
         if (!configFile.exists() && !getDataFolder().exists() && !getDataFolder().mkdirs()) {
             getLogger().severe("The config folder could NOT be created, make sure it's writable!");
             getLogger().severe("Disabling now!");
             setEnabled(false);
-            return;
+            return false;
         }
 
         if (!configFile.exists()) {
             copy("config.yml", configFile);
         }
-
+        
         config = getConfig();
         loadConfig();
         loadValues();
+        return true;
+    }
 
+    private void loadLocalizationFile() {
         localizationFile = new File(getDataFolder(), "localization.yml");
         if (!localizationFile.exists()) {
             copy("localization.yml", localizationFile);
@@ -85,11 +97,26 @@ public class UnlimitedLava extends JavaPlugin {
 
         localization = ScalarYamlConfiguration.loadConfiguration(localizationFile);
         loadLocalization();
+    }
 
-        executor = new UnlimitedLavaCommands(this);
-        getCommand("unlimitedlava").setExecutor(executor);
-
+    private void startMetrics() {
         new Metrics(this);
+    }
+
+    private void registerCommand() {
+        UnlimitedLavaCommands executor = new UnlimitedLavaCommands(this);
+        getCommand("unlimitedlava").setExecutor(executor);
+    }
+
+    private void registerEvents() {
+        UnlimitedLavaCheck unlimitedLavaCheck = new UnlimitedLavaCheck(this);
+        UnlimitedLavaBlockListener blockListener = new UnlimitedLavaBlockListener(this, unlimitedLavaCheck);
+        UnlimitedLavaPlayerListener playerListener = new UnlimitedLavaPlayerListener(this, unlimitedLavaCheck);
+        UnlimitedLavaInventoryListener inventoryListener = new UnlimitedLavaInventoryListener(this);
+        PluginManager pm = getServer().getPluginManager();
+        pm.registerEvents(blockListener, this);
+        pm.registerEvents(playerListener, this);
+        pm.registerEvents(inventoryListener, this);
     }
 
     public void loadConfig() {
@@ -108,12 +135,8 @@ public class UnlimitedLava extends JavaPlugin {
         config.addDefault("sources.lava_fall", true);
         config.addDefault("sources.water_fall", false);
         config.addDefault("furnace.item", "BUCKET");
-        List<World> worlds = getServer().getWorlds();
-        List<String> worldNames = new ArrayList<>();
-        for (World w : worlds) {
-            worldNames.add(w.getName());
-        }
-        config.addDefault("enabled_worlds", worldNames);
+        List<String> worlds = getServer().getWorlds().stream().map(w -> w.getUID().toString()).collect(Collectors.toList());
+        config.addDefault("enabled_worlds", worlds);
         config.addDefault("debug", false);
         config.options().copyDefaults(true);
         saveConfig();
@@ -125,7 +148,7 @@ public class UnlimitedLava extends JavaPlugin {
         other = config.getBoolean("sources.other");
         big = config.getBoolean("sources.big");
         plus = config.getBoolean("sources.plus");
-        T = config.getBoolean("sources.T");
+        tShape = config.getBoolean("sources.T");
         ring = config.getBoolean("sources.ring");
         lavaFall = config.getBoolean("sources.lava_fall");
         waterFall = config.getBoolean("sources.water_fall");
@@ -133,7 +156,7 @@ public class UnlimitedLava extends JavaPlugin {
         messages = config.getBoolean("configuration.messages");
         furnace = config.getBoolean("configuration.furnace");
         height = config.getInt("configuration.height");
-        enabledWorlds = config.getStringList("enabled_worlds");
+        enabledWorlds = config.getStringList("enabled_worlds").stream().map(g -> UUID.fromString(g)).collect(Collectors.toList());
         debug = config.getBoolean("debug");
     }
 

@@ -30,144 +30,116 @@ public class UnlimitedLavaCommands implements CommandExecutor {
         plugin = instance;
     }
 
-    // Commands... First check if config value permissions is true
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         String message, value;
-        // reload
         if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
-            if (sender.hasPermission("unlimitedlava.reload") || !plugin.permissions) {
-                unlimitedLavaReload(sender);
+            if (sender.hasPermission("unlimitedlava.reload") || !plugin.isPermissions()) {
+                reload(sender);
             } else {
-                message = plugin.localization.getString("permission_denied");
+                message = plugin.getLocalization().getString("permission_denied");
                 plugin.message(sender, null, message, null);
             }
             return true;
-        }
-        // status
-        else if (args.length > 0 && args[0].equalsIgnoreCase("status")) {
-            if (sender.hasPermission("unlimitedlava.status") || !plugin.permissions) {
-                unlimitedLavaStatus(sender);
+        } else if (args.length > 0 && args[0].equalsIgnoreCase("status")) {
+            if (sender.hasPermission("unlimitedlava.status") || !plugin.isPermissions()) {
+                displayStatus(sender);
             } else {
-                message = plugin.localization.getString("permission_denied");
+                message = plugin.getLocalization().getString("permission_denied");
                 plugin.message(sender, null, message, null);
             }
             return true;
-        }
-        // help
-        else if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
-            if (sender.hasPermission("unlimitedlava.help") || !plugin.permissions) {
-                unlimitedLavaHelp(sender);
+        } else if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
+            if (sender.hasPermission("unlimitedlava.help") || !plugin.isPermissions()) {
+                displayHelp(sender);
             } else {
-                message = plugin.localization.getString("permission_denied");
+                message = plugin.getLocalization().getString("permission_denied");
                 plugin.message(sender, null, message, null);
             }
             return true;
-        }
-        // Enable
-        else if (args.length > 0 && args[0].equalsIgnoreCase("enable")) {
-            // Enable all
+        } else if (args.length > 0 && args[0].equalsIgnoreCase("enable")) {
             if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
-                if (sender.hasPermission("unlimitedlava.enable.all") || !plugin.permissions) {
-                    unlimitedLavaEnableAll(sender);
+                if (sender.hasPermission("unlimitedlava.enable.all") || !plugin.isPermissions()) {
+                    enableAll(sender);
                 } else {
-                    message = plugin.localization.getString("permission_denied");
+                    message = plugin.getLocalization().getString("permission_denied");
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            }
-            // Enable a source
-            else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
+            } else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
                 value = args[1];
-                if (sender.hasPermission("unlimitedlava.enable." + args[1]) || !plugin.permissions) {
-                    unlimitedLavaEnableSource(sender, value);
+                if (sender.hasPermission("unlimitedlava.enable." + args[1]) || !plugin.isPermissions()) {
+                    enableSource(sender, value);
                 } else {
-                    message = plugin.localization.getString("permission_denied");
+                    message = plugin.getLocalization().getString("permission_denied");
+                    plugin.message(sender, null, message, null);
+                }
+                return true;
+            } else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
+                if (sender.hasPermission("unlimitedlava.enable.furnace") || !plugin.isPermissions()) {
+                    enableFurnace(sender);
+                } else {
+                    message = plugin.getLocalization().getString("permission_denied");
+                    plugin.message(sender, null, message, null);
+                }
+                return true;
+            } else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
+                if (sender.hasPermission("unlimitedlava.enable.permissions") || !plugin.isPermissions()) {
+                    enablePermissions(sender);
+                } else {
+                    message = plugin.getLocalization().getString("permission_denied");
+                    plugin.message(sender, null, message, null);
+                }
+                return true;
+            } else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
+                if (sender.hasPermission("unlimitedlava.enable.messages") || !plugin.isPermissions()) {
+                    enableMessages(sender);
+                } else {
+                    message = plugin.getLocalization().getString("permission_denied");
                     plugin.message(sender, null, message, null);
                 }
                 return true;
             }
-            // Enable furnace
-            else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
-                if (sender.hasPermission("unlimitedlava.enable.furnace") || !plugin.permissions) {
-                    unlimitedLavaEnableFurnace(sender);
-                } else {
-                    message = plugin.localization.getString("permission_denied");
-                    plugin.message(sender, null, message, null);
-                }
-                return true;
-            }
-            // Enable permissions
-            else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
-                if (sender.hasPermission("unlimitedlava.enable.permissions") || !plugin.permissions) {
-                    unlimitedLavaEnablePermissions(sender);
-                } else {
-                    message = plugin.localization.getString("permission_denied");
-                    plugin.message(sender, null, message, null);
-                }
-                return true;
-            }
-            // Enable messages
-            else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
-                if (sender.hasPermission("unlimitedlava.enable.messages") || !plugin.permissions) {
-                    unlimitedLavaEnableMessages(sender);
-                } else {
-                    message = plugin.localization.getString("permission_denied");
-                    plugin.message(sender, null, message, null);
-                }
-                return true;
-            }
-        }
-        // Disable
-        else if (args.length > 0 && args[0].equalsIgnoreCase("disable")) {
-            // Disable all
+        } else if (args.length > 0 && args[0].equalsIgnoreCase("disable")) {
             if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
-                if (sender.hasPermission("unlimitedlava.disable.all") || !plugin.permissions) {
-                    unlimitedLavaDisableAll(sender);
+                if (sender.hasPermission("unlimitedlava.disable.all") || !plugin.isPermissions()) {
+                    disableAll(sender);
                 } else {
-                    message = plugin.localization.getString("permission_denied");
+                    message = plugin.getLocalization().getString("permission_denied");
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            }
-            // Disable a source
-            else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
+            } else if (args.length > 1 && Arrays.asList(values).contains(args[1])) {
                 value = args[1];
-                if (sender.hasPermission("unlimitedlava.disable." + args[1]) || !plugin.permissions) {
-                    unlimitedLavaDisableSource(sender, value);
+                if (sender.hasPermission("unlimitedlava.disable." + args[1]) || !plugin.isPermissions()) {
+                    disableSource(sender, value);
                 } else {
-                    message = plugin.localization.getString("permission_denied");
+                    message = plugin.getLocalization().getString("permission_denied");
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            }
-            // Disable permissions
-            else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
-                if (sender.hasPermission("unlimitedlava.disable.permissions") || !plugin.permissions) {
-                    unlimitedLavaDisablePermissions(sender);
+            } else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
+                if (sender.hasPermission("unlimitedlava.disable.permissions") || !plugin.isPermissions()) {
+                    disablePermissions(sender);
                 } else {
-                    message = plugin.localization.getString("permission_denied");
+                    message = plugin.getLocalization().getString("permission_denied");
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            }
-            // Disable messages
-            else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
-                if (sender.hasPermission("unlimitedlava.disable.messages") || !plugin.permissions) {
-                    unlimitedLavaDisableMessages(sender);
+            } else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
+                if (sender.hasPermission("unlimitedlava.disable.messages") || !plugin.isPermissions()) {
+                    disableMessages(sender);
                 } else {
-                    message = plugin.localization.getString("permission_denied");
+                    message = plugin.getLocalization().getString("permission_denied");
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            }
-            // Disable furnace
-            else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
-                if (sender.hasPermission("unlimitedlava.disable.furnace") || !plugin.permissions) {
-                    unlimitedLavaDisableFurnace(sender);
+            } else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
+                if (sender.hasPermission("unlimitedlava.disable.furnace") || !plugin.isPermissions()) {
+                    disableFurnace(sender);
 
                 } else {
-                    message = plugin.localization.getString("permission_denied");
+                    message = plugin.getLocalization().getString("permission_denied");
                     plugin.message(sender, null, message, null);
                 }
                 return true;
@@ -176,232 +148,202 @@ public class UnlimitedLavaCommands implements CommandExecutor {
         return false;
     }
 
-    private void unlimitedLavaStatus(CommandSender sender) {
+    private void displayStatus(CommandSender sender) {
         String header = ChatColor.YELLOW + "Status of UnlimitedLava";
         String string = "";
-        // Big
-        if (plugin.big) {
-            string += "Big: " + ChatColor.DARK_GREEN + plugin.big + ChatColor.WHITE + ", ";
+        if (plugin.isBig()) {
+            string += "Big: " + ChatColor.DARK_GREEN + plugin.isBig() + ChatColor.WHITE + ", ";
         } else {
-            string += "Big: " + ChatColor.DARK_RED + plugin.big + ChatColor.WHITE + ", ";
+            string += "Big: " + ChatColor.DARK_RED + plugin.isBig() + ChatColor.WHITE + ", ";
         }
-        // Three
-        if (plugin.three) {
-            string += "three: " + ChatColor.DARK_GREEN + plugin.three + ChatColor.WHITE + ", ";
+        if (plugin.isThree()) {
+            string += "three: " + ChatColor.DARK_GREEN + plugin.isThree() + ChatColor.WHITE + ", ";
         } else {
-            string += "three: " + ChatColor.DARK_RED + plugin.three + ChatColor.WHITE + ", ";
+            string += "three: " + ChatColor.DARK_RED + plugin.isThree() + ChatColor.WHITE + ", ";
         }
-        // Two
-        if (plugin.two) {
-            string += "two: " + ChatColor.DARK_GREEN + plugin.two + ChatColor.WHITE + ", ";
+        if (plugin.isTwo()) {
+            string += "two: " + ChatColor.DARK_GREEN + plugin.isTwo() + ChatColor.WHITE + ", ";
         } else {
-            string += "two:" + ChatColor.DARK_RED + plugin.two + ChatColor.WHITE + ", ";
+            string += "two:" + ChatColor.DARK_RED + plugin.isTwo() + ChatColor.WHITE + ", ";
         }
         string += "\n";
-        // Other
-        if (plugin.other) {
-            string += "other: " + ChatColor.DARK_GREEN + plugin.other + ChatColor.WHITE + ", ";
+        if (plugin.isOther()) {
+            string += "other: " + ChatColor.DARK_GREEN + plugin.isOther() + ChatColor.WHITE + ", ";
         } else {
-            string += "other: " + ChatColor.DARK_RED + plugin.other + ChatColor.WHITE + ", ";
+            string += "other: " + ChatColor.DARK_RED + plugin.isOther() + ChatColor.WHITE + ", ";
         }
-        // Plus
-        if (plugin.plus) {
-            string += "plus: " + ChatColor.DARK_GREEN + plugin.plus + ChatColor.WHITE + ", ";
+        if (plugin.isPlus()) {
+            string += "plus: " + ChatColor.DARK_GREEN + plugin.isPlus() + ChatColor.WHITE + ", ";
         } else {
-            string += "plus: " + ChatColor.DARK_RED + plugin.plus + ChatColor.WHITE + ", ";
+            string += "plus: " + ChatColor.DARK_RED + plugin.isPlus() + ChatColor.WHITE + ", ";
         }
-        // T
-        if (plugin.T) {
-            string += "T: " + ChatColor.DARK_GREEN + plugin.T + ChatColor.WHITE + ", ";
+        if (plugin.isTShape()) {
+            string += "T: " + ChatColor.DARK_GREEN + plugin.isTShape() + ChatColor.WHITE + ", ";
         } else {
-            string += "T: " + ChatColor.DARK_RED + plugin.T + ChatColor.WHITE + ", ";
+            string += "T: " + ChatColor.DARK_RED + plugin.isTShape() + ChatColor.WHITE + ", ";
         }
-        // Ring
-        if (plugin.ring) {
-            string += "ring: " + ChatColor.DARK_GREEN + plugin.ring + ChatColor.WHITE + ", ";
+        if (plugin.isRing()) {
+            string += "ring: " + ChatColor.DARK_GREEN + plugin.isRing() + ChatColor.WHITE + ", ";
         } else {
-            string += "ring: " + ChatColor.DARK_RED + plugin.ring + ChatColor.WHITE + ", ";
+            string += "ring: " + ChatColor.DARK_RED + plugin.isRing() + ChatColor.WHITE + ", ";
         }
         string += "\n";
-        // LavaFall
-        if (plugin.lavaFall) {
-            string += "lavaFall: " + ChatColor.DARK_GREEN + plugin.lavaFall + ChatColor.WHITE + ", ";
+        if (plugin.isLavaFall()) {
+            string += "lavaFall: " + ChatColor.DARK_GREEN + plugin.isLavaFall() + ChatColor.WHITE + ", ";
         } else {
-            string += "lavaFall: " + ChatColor.DARK_RED + plugin.lavaFall + ChatColor.WHITE + ", ";
+            string += "lavaFall: " + ChatColor.DARK_RED + plugin.isLavaFall() + ChatColor.WHITE + ", ";
         }
-        // WaterFall
-        if (plugin.waterFall) {
-            string += "waterFall: " + ChatColor.DARK_GREEN + plugin.waterFall + ChatColor.WHITE + ", ";
+        if (plugin.isWaterFall()) {
+            string += "waterFall: " + ChatColor.DARK_GREEN + plugin.isWaterFall() + ChatColor.WHITE + ", ";
         } else {
-            string += "waterFall: " + ChatColor.DARK_RED + plugin.waterFall + ChatColor.WHITE + ", ";
+            string += "waterFall: " + ChatColor.DARK_RED + plugin.isWaterFall() + ChatColor.WHITE + ", ";
         }
-        // MinHeight
-        string += "minHeight: " + ChatColor.YELLOW + plugin.height + ChatColor.WHITE + ", ";
+        string += "minHeight: " + ChatColor.YELLOW + plugin.getHeight() + ChatColor.WHITE + ", ";
         string += "\n";
-        // furnace
-        if (plugin.furnace) {
-            string += "furnace: " + ChatColor.DARK_GREEN + plugin.furnace + ChatColor.WHITE + ", ";
+        if (plugin.isFurnace()) {
+            string += "furnace: " + ChatColor.DARK_GREEN + plugin.isFurnace() + ChatColor.WHITE + ", ";
         } else {
-            string += "furnace: " + ChatColor.DARK_RED + plugin.furnace + ChatColor.WHITE + ", ";
+            string += "furnace: " + ChatColor.DARK_RED + plugin.isFurnace() + ChatColor.WHITE + ", ";
         }
-        // Permissions
-        if (plugin.permissions) {
-            string += "permissions: " + ChatColor.DARK_GREEN + plugin.permissions + ChatColor.WHITE + ", ";
+        if (plugin.isPermissions()) {
+            string += "permissions: " + ChatColor.DARK_GREEN + plugin.isPermissions() + ChatColor.WHITE + ", ";
         } else {
-            string += "permissions: " + ChatColor.DARK_RED + plugin.permissions + ChatColor.WHITE + ", ";
+            string += "permissions: " + ChatColor.DARK_RED + plugin.isPermissions() + ChatColor.WHITE + ", ";
         }
-        // Messages
-        if (plugin.messages) {
-            string += "messages: " + ChatColor.DARK_GREEN + plugin.messages + ChatColor.WHITE + ", ";
+        if (plugin.isMessages()) {
+            string += "messages: " + ChatColor.DARK_GREEN + plugin.isMessages() + ChatColor.WHITE + ", ";
         } else {
-            string += "messages: " + ChatColor.DARK_RED + plugin.messages + ChatColor.WHITE + ", ";
+            string += "messages: " + ChatColor.DARK_RED + plugin.isMessages() + ChatColor.WHITE + ", ";
         }
-        String worlds = ChatColor.YELLOW + "Active worlds: " + ChatColor.DARK_GREEN + plugin.enabledWorlds.toString().replace("[", "").replace("]", "");
+        String worlds = ChatColor.YELLOW + "Active worlds:";
         sender.sendMessage(header);
         sender.sendMessage(string);
         sender.sendMessage(worlds);
+        plugin.getEnabledWorlds().forEach(
+                uid -> sender.sendMessage(ChatColor.DARK_GREEN + "\t" + plugin.getServer().getWorld(uid).getName()));
     }
 
-    // Reloads the config with /unlimitedlava reload or /ulava reload
-    private void unlimitedLavaReload(CommandSender sender) {
+    private void reload(CommandSender sender) {
         plugin.loadConfigsAgain();
         plugin.loadValues();
-        String message = plugin.localization.getString("reload");
+        String message = plugin.getLocalization().getString("reload");
         plugin.message(sender, null, message, null);
     }
 
-    // See the help with /unlimitedlava help or /ulava help
-    private void unlimitedLavaHelp(CommandSender sender) {
-        String message = plugin.localization.getString("help");
+    private void displayHelp(CommandSender sender) {
+        String message = plugin.getLocalization().getString("help");
         plugin.message(sender, null, message, null);
     }
 
-    // Enable a source
-    private void unlimitedLavaEnableSource(CommandSender sender, String value) {
-        plugin.config.set("sources." + value, true);
+    private void enableSource(CommandSender sender, String value) {
+        plugin.getConfig().set("sources." + value, true);
         plugin.saveConfig();
         plugin.loadValues();
-        String message = plugin.localization.getString("enable_source");
+        String message = plugin.getLocalization().getString("enable_source");
         plugin.message(sender, null, message, value);
     }
 
-    // Enables all sources with /unlimitedlava enable all or /ulava enable all
-    private void unlimitedLavaEnableAll(CommandSender sender) {
-        plugin.config.set("sources.three", true);
-        plugin.config.set("sources.two", true);
-        plugin.config.set("sources.other", true);
-        plugin.config.set("sources.big", true);
-        plugin.config.set("sources.plus", true);
-        plugin.config.set("sources.T", true);
-        plugin.config.set("sources.ring", true);
-        plugin.config.set("sources.water_fall", true);
-        plugin.config.set("sources.lava_fall", true);
+    private void enableAll(CommandSender sender) {
+        plugin.getConfig().set("sources.three", true);
+        plugin.getConfig().set("sources.two", true);
+        plugin.getConfig().set("sources.other", true);
+        plugin.getConfig().set("sources.big", true);
+        plugin.getConfig().set("sources.plus", true);
+        plugin.getConfig().set("sources.T", true);
+        plugin.getConfig().set("sources.ring", true);
+        plugin.getConfig().set("sources.water_fall", true);
+        plugin.getConfig().set("sources.lava_fall", true);
         plugin.saveConfig();
-        plugin.three = true;
-        plugin.two = true;
-        plugin.other = true;
-        plugin.plus = true;
-        plugin.big = true;
-        plugin.T = true;
-        plugin.ring = true;
-        plugin.waterFall = true;
-        plugin.lavaFall = true;
-        String message = plugin.localization.getString("enable_all");
+        plugin.setThree(true);
+        plugin.setTwo(true);
+        plugin.setOther(true);
+        plugin.setPlus(true);
+        plugin.setBig(true);
+        plugin.setTShape(true);
+        plugin.setRing(true);
+        plugin.setWaterFall(true);
+        plugin.setLavaFall(true);
+        String message = plugin.getLocalization().getString("enable_all");
         plugin.message(sender, null, message, null);
     }
 
-    // Enables permissions with /unlimitedlava enable permissions or /ulava
-    // enable permissions
-    private void unlimitedLavaEnablePermissions(CommandSender sender) {
-        plugin.config.set("configuration.permissions", true);
+    private void enablePermissions(CommandSender sender) {
+        plugin.getConfig().set("configuration.permissions", true);
         plugin.saveConfig();
-        plugin.permissions = true;
-        String message = plugin.localization.getString("enable_permissions");
+        plugin.setPermissions(true);
+        String message = plugin.getLocalization().getString("enable_permissions");
         plugin.message(sender, null, message, null);
     }
 
-    // Enables messages with /unlimitedlava enable messages or /ulava enable
-    // messages
-    private void unlimitedLavaEnableMessages(CommandSender sender) {
-        plugin.config.set("configuration.messages", true);
+    private void enableMessages(CommandSender sender) {
+        plugin.getConfig().set("configuration.messages", true);
         plugin.saveConfig();
-        plugin.messages = true;
-        String message = plugin.localization.getString("enable_messages");
+        plugin.setMessages(true);
+        String message = plugin.getLocalization().getString("enable_messages");
         plugin.message(sender, null, message, null);
     }
 
-    // Enables furnace with /unlimitedlava enable furnace or /ulava enable
-    // furnace
-    private void unlimitedLavaEnableFurnace(CommandSender sender) {
-        plugin.config.set("configuration.furnace", true);
+    private void enableFurnace(CommandSender sender) {
+        plugin.getConfig().set("configuration.furnace", true);
         plugin.saveConfig();
-        plugin.furnace = true;
-        String message = plugin.localization.getString("enable_furnace");
+        plugin.setFurnace(true);
+        String message = plugin.getLocalization().getString("enable_furnace");
         plugin.message(sender, null, message, null);
     }
 
-    // Disable a source
-    private void unlimitedLavaDisableSource(CommandSender sender, String value) {
-        plugin.config.set("sources." + value, false);
+    private void disableSource(CommandSender sender, String value) {
+        plugin.getConfig().set("sources." + value, false);
         plugin.saveConfig();
         plugin.loadValues();
-        String message = plugin.localization.getString("disable_source");
+        String message = plugin.getLocalization().getString("disable_source");
         plugin.message(sender, null, message, value);
     }
 
-    // Disables all sources with /unlimitedlava disable all or /ulava disable
-    // all
-    private void unlimitedLavaDisableAll(CommandSender sender) {
-        plugin.config.set("sources.three", false);
-        plugin.config.set("sources.two", false);
-        plugin.config.set("sources.other", false);
-        plugin.config.set("sources.big", false);
-        plugin.config.set("sources.plus", false);
-        plugin.config.set("sources.T", false);
-        plugin.config.set("sources.ring", false);
-        plugin.config.set("sources.water_fall", false);
-        plugin.config.set("sources.lava_fall", false);
+    private void disableAll(CommandSender sender) {
+        plugin.getConfig().set("sources.three", false);
+        plugin.getConfig().set("sources.two", false);
+        plugin.getConfig().set("sources.other", false);
+        plugin.getConfig().set("sources.big", false);
+        plugin.getConfig().set("sources.plus", false);
+        plugin.getConfig().set("sources.T", false);
+        plugin.getConfig().set("sources.ring", false);
+        plugin.getConfig().set("sources.water_fall", false);
+        plugin.getConfig().set("sources.lava_fall", false);
         plugin.saveConfig();
-        plugin.three = false;
-        plugin.two = false;
-        plugin.other = false;
-        plugin.plus = false;
-        plugin.big = false;
-        plugin.T = false;
-        plugin.ring = false;
-        plugin.waterFall = false;
-        plugin.lavaFall = false;
-        String message = plugin.localization.getString("disable_all");
+        plugin.setThree(false);
+        plugin.setTwo(false);
+        plugin.setOther(false);
+        plugin.setPlus(false);
+        plugin.setBig(false);
+        plugin.setTShape(false);
+        plugin.setRing(false);
+        plugin.setWaterFall(false);
+        plugin.setLavaFall(false);
+        String message = plugin.getLocalization().getString("disable_all");
         plugin.message(sender, null, message, null);
     }
 
-    // Disables permissions with /unlimitedlava disable permissions or /ulava
-    // disable permissions
-    private void unlimitedLavaDisablePermissions(CommandSender sender) {
-        plugin.config.set("configuration.permissions", false);
+    private void disablePermissions(CommandSender sender) {
+        plugin.getConfig().set("configuration.permissions", false);
         plugin.saveConfig();
-        plugin.permissions = false;
-        String message = plugin.localization.getString("disable_permissions");
+        plugin.setPermissions(false);
+        String message = plugin.getLocalization().getString("disable_permissions");
         plugin.message(sender, null, message, null);
     }
 
-    // Disables messages with /unlimitedlava disable messages or /ulava disable
-    // messages
-    private void unlimitedLavaDisableMessages(CommandSender sender) {
-        plugin.config.set("configuration.messages", false);
+    private void disableMessages(CommandSender sender) {
+        plugin.getConfig().set("configuration.messages", false);
         plugin.saveConfig();
-        plugin.messages = false;
-        String message = plugin.localization.getString("disable_messages");
+        plugin.setMessages(false);
+        String message = plugin.getLocalization().getString("disable_messages");
         plugin.message(sender, null, message, null);
     }
 
-    // Disables furnace with /unlimitedlava disable furnace or /ulava disable
-    // furnace
-    private void unlimitedLavaDisableFurnace(CommandSender sender) {
-        plugin.config.set("configuration.furnace", false);
+    private void disableFurnace(CommandSender sender) {
+        plugin.getConfig().set("configuration.furnace", false);
         plugin.saveConfig();
-        plugin.furnace = false;
-        String message = plugin.localization.getString("disable_furnace");
+        plugin.setFurnace(false);
+        String message = plugin.getLocalization().getString("disable_furnace");
         plugin.message(sender, null, message, null);
     }
 }
