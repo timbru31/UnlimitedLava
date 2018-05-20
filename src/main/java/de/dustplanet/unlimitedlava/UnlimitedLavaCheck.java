@@ -61,7 +61,7 @@ public class UnlimitedLavaCheck {
                 blockIsSolid[i] = false;
             }
             if (blockMaterial[i] == Material.WATER || blockMaterial[i] == Material.LAVA) {
-                blockData[i] = ((Levelled) block.getBlockData()).getLevel();
+                blockData[i] = ((Levelled) blockRelative[i].getBlockData()).getLevel();
             } else {
                 blockData[i] = -1;
             }
