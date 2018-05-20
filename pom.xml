@@ -27,7 +27,7 @@
       <url>https://repo.dustplanet.de/artifactory/bukkit-plugins/</url>
     </repository>
     <repository>
-      <id>parent</id>
+      <id>dustplanet-ext-release-snapshots</id>
       <url>https://repo.dustplanet.de/artifactory/ext-snapshot-local/</url>
     </repository>
   </repositories>
