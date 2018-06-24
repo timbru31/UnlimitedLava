@@ -230,3 +230,6 @@ The file `./plugins/bStats/config.yml` contains an option to *opt-out*.
 
 ![BitCoin](https://dustplanet.de/wp-content/uploads/2015/01/bitcoin-logo-plain.png "Donation via BitCoins")  
 1NnrRgdy7CfiYN63vKHiypSi3MSctCP55C
+
+---
+Built by (c) Tim Brust and contributors. Released under the MIT license.
