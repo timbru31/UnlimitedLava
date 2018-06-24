@@ -21,11 +21,6 @@ Special features are
 *Third party features, all of them can be disabled*
 * bStats for usage statistics
 
-## License
-This plugin is released under the
-*Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)* license.
-Please see [LICENSE.md](LICENSE.md) for more information.
-
 ## Standard config
 ```yaml
 # For help please refer to the bukkit dev page: https://dev.bukkit.org/projects/unlimited-lava
