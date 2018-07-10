@@ -18,7 +18,7 @@
     <plugin.name>UnlimitedLava</plugin.name>
     <plugin.main>de.dustplanet.unlimitedlava.UnlimitedLava</plugin.main>
     <plugin.package>de.dustplanet.unlimitedlava</plugin.package>
-    <bukkit.version>18w15a-R0.1-SNAPSHOT</bukkit.version>
+    <bukkit.version>1.13-pre5-R0.1-SNAPSHOT</bukkit.version>
   </properties>
 
   <repositories>
