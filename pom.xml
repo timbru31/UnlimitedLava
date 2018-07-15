@@ -18,17 +18,13 @@
     <plugin.name>UnlimitedLava</plugin.name>
     <plugin.main>de.dustplanet.unlimitedlava.UnlimitedLava</plugin.main>
     <plugin.package>de.dustplanet.unlimitedlava</plugin.package>
-    <bukkit.version>1.13-pre5-R0.1-SNAPSHOT</bukkit.version>
+    <bukkit.version>1.13-pre7-R0.1-SNAPSHOT</bukkit.version>
   </properties>
 
   <repositories>
     <repository>
       <id>parent</id>
       <url>https://repo.dustplanet.de/artifactory/bukkit-plugins/</url>
-    </repository>
-    <repository>
-      <id>dustplanet-ext-release-snapshots</id>
-      <url>https://repo.dustplanet.de/artifactory/ext-snapshot-local/</url>
     </repository>
   </repositories>
 
