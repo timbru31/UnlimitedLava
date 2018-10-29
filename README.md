@@ -6,7 +6,7 @@
 
 [![BukkitDev](https://img.shields.io/badge/BukkitDev-v1.9.4-orange.svg)](https://dev.bukkit.org/projects/unlimited-lava)
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Info
 This CraftBukkit plugin aims to offer the same ability to lava that water has:
