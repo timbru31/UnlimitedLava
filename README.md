@@ -1,7 +1,6 @@
 # UnlimitedLava
 [![Build Status](https://ci.dustplanet.de/job/UnlimitedLava/badge/icon)](https://ci.dustplanet.de/job/UnlimitedLava/)
 [![Build Status](https://travis-ci.org/timbru31/UnlimitedLava.svg?branch=master)](https://travis-ci.org/timbru31/UnlimitedLava)
-[![Circle CI](https://img.shields.io/circleci/project/timbru31/UnlimitedLava.svg)](https://circleci.com/gh/timbru31/UnlimitedLava)
 [![Build status](https://ci.appveyor.com/api/projects/status/72ns97g6n7jqy6h2?svg=true)](https://ci.appveyor.com/project/timbru31/unlimitedlava)
 
 [![BukkitDev](https://img.shields.io/badge/BukkitDev-v1.9.4-orange.svg)](https://dev.bukkit.org/projects/unlimited-lava)
