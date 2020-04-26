@@ -24,6 +24,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 public class UnlimitedLava extends JavaPlugin {
+    private static final int BSTATS_PLUGIN_ID = 558;
     private File configFile, localizationFile;
     @Getter
     @Setter
@@ -84,8 +85,9 @@ public class UnlimitedLava extends JavaPlugin {
         loadLocalization();
     }
 
+    @SuppressWarnings("unused")
     private void startMetrics() {
-        new Metrics(this);
+        new Metrics(this, BSTATS_PLUGIN_ID);
     }
 
     private void registerCommand() {
