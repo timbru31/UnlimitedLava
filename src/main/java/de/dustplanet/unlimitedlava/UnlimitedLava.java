@@ -22,8 +22,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.gravitydevelopment.updater.Updater;
 
 public class UnlimitedLava extends JavaPlugin {
+    private static final int PLUGIN_ID = 31702;
     private static final int BSTATS_PLUGIN_ID = 558;
     private File configFile, localizationFile;
     @Getter
@@ -54,6 +56,27 @@ public class UnlimitedLava extends JavaPlugin {
         registerCommand();
 
         startMetrics();
+
+        startAutoUpdater();
+    }
+
+    private void startAutoUpdater() {
+        if (config.getBoolean("configuration.autoUpdater", true)) {
+            if (getDescription().getVersion().contains("SNAPSHOT")) {
+                getLogger().info("AutoUpdater is disabled because you are running a dev build!");
+            } else {
+                try {
+                    // Updater https://bukkit.org/threads96681/
+                    Updater updater = new Updater(this, PLUGIN_ID, getFile(), Updater.UpdateType.DEFAULT, true);
+                    getLogger().info("AutoUpdater is enabled.");
+                    getLogger().info("Result from AutoUpdater is: " + updater.getResult().name());
+                } catch (Exception e) {
+                    getLogger().info("Error while auto updating: " + e.getMessage());
+                }
+            }
+        } else {
+            getLogger().info("AutoUpdater is disabled due to config setting.");
+        }
     }
 
     private boolean loadConfigFile() {
@@ -112,6 +135,7 @@ public class UnlimitedLava extends JavaPlugin {
         config.addDefault("configuration.messages", Boolean.TRUE);
         config.addDefault("configuration.furnace", Boolean.TRUE);
         config.addDefault("configuration.height", 60);
+        config.addDefault("configuration.autoUpdater", Boolean.TRUE);
         config.addDefault("sources.three", Boolean.TRUE);
         config.addDefault("sources.two", Boolean.TRUE);
         config.addDefault("sources.other", Boolean.FALSE);

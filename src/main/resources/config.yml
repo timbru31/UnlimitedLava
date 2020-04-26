@@ -4,6 +4,7 @@ configuration:
   messages: true
   furnace: true
   height: 60
+  autoUpdater: true
 sources:
   three: true
   two: true

@@ -19,6 +19,7 @@ Special features are
 
 *Third party features, all of them can be disabled*
 * bStats for usage statistics
+* AutoUpdater
 
 ## Standard config
 ```yaml
@@ -32,6 +33,8 @@ configuration:
   furnace: true
   # At which height (block - not line of sight!) is the lava unlimited
   height: 60
+  # Should an auto updater for this plugin be enabled?
+  autoUpdater: true
 sources:
   # Different sources -> See the schematics below
   three: true
