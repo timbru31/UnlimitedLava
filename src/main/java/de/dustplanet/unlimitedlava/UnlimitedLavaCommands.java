@@ -3,6 +3,7 @@ package de.dustplanet.unlimitedlava;
 import java.util.Arrays;
 
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -204,8 +205,11 @@ public class UnlimitedLavaCommands implements CommandExecutor {
         sender.sendMessage(header);
         sender.sendMessage(string);
         sender.sendMessage(worlds);
-        plugin.getEnabledWorlds().forEach(
-                uid -> sender.sendMessage(ChatColor.DARK_GREEN + "\t" + plugin.getServer().getWorld(uid).getName()));
+        plugin.getEnabledWorlds().forEach(uuid -> {
+            World world = plugin.getServer().getWorld(uuid);
+            String worldName = world != null ? world.getName() : uuid.toString();
+            sender.sendMessage(ChatColor.DARK_GREEN + "\t" + worldName);
+        });
     }
 
     private void reload(CommandSender sender) {
