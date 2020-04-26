@@ -19,7 +19,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
         String message, value;
-        if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
+        if (args.length > 0 && "reload".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("unlimitedlava.reload") || !plugin.isPermissions()) {
                 reload(sender);
             } else {
@@ -27,7 +27,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                 plugin.message(sender, null, message, null);
             }
             return true;
-        } else if (args.length > 0 && args[0].equalsIgnoreCase("status")) {
+        } else if (args.length > 0 && "status".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("unlimitedlava.status") || !plugin.isPermissions()) {
                 displayStatus(sender);
             } else {
@@ -35,7 +35,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                 plugin.message(sender, null, message, null);
             }
             return true;
-        } else if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
+        } else if (args.length > 0 && "help".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("unlimitedlava.help") || !plugin.isPermissions()) {
                 displayHelp(sender);
             } else {
@@ -43,8 +43,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                 plugin.message(sender, null, message, null);
             }
             return true;
-        } else if (args.length > 0 && args[0].equalsIgnoreCase("enable")) {
-            if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
+        } else if (args.length > 0 && "enable".equalsIgnoreCase(args[0])) {
+            if (args.length > 1 && "all".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.enable.all") || !plugin.isPermissions()) {
                     enableAll(sender);
                 } else {
@@ -61,7 +61,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            } else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
+            } else if (args.length > 1 && "furnace".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.enable.furnace") || !plugin.isPermissions()) {
                     enableFurnace(sender);
                 } else {
@@ -69,7 +69,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            } else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
+            } else if (args.length > 1 && "permissions".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.enable.permissions") || !plugin.isPermissions()) {
                     enablePermissions(sender);
                 } else {
@@ -77,7 +77,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            } else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
+            } else if (args.length > 1 && "messages".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.enable.messages") || !plugin.isPermissions()) {
                     enableMessages(sender);
                 } else {
@@ -86,8 +86,8 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                 }
                 return true;
             }
-        } else if (args.length > 0 && args[0].equalsIgnoreCase("disable")) {
-            if (args.length > 1 && args[1].equalsIgnoreCase("all")) {
+        } else if (args.length > 0 && "disable".equalsIgnoreCase(args[0])) {
+            if (args.length > 1 && "all".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.disable.all") || !plugin.isPermissions()) {
                     disableAll(sender);
                 } else {
@@ -104,7 +104,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            } else if (args.length > 1 && args[1].equalsIgnoreCase("permissions")) {
+            } else if (args.length > 1 && "permissions".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.disable.permissions") || !plugin.isPermissions()) {
                     disablePermissions(sender);
                 } else {
@@ -112,7 +112,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            } else if (args.length > 1 && args[1].equalsIgnoreCase("messages")) {
+            } else if (args.length > 1 && "messages".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.disable.messages") || !plugin.isPermissions()) {
                     disableMessages(sender);
                 } else {
@@ -120,7 +120,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
                     plugin.message(sender, null, message, null);
                 }
                 return true;
-            } else if (args.length > 1 && args[1].equalsIgnoreCase("furnace")) {
+            } else if (args.length > 1 && "furnace".equalsIgnoreCase(args[1])) {
                 if (sender.hasPermission("unlimitedlava.disable.furnace") || !plugin.isPermissions()) {
                     disableFurnace(sender);
 
@@ -225,7 +225,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void enableSource(CommandSender sender, String value) {
-        plugin.getConfig().set("sources." + value, true);
+        plugin.getConfig().set("sources." + value, Boolean.TRUE);
         plugin.saveConfig();
         plugin.loadValues();
         String message = plugin.getLocalization().getString("enable_source");
@@ -233,15 +233,15 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void enableAll(CommandSender sender) {
-        plugin.getConfig().set("sources.three", true);
-        plugin.getConfig().set("sources.two", true);
-        plugin.getConfig().set("sources.other", true);
-        plugin.getConfig().set("sources.big", true);
-        plugin.getConfig().set("sources.plus", true);
-        plugin.getConfig().set("sources.T", true);
-        plugin.getConfig().set("sources.ring", true);
-        plugin.getConfig().set("sources.water_fall", true);
-        plugin.getConfig().set("sources.lava_fall", true);
+        plugin.getConfig().set("sources.three", Boolean.TRUE);
+        plugin.getConfig().set("sources.two", Boolean.TRUE);
+        plugin.getConfig().set("sources.other", Boolean.TRUE);
+        plugin.getConfig().set("sources.big", Boolean.TRUE);
+        plugin.getConfig().set("sources.plus", Boolean.TRUE);
+        plugin.getConfig().set("sources.T", Boolean.TRUE);
+        plugin.getConfig().set("sources.ring", Boolean.TRUE);
+        plugin.getConfig().set("sources.water_fall", Boolean.TRUE);
+        plugin.getConfig().set("sources.lava_fall", Boolean.TRUE);
         plugin.saveConfig();
         plugin.setThree(true);
         plugin.setTwo(true);
@@ -257,7 +257,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void enablePermissions(CommandSender sender) {
-        plugin.getConfig().set("configuration.permissions", true);
+        plugin.getConfig().set("configuration.permissions", Boolean.TRUE);
         plugin.saveConfig();
         plugin.setPermissions(true);
         String message = plugin.getLocalization().getString("enable_permissions");
@@ -265,7 +265,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void enableMessages(CommandSender sender) {
-        plugin.getConfig().set("configuration.messages", true);
+        plugin.getConfig().set("configuration.messages", Boolean.TRUE);
         plugin.saveConfig();
         plugin.setMessages(true);
         String message = plugin.getLocalization().getString("enable_messages");
@@ -273,7 +273,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void enableFurnace(CommandSender sender) {
-        plugin.getConfig().set("configuration.furnace", true);
+        plugin.getConfig().set("configuration.furnace", Boolean.TRUE);
         plugin.saveConfig();
         plugin.setFurnace(true);
         String message = plugin.getLocalization().getString("enable_furnace");
@@ -281,7 +281,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void disableSource(CommandSender sender, String value) {
-        plugin.getConfig().set("sources." + value, false);
+        plugin.getConfig().set("sources." + value, Boolean.FALSE);
         plugin.saveConfig();
         plugin.loadValues();
         String message = plugin.getLocalization().getString("disable_source");
@@ -289,15 +289,15 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void disableAll(CommandSender sender) {
-        plugin.getConfig().set("sources.three", false);
-        plugin.getConfig().set("sources.two", false);
-        plugin.getConfig().set("sources.other", false);
-        plugin.getConfig().set("sources.big", false);
-        plugin.getConfig().set("sources.plus", false);
-        plugin.getConfig().set("sources.T", false);
-        plugin.getConfig().set("sources.ring", false);
-        plugin.getConfig().set("sources.water_fall", false);
-        plugin.getConfig().set("sources.lava_fall", false);
+        plugin.getConfig().set("sources.three", Boolean.FALSE);
+        plugin.getConfig().set("sources.two", Boolean.FALSE);
+        plugin.getConfig().set("sources.other", Boolean.FALSE);
+        plugin.getConfig().set("sources.big", Boolean.FALSE);
+        plugin.getConfig().set("sources.plus", Boolean.FALSE);
+        plugin.getConfig().set("sources.T", Boolean.FALSE);
+        plugin.getConfig().set("sources.ring", Boolean.FALSE);
+        plugin.getConfig().set("sources.water_fall", Boolean.FALSE);
+        plugin.getConfig().set("sources.lava_fall", Boolean.FALSE);
         plugin.saveConfig();
         plugin.setThree(false);
         plugin.setTwo(false);
@@ -313,7 +313,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void disablePermissions(CommandSender sender) {
-        plugin.getConfig().set("configuration.permissions", false);
+        plugin.getConfig().set("configuration.permissions", Boolean.FALSE);
         plugin.saveConfig();
         plugin.setPermissions(false);
         String message = plugin.getLocalization().getString("disable_permissions");
@@ -321,7 +321,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void disableMessages(CommandSender sender) {
-        plugin.getConfig().set("configuration.messages", false);
+        plugin.getConfig().set("configuration.messages", Boolean.FALSE);
         plugin.saveConfig();
         plugin.setMessages(false);
         String message = plugin.getLocalization().getString("disable_messages");
@@ -329,7 +329,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
     }
 
     private void disableFurnace(CommandSender sender) {
-        plugin.getConfig().set("configuration.furnace", false);
+        plugin.getConfig().set("configuration.furnace", Boolean.FALSE);
         plugin.saveConfig();
         plugin.setFurnace(false);
         String message = plugin.getLocalization().getString("disable_furnace");

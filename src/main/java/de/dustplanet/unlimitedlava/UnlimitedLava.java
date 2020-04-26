@@ -106,21 +106,21 @@ public class UnlimitedLava extends JavaPlugin {
         pm.registerEvents(inventoryListener, this);
     }
 
-    public void loadConfig() {
+    void loadConfig() {
         config.options().header("For help please refer to Bukkit page: https://dev.bukkit.org/projects/unlimited-lava");
-        config.addDefault("configuration.permissions", true);
-        config.addDefault("configuration.messages", true);
-        config.addDefault("configuration.furnace", true);
+        config.addDefault("configuration.permissions", Boolean.TRUE);
+        config.addDefault("configuration.messages", Boolean.TRUE);
+        config.addDefault("configuration.furnace", Boolean.TRUE);
         config.addDefault("configuration.height", 60);
-        config.addDefault("sources.three", true);
-        config.addDefault("sources.two", true);
-        config.addDefault("sources.other", false);
-        config.addDefault("sources.big", false);
-        config.addDefault("sources.plus", true);
-        config.addDefault("sources.T", true);
-        config.addDefault("sources.ring", true);
-        config.addDefault("sources.lava_fall", true);
-        config.addDefault("sources.water_fall", false);
+        config.addDefault("sources.three", Boolean.TRUE);
+        config.addDefault("sources.two", Boolean.TRUE);
+        config.addDefault("sources.other", Boolean.FALSE);
+        config.addDefault("sources.big", Boolean.FALSE);
+        config.addDefault("sources.plus", Boolean.TRUE);
+        config.addDefault("sources.T", Boolean.TRUE);
+        config.addDefault("sources.ring", Boolean.TRUE);
+        config.addDefault("sources.lava_fall", Boolean.TRUE);
+        config.addDefault("sources.water_fall", Boolean.FALSE);
         config.addDefault("furnace.item", "BUCKET");
         List<String> worlds = getServer().getWorlds().stream().map(w -> w.getUID().toString()).collect(Collectors.toList());
         config.addDefault("enabled_worlds", worlds);
@@ -129,7 +129,7 @@ public class UnlimitedLava extends JavaPlugin {
         saveConfig();
     }
 
-    public void loadValues() {
+    void loadValues() {
         three = config.getBoolean("sources.three");
         two = config.getBoolean("sources.two");
         other = config.getBoolean("sources.other");
@@ -147,7 +147,7 @@ public class UnlimitedLava extends JavaPlugin {
         debug = config.getBoolean("debug");
     }
 
-    public void loadLocalization() {
+    void loadLocalization() {
         localization.addDefault("permission_denied", "&4You do not have the permission to do this!");
         localization.addDefault("reload", "&2UnlimitedLava &4%version &2reloaded!");
         localization.addDefault("help",
