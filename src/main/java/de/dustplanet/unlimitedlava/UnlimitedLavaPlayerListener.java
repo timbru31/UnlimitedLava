@@ -21,8 +21,7 @@ public class UnlimitedLavaPlayerListener implements Listener {
         Block clicked = event.getBlockClicked();
         Player player = event.getPlayer();
         if (plugin.isPermissions()) {
-            if (event.getBlockClicked().getType() == Material.WATER
-                    || event.getBlockClicked().getType() == Material.STATIONARY_WATER) {
+            if (event.getBlockClicked().getType() == Material.WATER) {
                 return;
             }
             if (!player.hasPermission("unlimitedlava.use") && check.checkLavaSpreadValidity(clicked)) {
