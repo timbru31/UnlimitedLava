@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>UnlimitedLava</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.0</version>
   <name>UnlimitedLava</name>
   <description>Enjoy infinite lava sources</description>
   <url>https://dev.bukkit.org/projects/unlimited-lava</url>
@@ -32,6 +32,6 @@
     <url>https://github.com/timbru31/UnlimitedLava</url>
     <connection>scm:git:git://github.com/timbru31/UnlimitedLava.git</connection>
     <developerConnection>scm:git:git@github.com:timbru31/UnlimitedLava.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>UnlimitedLava-2.0.0</tag>
   </scm>
 </project>
