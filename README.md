@@ -203,7 +203,7 @@ Please follow the Sun Coding Guidelines, thanks!
 
 ## Usage statistics
 
-_stats images are returning soon!_
+[![Usage statistics](https://bstats.org/signatures/bukkit/UnlimitedLava.svg)](https://bstats.org/plugin/bukkit/UnlimitedLava/558)
 
 ## Data usage collection of bStats
 
