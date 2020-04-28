@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/timbru31/UnlimitedLava.svg?branch=master)](https://travis-ci.org/timbru31/UnlimitedLava)
 [!![Build the plugin](https://github.com/timbru31/UnlimitedLava/workflows/Build%20the%20plugin/badge.svg)](https://github.com/timbru31/UnlimitedLava/actions?query=workflow%3A%22Build+the+plugin%22)
 
-[![BukkitDev](https://img.shields.io/badge/BukkitDev-v1.9.4-orange.svg)](https://dev.bukkit.org/projects/unlimited-lava)
+[![BukkitDev](https://img.shields.io/badge/BukkitDev-v2.0.0-orange.svg)](https://dev.bukkit.org/projects/unlimited-lava)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
