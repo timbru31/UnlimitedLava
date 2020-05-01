@@ -36,25 +36,23 @@ public class UnlimitedLavaBlockListener implements Listener {
             public void run() {
                 Block targetBlock = event.getToBlock();
 
-                if (plugin.isLavaFall() && sourceBlock.getY() > 0 && event.getFace() == BlockFace.DOWN) {
-                    if (targetBlock.getRelative(BlockFace.UP).getType() == Material.LAVA) {
-                        if (targetBlock.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-                            Levelled targetLevel = (Levelled) targetBlock.getBlockData();
-                            targetLevel.setLevel(0);
-                            targetBlock.setBlockData(targetLevel);
-                            event.setCancelled(true);
-                        }
-                    }
-                }
+                if (sourceBlock.getY() > 0 && event.getFace() == BlockFace.DOWN
+                        && targetBlock.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
 
-                if (plugin.isWaterFall() && sourceBlock.getY() > 0 && event.getFace() == BlockFace.DOWN) {
-                    if (targetBlock.getRelative(BlockFace.UP).getType() == Material.WATER) {
-                        if (targetBlock.getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-                            Levelled targetLevel = (Levelled) targetBlock.getBlockData();
-                            targetLevel.setLevel(0);
-                            targetBlock.setBlockData(targetLevel);
-                            event.setCancelled(true);
-                        }
+                    if (plugin.isLavaFall() && targetBlock.getType() == Material.LAVA
+                            && targetBlock.getRelative(BlockFace.UP).getType() == Material.LAVA) {
+                        Levelled targetLevel = (Levelled) targetBlock.getBlockData();
+                        targetLevel.setLevel(0);
+                        targetBlock.setBlockData(targetLevel);
+                        event.setCancelled(true);
+                    }
+
+                    if (plugin.isWaterFall() && targetBlock.getType() == Material.WATER
+                            && targetBlock.getRelative(BlockFace.UP).getType() == Material.WATER) {
+                        Levelled targetLevel = (Levelled) targetBlock.getBlockData();
+                        targetLevel.setLevel(0);
+                        targetBlock.setBlockData(targetLevel);
+                        event.setCancelled(true);
                     }
                 }
 
