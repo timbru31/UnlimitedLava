@@ -170,7 +170,7 @@ public class UnlimitedLavaCommands implements CommandExecutor {
         plugin.getEnabledWorlds().forEach(uuid -> {
             World world = plugin.getServer().getWorld(uuid);
             String worldName = world != null ? world.getName() : uuid.toString();
-            sender.sendMessage(ChatColor.DARK_GREEN + "\t" + worldName);
+            sender.sendMessage(ChatColor.DARK_GREEN + "- " + worldName);
         });
     }
 
