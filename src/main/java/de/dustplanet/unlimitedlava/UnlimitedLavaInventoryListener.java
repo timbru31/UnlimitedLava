@@ -8,6 +8,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.FurnaceBurnEvent;
 import org.bukkit.inventory.ItemStack;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = { "FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY", "CD_CIRCULAR_DEPENDENCY", "IMC_IMMATURE_CLASS_NO_TOSTRING",
+        "NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" })
 public class UnlimitedLavaInventoryListener implements Listener {
     private UnlimitedLava plugin;
 
@@ -27,7 +31,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
 
     private Runnable setFurnaceItem(final Block furnace) {
         return () -> {
-            String configItem = plugin.getConfig().getString("furnace.item");
+            String configItem = plugin.getConfig().getString("furnace.item", "BUCKET");
             Material item = Material.matchMaterial(configItem);
             if (item == null) {
                 item = Material.AIR;

@@ -8,6 +8,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = { "FCCD_FIND_CLASS_CIRCULAR_DEPENDENCY", "CD_CIRCULAR_DEPENDENCY", "CLI_CONSTANT_LIST_INDEX",
+        "IMC_IMMATURE_CLASS_NO_TOSTRING" })
 public class UnlimitedLavaCommands implements CommandExecutor {
     private UnlimitedLava plugin;
     private String[] values = { "three", "two", "other", "big", "lava_fall", "water_fall", "plus", "T", "ring" };
@@ -136,80 +140,51 @@ public class UnlimitedLavaCommands implements CommandExecutor {
 
     private void displayStatus(CommandSender sender) {
         String header = ChatColor.YELLOW + "Status of UnlimitedLava";
-        String string = "";
-        if (plugin.isBig()) {
-            string += "Big: " + ChatColor.DARK_GREEN + plugin.isBig() + ChatColor.WHITE + ", ";
-        } else {
-            string += "Big: " + ChatColor.DARK_RED + plugin.isBig() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isThree()) {
-            string += "three: " + ChatColor.DARK_GREEN + plugin.isThree() + ChatColor.WHITE + ", ";
-        } else {
-            string += "three: " + ChatColor.DARK_RED + plugin.isThree() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isTwo()) {
-            string += "two: " + ChatColor.DARK_GREEN + plugin.isTwo() + ChatColor.WHITE + ", ";
-        } else {
-            string += "two:" + ChatColor.DARK_RED + plugin.isTwo() + ChatColor.WHITE + ", ";
-        }
-        string += "\n";
-        if (plugin.isOther()) {
-            string += "other: " + ChatColor.DARK_GREEN + plugin.isOther() + ChatColor.WHITE + ", ";
-        } else {
-            string += "other: " + ChatColor.DARK_RED + plugin.isOther() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isPlus()) {
-            string += "plus: " + ChatColor.DARK_GREEN + plugin.isPlus() + ChatColor.WHITE + ", ";
-        } else {
-            string += "plus: " + ChatColor.DARK_RED + plugin.isPlus() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isTShape()) {
-            string += "T: " + ChatColor.DARK_GREEN + plugin.isTShape() + ChatColor.WHITE + ", ";
-        } else {
-            string += "T: " + ChatColor.DARK_RED + plugin.isTShape() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isRing()) {
-            string += "ring: " + ChatColor.DARK_GREEN + plugin.isRing() + ChatColor.WHITE + ", ";
-        } else {
-            string += "ring: " + ChatColor.DARK_RED + plugin.isRing() + ChatColor.WHITE + ", ";
-        }
-        string += "\n";
-        if (plugin.isLavaFall()) {
-            string += "lavaFall: " + ChatColor.DARK_GREEN + plugin.isLavaFall() + ChatColor.WHITE + ", ";
-        } else {
-            string += "lavaFall: " + ChatColor.DARK_RED + plugin.isLavaFall() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isWaterFall()) {
-            string += "waterFall: " + ChatColor.DARK_GREEN + plugin.isWaterFall() + ChatColor.WHITE + ", ";
-        } else {
-            string += "waterFall: " + ChatColor.DARK_RED + plugin.isWaterFall() + ChatColor.WHITE + ", ";
-        }
-        string += "minHeight: " + ChatColor.YELLOW + plugin.getHeight() + ChatColor.WHITE + ", ";
-        string += "\n";
-        if (plugin.isFurnace()) {
-            string += "furnace: " + ChatColor.DARK_GREEN + plugin.isFurnace() + ChatColor.WHITE + ", ";
-        } else {
-            string += "furnace: " + ChatColor.DARK_RED + plugin.isFurnace() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isPermissions()) {
-            string += "permissions: " + ChatColor.DARK_GREEN + plugin.isPermissions() + ChatColor.WHITE + ", ";
-        } else {
-            string += "permissions: " + ChatColor.DARK_RED + plugin.isPermissions() + ChatColor.WHITE + ", ";
-        }
-        if (plugin.isMessages()) {
-            string += "messages: " + ChatColor.DARK_GREEN + plugin.isMessages() + ChatColor.WHITE + ", ";
-        } else {
-            string += "messages: " + ChatColor.DARK_RED + plugin.isMessages() + ChatColor.WHITE + ", ";
-        }
+        StringBuilder stringBuilder = new StringBuilder();
+        appendPart(stringBuilder, "big", plugin.isBig());
+        appendPart(stringBuilder, "three", plugin.isThree());
+        appendPart(stringBuilder, "two", plugin.isTwo());
+        stringBuilder.append('\n');
+        appendPart(stringBuilder, "other", plugin.isOther());
+        appendPart(stringBuilder, "plus", plugin.isPlus());
+        appendPart(stringBuilder, "T", plugin.isTShape());
+        appendPart(stringBuilder, "ring", plugin.isRing());
+        stringBuilder.append('\n');
+        appendPart(stringBuilder, "lavaFall", plugin.isLavaFall());
+        appendPart(stringBuilder, "waterFall", plugin.isWaterFall());
+        // @formatter:off
+        stringBuilder
+            .append("minHeight: ")
+            .append(ChatColor.YELLOW)
+            .append(plugin.getHeight())
+            .append(ChatColor.WHITE)
+            .append(", \n");
+        // @formatter:on
+        appendPart(stringBuilder, "furnace", plugin.isFurnace());
+        appendPart(stringBuilder, "permission", plugin.isPermissions());
+        appendPart(stringBuilder, "messages", plugin.isMessages());
         String worlds = ChatColor.YELLOW + "Active worlds:";
         sender.sendMessage(header);
-        sender.sendMessage(string);
+        sender.sendMessage(stringBuilder.toString());
         sender.sendMessage(worlds);
         plugin.getEnabledWorlds().forEach(uuid -> {
             World world = plugin.getServer().getWorld(uuid);
             String worldName = world != null ? world.getName() : uuid.toString();
             sender.sendMessage(ChatColor.DARK_GREEN + "\t" + worldName);
         });
+    }
+
+    @SuppressWarnings("static-method")
+    private void appendPart(StringBuilder stringBuilder, String part, boolean partFlag) {
+        // @@formatter:off
+        stringBuilder
+            .append(part)
+            .append(": ")
+            .append(partFlag ? ChatColor.DARK_GREEN : ChatColor.RED)
+            .append(partFlag)
+            .append(ChatColor.WHITE)
+            .append(", ");
+        // @formatter:on
     }
 
     private void reload(CommandSender sender) {

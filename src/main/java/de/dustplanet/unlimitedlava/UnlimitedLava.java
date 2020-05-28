@@ -1,19 +1,21 @@
 package de.dustplanet.unlimitedlava;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -22,10 +24,12 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import lombok.Getter;
 import lombok.Setter;
 import net.gravitydevelopment.updater.Updater;
 
+@SuppressFBWarnings("CRLF_INJECTION_LOGS")
 public class UnlimitedLava extends JavaPlugin {
     private static final int PLUGIN_ID = 31702;
     private static final int BSTATS_PLUGIN_ID = 558;
@@ -62,6 +66,7 @@ public class UnlimitedLava extends JavaPlugin {
         startAutoUpdater();
     }
 
+    @SuppressFBWarnings("CRLF_INJECTION_LOGS")
     private void startAutoUpdater() {
         if (config.getBoolean("configuration.autoUpdater", true)) {
             if (getDescription().getVersion().contains("SNAPSHOT")) {
@@ -111,13 +116,17 @@ public class UnlimitedLava extends JavaPlugin {
     }
 
     @SuppressWarnings("unused")
+    @SuppressFBWarnings("SEC_SIDE_EFFECT_CONSTRUCTOR")
     private void startMetrics() {
         new Metrics(this, BSTATS_PLUGIN_ID);
     }
 
     private void registerCommand() {
-        UnlimitedLavaCommands executor = new UnlimitedLavaCommands(this);
-        getCommand("unlimitedlava").setExecutor(executor);
+        PluginCommand command = getCommand("unlimitedlava");
+        if (command != null) {
+            UnlimitedLavaCommands executor = new UnlimitedLavaCommands(this);
+            command.setExecutor(executor);
+        }
     }
 
     private void registerEvents() {
@@ -150,7 +159,7 @@ public class UnlimitedLava extends JavaPlugin {
         config.addDefault("furnace.item", "BUCKET");
         List<String> worlds = getServer().getWorlds().stream().map(w -> w.getUID().toString()).collect(Collectors.toList());
         config.addDefault("enabled_worlds", worlds);
-        config.addDefault("debug", false);
+        config.addDefault("debug", Boolean.FALSE);
         config.options().copyDefaults(true);
         saveConfig();
     }
@@ -219,11 +228,11 @@ public class UnlimitedLava extends JavaPlugin {
         try {
             localization.save(localizationFile);
         } catch (IOException e) {
-            getLogger().warning("Failed to save the localization! Please report this!");
-            e.printStackTrace();
+            getLogger().log(Level.WARNING, "Failed to save the localization! Please report this!", e.getCause());
         }
     }
 
+    @SuppressFBWarnings(value = { "IMC_IMMATURE_CLASS_PRINTSTACKTRACE", "INFORMATION_EXPOSURE_THROUGH_AN_ERROR_MESSAGE" })
     public void loadConfigsAgain() {
         try {
             config.load(configFile);
@@ -236,16 +245,16 @@ public class UnlimitedLava extends JavaPlugin {
         }
     }
 
+    @SuppressFBWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
     private void copy(String yml, File file) {
-        try (OutputStream out = new FileOutputStream(file); InputStream in = getResource(yml)) {
+        try (OutputStream out = Files.newOutputStream(file.toPath()); InputStream in = getResource(yml)) {
             byte[] buf = new byte[1024];
             int len;
             while ((len = in.read(buf)) > 0) {
                 out.write(buf, 0, len);
             }
         } catch (IOException e) {
-            getLogger().warning("Failed to copy the default config!");
-            e.printStackTrace();
+            getLogger().log(Level.WARNING, "Failed to copy the default config!", e.getCause());
         }
     }
 

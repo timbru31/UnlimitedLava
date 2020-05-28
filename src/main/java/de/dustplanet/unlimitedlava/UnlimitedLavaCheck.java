@@ -5,6 +5,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Levelled;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = { "IMC_IMMATURE_CLASS_NO_TOSTRING" })
 public class UnlimitedLavaCheck {
     private UnlimitedLava plugin;
 
@@ -111,7 +114,7 @@ public class UnlimitedLavaCheck {
         // Big, fill any block in the middle of a lake. Minimum requirement: 4
         // full faces, one full corner, and at least 4 lava blocks of any amount
         // contiguous with the full corner.
-        if (plugin.isBig() && faces == 4 && (lBlocks == 0 || lBlocks == 2 || lBlocks == 3 || lBlocks == 4 || lBlocks == 5)) {
+        if (faces == 4 && (lBlocks == 0 || lBlocks == 2 || lBlocks == 3 || lBlocks == 4 || lBlocks == 5) && plugin.isBig()) {
             // borders and corners are not used here because it they would be redundant and could invalidate a valid
             // fill.
             if (plugin.isDebug()) {
@@ -120,7 +123,7 @@ public class UnlimitedLavaCheck {
             fill = true;
         }
         // Three, a 3x3 pool. Minimum Requirement: 4 full corners (includes faces)
-        else if (plugin.isThree() && borders == 0 && corners == 4 && faces == 4 && !lake && lBlocks == 0) {
+        else if (borders == 0 && corners == 4 && faces == 4 && !lake && lBlocks == 0 && plugin.isThree()) {
             if (plugin.isDebug()) {
                 plugin.getLogger().info("Detected a \"3x3\" pool - filling");
             }
@@ -128,7 +131,7 @@ public class UnlimitedLavaCheck {
         }
         // Two. a 2x2 pool. Conditional requirements depending on status of Big
         // allows larger lava pools to be filled of other options are disabled.
-        else if (plugin.isTwo() && borders == 2 && corners == 1 && faces == 2) {
+        else if (borders == 2 && corners == 1 && faces == 2 && plugin.isTwo()) {
             if (plugin.isDebug()) {
                 plugin.getLogger().info("Detected a \"2x2\" pool - filling");
             }
@@ -137,7 +140,7 @@ public class UnlimitedLavaCheck {
         // Plus, fills the center block of a + shape. Can be free standing.
         // Diagonal borders are no longer tested. Corners will invalidate valid
         // fills. Do not use either of these variables for Plus.
-        else if (plugin.isPlus() && borders == 0 && corners == 0 && faces == 4) {
+        else if (borders == 0 && corners == 0 && faces == 4 && plugin.isPlus()) {
             if (plugin.isDebug()) {
                 plugin.getLogger().info("Detected a \"plus\" pool - filling");
             }
@@ -145,7 +148,7 @@ public class UnlimitedLavaCheck {
         }
         // Other, a block will be filled from any 2 faces of full lava but only
         // if it is bordered by 2 solid blocks.
-        else if (plugin.isOther() && borders == 2 && corners == 0 && faces == 2) {
+        else if (borders == 2 && corners == 0 && faces == 2 && plugin.isOther()) {
             if (plugin.isDebug()) {
                 plugin.getLogger().info("Detected an \"other\" pool - filling");
             }
@@ -153,7 +156,7 @@ public class UnlimitedLavaCheck {
         }
         // T Shape, the "T" block from Tetris. Requires 3 faces, 1 border.
         // Conditional 0 corners if Big is enabled to prevent shore filling.
-        else if (plugin.isTShape() && borders == 1 && corners == 0 && faces == 3) {
+        else if (borders == 1 && corners == 0 && faces == 3 && plugin.isTShape()) {
             if (plugin.isDebug()) {
                 plugin.getLogger().info("Detected a \"T\" pool - filling");
             }

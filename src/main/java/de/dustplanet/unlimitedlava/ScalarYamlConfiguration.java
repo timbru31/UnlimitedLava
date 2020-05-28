@@ -14,6 +14,8 @@ import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.representer.Representer;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 public class ScalarYamlConfiguration extends YamlConfiguration {
     private final DumperOptions yamlOptions = new DumperOptions();
     private final Representer yamlRepresenter = new YamlRepresenter();
@@ -31,6 +33,7 @@ public class ScalarYamlConfiguration extends YamlConfiguration {
      * @return Resulting configuration
      * @throws IllegalArgumentException Thrown if file is null
      */
+    @SuppressFBWarnings("CRLF_INJECTION_LOGS")
     public static ScalarYamlConfiguration loadConfiguration(File file) {
         Validate.notNull(file, "File cannot be null");
 

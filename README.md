@@ -50,11 +50,12 @@ sources:
 furnace:
   # What item should appear in the furnace if you place a lava bucket as the fuel?
   item: BUCKET
-# Define in which worlds the sources should be unlimited.
+# Define in which worlds the sources should be unlimited. UUID's and world names are supported
 enabled_worlds:
   - world
   - world_nether
   - myAwesomeWorld
+  - 33a5b547-b272-45ca-b1d7-7b6648a5e44f
 debug: false
 ```
 
