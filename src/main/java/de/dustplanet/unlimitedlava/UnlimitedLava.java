@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 import org.bstats.bukkit.Metrics;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -19,6 +20,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Nullable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -167,7 +169,23 @@ public class UnlimitedLava extends JavaPlugin {
         messages = config.getBoolean("configuration.messages");
         furnace = config.getBoolean("configuration.furnace");
         height = config.getInt("configuration.height");
-        enabledWorlds = config.getStringList("enabled_worlds").stream().map(g -> UUID.fromString(g)).collect(Collectors.toList());
+        enabledWorlds = config.getStringList("enabled_worlds").stream().map(worldStringOrUUID -> {
+            @Nullable
+            World world = null;
+            try {
+                UUID uuid = UUID.fromString(worldStringOrUUID);
+                world = getServer().getWorld(uuid);
+            } catch (@SuppressWarnings("unused") IllegalArgumentException e) {
+                world = getServer().getWorld(worldStringOrUUID);
+            }
+            if (world != null) {
+                return world.getUID();
+            }
+            getLogger().warning("World string '" + worldStringOrUUID + "' is not a valid world and will be ignored");
+            return null;
+
+        }).filter(uuid -> uuid != null).collect(Collectors.toList());
+
         debug = config.getBoolean("debug");
     }
 
