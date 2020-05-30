@@ -37,7 +37,7 @@ public class UnlimitedLavaInventoryListener implements Listener {
                 item = Material.AIR;
             }
             Furnace furn = (Furnace) furnace.getState();
-            furn.getInventory().setItem(1, new ItemStack(item, 1));
+            furn.getInventory().setFuel(new ItemStack(item, 1));
         };
     }
 }
