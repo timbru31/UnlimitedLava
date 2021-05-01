@@ -2,6 +2,9 @@ name: Build the plugin
 
 on: [push, pull_request]
 
+env:
+  MAVEN_OPTS: -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -24,4 +27,4 @@ jobs:
         mvn --version
 
     - name: Build with Maven
-      run: mvn -DskipTests=true -Dhttp.keepAlive=false -Dmaven.wagon.http.pool=false -Dmaven.wagon.httpconnectionManager.ttlSeconds=120 -B -V clean package
+      run: mvn -DskipTests=true -B -V clean package
